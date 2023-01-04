@@ -1,0 +1,24 @@
+.container-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+  background-color: rgb(230, 230, 250);
+  padding: 0.5rem;
+}
+
+.item-header {
+  display: flex;
+  margin: 0.5rem;
+}
+
+.item-header p {
+  text-align: center;
+  box-shadow: none;
+}
+
+.buttons {
+  display: flex;
+  height: 2.5rem;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}

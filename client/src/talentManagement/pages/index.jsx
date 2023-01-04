@@ -1,0 +1,15 @@
+export { default as HomeTalentManagement } from "./HomeTalentManagement";
+export { default as Employee } from "./Employee";
+export { default as OverallPayroll } from "./OverallPayroll";
+export { default as CreateOverallPayroll } from "./CreateOverallPayroll";
+export { default as DetailEmployee } from "./DetailEmployee";
+export { default as Unfitness } from "./Unfitness";
+export { default as MissingWork } from "./MissingWork";
+export { default as LoanMoney } from "./LoanMoney";
+export { default as DetailLoanMoney } from "./DetailLoanMoney";
+export { default as BonusService } from "./BonusService";
+export { default as DetailBonusService } from "./DetailBonusService";
+export { default as Liquidation } from "./Liquidation";
+export { default as DetailLiquidation } from "./DetailLiquidation";
+export { default as Contract } from "./Contract";
+export { default as CompletePayroll } from "./CompletePayroll";

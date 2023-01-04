@@ -1,0 +1,11 @@
+.container_module_card {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.link {
+  text-decoration: none;
+  color: inherit;
+}
