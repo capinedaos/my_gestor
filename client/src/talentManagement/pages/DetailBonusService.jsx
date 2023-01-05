@@ -1,17 +1,19 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import getConfig from "../../utils/getConfig";
 import { useCoinFormatter, formatNumber } from "../../hooks";
-
+import { getContractByEmployeeIdThunk } from "../../app/slicesTalentManagement/contract.slice";
 import { ModalDelete, BonusServiceForm, ButtonReturn } from "../components";
 
 const DetailBonusService = () => {
   const dispatch = useDispatch();
   const [idBonusService, setIdBonusService] = useState(0);
   const [bonusService, setBonusService] = useState({});
+  const contract = useSelector((state) => state.contract);
+  const [contracActive, setContracActive] = useState({});
   const [titleModal, setTitleModal] = useState("");
   const [textButton, setTextButton] = useState("");
   const [bonusServiceSelected, setBonusServiceSelected] = useState(null);
@@ -37,6 +39,13 @@ const DetailBonusService = () => {
         );
         setBonusService(bonusServiceSearch);
       });
+    if (bonusService?.employeeId !== undefined) {
+      dispatch(getContractByEmployeeIdThunk(bonusService?.employeeId));
+    }
+    const contractFind = contract.find(
+      (contract) => contract.status === "activo"
+    );
+    setContracActive(contractFind);
   }, [id, dispatch]);
 
   return (
@@ -72,7 +81,7 @@ const DetailBonusService = () => {
               <th scope="row" className="table-primary">
                 Cargo
               </th>
-              <td></td>
+              <td>{contracActive?.position}</td>
             </tr>
             <tr>
               <th scope="row" className="table-primary">

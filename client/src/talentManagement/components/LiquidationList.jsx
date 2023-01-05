@@ -5,6 +5,7 @@ import {
   getLiquidationThunk,
   getLiquidationByIdThunk,
 } from "../../app/slicesTalentManagement/liquidation.slice";
+import { getContractByEmployeeIdThunk } from "../../app/slicesTalentManagement/contract.slice";
 import ModalDelete from "./ModalDelete";
 import { useCoinFormatter } from "../../hooks";
 
@@ -74,7 +75,10 @@ const LiquidationList = ({
                         type="button"
                         className="btn btn-info"
                         onClick={() => {
-                          getLiquidationByIdThunk(liquidation.id);
+                          dispatch(
+                            getLiquidationByIdThunk(liquidation.id),
+                            getContractByEmployeeIdThunk(liquidation.employeeId)
+                          );
                         }}
                       >
                         <i className="bi bi-plus-circle"></i>

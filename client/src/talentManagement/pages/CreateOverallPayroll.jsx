@@ -36,7 +36,7 @@ const CreateOverallPayroll = () => {
     dispatch(getEmployeePayrollThunk());
     dispatch(getEmployeeThunk());
     setEmployeesData(employees);
-  }, [dispatch, employees]);
+  }, [dispatch]);
 
   // handle submit
   const onSubmit = (data) => {

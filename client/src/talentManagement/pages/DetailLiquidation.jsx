@@ -1,14 +1,19 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import getConfig from "../../utils/getConfig";
 import { useCoinFormatter, formatNumber } from "../../hooks";
+import { getContractByEmployeeIdThunk } from "../../app/slicesTalentManagement/contract.slice";
 import { ModalDelete, LiquidationForm, ButtonReturn } from "../components";
 
 const DetailLiquidation = () => {
+  const dispatch = useDispatch();
   const [idLiquidation, setIdLiquidation] = useState(0);
   const [liquidation, setLiquidation] = useState({});
+  const [contracActive, setContracActive] = useState({});
+  const contract = useSelector((state) => state.contract);
   const [titleModal, setTitleModal] = useState("");
   const [textButton, setTextButton] = useState("");
   const [liquidationSelected, setLiquidationSelected] = useState(null);
@@ -34,7 +39,14 @@ const DetailLiquidation = () => {
         );
         setLiquidation(liquidationSearch);
       });
-  }, [id]);
+    if (liquidation?.employeeId !== undefined) {
+      dispatch(getContractByEmployeeIdThunk(liquidation?.employeeId));
+    }
+    const contractFind = contract.find(
+      (contract) => contract.status === "activo"
+    );
+    setContracActive(contractFind);
+  }, [id, dispatch]);
 
   return (
     <>
@@ -69,13 +81,13 @@ const DetailLiquidation = () => {
               <th scope="row" className="table-primary">
                 Cargo
               </th>
-              <td></td>
+              <td>{contracActive?.position}</td>
             </tr>
             <tr>
               <th scope="row" className="table-primary">
                 Salario
               </th>
-              <td></td>
+              <td>{useCoinFormatter.format(liquidation?.salary)}</td>
             </tr>
             <tr>
               <th scope="row" className="table-primary">
@@ -156,7 +168,7 @@ const DetailLiquidation = () => {
               <th scope="row" className="table-danger">
                 TOTAL LIQUIDACION
               </th>
-              <td colspan="2" className="table-dark">
+              <td colSpan="2" className="table-dark">
                 {" "}
                 {useCoinFormatter.format(liquidation?.totalLiquidation)}
               </td>

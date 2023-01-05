@@ -54,7 +54,6 @@ const DetailEmployee = () => {
   const [initialDate, setInitialDate] = useState("");
   const [finalDate, setFinalDate] = useState("");
 
-
   const employee = useSelector((state) => state.employee);
   const [names, setNames] = useState("");
   const [identification, setIdentification] = useState("");
@@ -170,7 +169,7 @@ const DetailEmployee = () => {
 
     dispatch(getSalaryIncreaseByEmployeeIdThunk(id));
     dispatch(getAreaThunk());
-  }, [id, dispatch, contracActive]);
+  }, [id, dispatch]);
 
   const onSubmitSocialSecurity = (e) => {
     e.preventDefault();
