@@ -2,11 +2,23 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import ModalDelete from "./ModalDelete";
 import { formatNumber } from "../../hooks";
+import { useCoinFormatter } from "../../hooks";
+import {
+  getEmployeePayrollByOverallPayrollId,
+  getEmployeePayrollByIdThunk,
+} from "../../app/slicesTalentManagement/employeePayroll.slice";
+import { useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const EmployeePayrollList = () => {
-  const employeePayroll = useSelector((state) => state.employeePayroll);
   const dispatch = useDispatch();
+  const employeePayroll = useSelector((state) => state.employeePayroll);
   const [idEmployeePayroll, setIdEmployeePayroll] = useState(0);
+  const { id } = useParams();
+
+  useEffect(() => {
+    dispatch(getEmployeePayrollByOverallPayrollId(id));
+  }, [dispatch]);
 
   return (
     <div className="table-responsive rounded-3" style={{ height: "410px" }}>
@@ -15,26 +27,50 @@ const EmployeePayrollList = () => {
           <tr>
             <th scope="col">Nombres</th>
             <th scope="col">Identificacion</th>
+            <th scope="col">Salario</th>
             <th scope="col">Novedades</th>
             <th scope="col">Ingresos</th>
             <th scope="col">Deducciones</th>
             <th scope="col">Neto a pagar</th>
-            <th scope="col">Acciones</th>
+            <th scope="col">Editar</th>
+            <th scope="col">Eliminar</th>
           </tr>
         </thead>
         <tbody>
           {Array.isArray(employeePayroll)
             ? employeePayroll.map((employeePayroll) => (
                 <tr className="text-left" key={employeePayroll.id}>
-                  <td>{employeePayroll.employee.names}</td>
-                  <td>
-                    {formatNumber(employeePayroll.employee.identification)}
-                  </td>
+                  <td>nombres</td>
+                  <td>documento</td>
+                  <td>{useCoinFormatter.format(employeePayroll.salary)} </td>
                   <td>Ver detalle</td>
-                  <td>{employeePayroll.totalAccrued} </td>
-                  <td>{employeePayroll.totalDeductions} </td>
-                  <td>{employeePayroll.netPayable} </td>
-
+                  <td>
+                    {useCoinFormatter.format(employeePayroll.totalAccrued)}{" "}
+                  </td>
+                  <td>
+                    {useCoinFormatter.format(employeePayroll.totalDeductions)}{" "}
+                  </td>
+                  <td>
+                    {useCoinFormatter.format(employeePayroll.netPayable)}{" "}
+                  </td>
+                  <td>
+                    <Link
+                      to={`/talent-management/add-news-payroll/${employeePayroll.id}`}
+                      className="nav-link active"
+                    >
+                      <button
+                        type="button"
+                        className="btn btn-info me-1"
+                        onClick={() => {
+                          dispatch(
+                            getEmployeePayrollByIdThunk(employeePayroll.id)
+                          );
+                        }}
+                      >
+                        <i className="bi bi-pencil"></i>
+                      </button>
+                    </Link>
+                  </td>
                   <td>
                     <button
                       onClick={() => {

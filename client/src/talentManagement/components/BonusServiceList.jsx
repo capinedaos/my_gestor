@@ -72,7 +72,7 @@ const BonusServiceList = ({
                         type="button"
                         className="btn btn-info"
                         onClick={() => {
-                          getBonusServiceByIdThunk(bonusService.id);
+                          dispatch(getBonusServiceByIdThunk(bonusService.id));
                         }}
                       >
                         <i className="bi bi-plus-circle"></i>

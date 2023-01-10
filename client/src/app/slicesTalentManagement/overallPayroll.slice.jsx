@@ -30,8 +30,8 @@ export const createOverallPayrollThunk = (data) => (dispatch) => {
   return axios
     .post(URL, data, getConfig())
     .then((res) => {
-      dispatch(getOverallPayrollThunk());
       dispatch(setOverallPayroll(res.data.newOverallPayroll));
+      dispatch(getOverallPayrollThunk());
     })
     .finally(() => dispatch(setIsLoading(false)));
 };

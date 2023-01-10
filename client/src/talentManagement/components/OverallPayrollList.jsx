@@ -5,6 +5,7 @@ import {
   getOverallPayrollThunk,
   getOverallPayrollByIdThunk,
 } from "../../app/slicesTalentManagement/overallPayroll.slice";
+import { getEmployeePayrollByOverallPayrollId } from "../../app/slicesTalentManagement/employeePayroll.slice";
 import ModalDelete from "./ModalDelete";
 import { useCoinFormatter } from "../../hooks";
 
@@ -56,7 +57,12 @@ const OverallPayrollList = ({
                         type="button"
                         className="btn btn-info"
                         onClick={() => {
-                          getOverallPayrollByIdThunk(overallPayroll.id);
+                          dispatch(
+                            getOverallPayrollByIdThunk(overallPayroll.id),
+                            getEmployeePayrollByOverallPayrollId(
+                              overallPayroll.id
+                            )
+                          );
                         }}
                       >
                         <i className="bi bi-check-circle"></i>

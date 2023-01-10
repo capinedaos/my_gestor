@@ -16,6 +16,7 @@ import {
   Liquidation,
   DetailLiquidation,
   CompletePayroll,
+  AddNewsPayroll,
   // Contract,
 } from "../talentManagement/pages";
 
@@ -41,6 +42,7 @@ const RoutesTalentManagement = () => {
         <Route path="/loan-money" element={<LoanMoney />} />
         <Route path="/bonus-service" element={<BonusService />} />
         <Route path="/liquidation" element={<Liquidation />} />
+        <Route path="/add-news-payroll/:id" element={<AddNewsPayroll />} />
         {/* <Route path="/contract" element={<Contract />} /> */}
       </Routes>
     </div>

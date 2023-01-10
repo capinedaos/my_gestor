@@ -11,46 +11,51 @@ const { AppError } = require("../../utils/appError.util");
 const createOverallPayroll = catchAsync(async (req, res, next) => {
   const { typeOfSettlement, description, month, year } = req.body;
   let newMonth = "";
-  const overallPayroll = await OverallPayroll.findAll();
+  
+  // const overallPayroll = await OverallPayroll.findAll();
 
-  const newInitialDate = new Date(overallPayroll.initialDate);
-  const newFinalDate = new Date(overallPayroll.finalDate);
+  // const newInitialDate = new Date(overallPayroll.initialDate);
+  // const newFinalDate = new Date(overallPayroll.finalDate);
 
-  if (overallPayroll) {
-    for (let i = 0; i < overallPayroll.length; i++) {
-      if (
-        new Date(overallPayroll[i].initialDate).getTime() ===
-          newInitialDate.getTime() &&
-        new Date(overallPayroll[i].finalDate).getTime() ===
-          newFinalDate.getTime()
-      ) {
-        return next(
-          new AppError("Ya existe una nómina con la misma fecha", 404)
-        );
-      }
-    }
-  }
+  // if (overallPayroll) {
+  //   for (let i = 0; i < overallPayroll.length; i++) {
+  //     if (
+  //       new Date(overallPayroll[i].initialDate).getTime() ===
+  //         newInitialDate.getTime() &&
+  //       new Date(overallPayroll[i].finalDate).getTime() ===
+  //         newFinalDate.getTime()
+  //     ) {
+  //       return next(
+  //         new AppError("Ya existe una nómina con la misma fecha", 404)
+  //       );
+  //     }
+  //   }
+  // }
 
-  if (month === "1") {
+  if (month === "enero") {
     newMonth = "01";
-  } else if (month === "2") {
+  } else if (month === "febrero") {
     newMonth = "02";
-  } else if (month === "3") {
+  } else if (month === "marzo") {
     newMonth = "03";
-  } else if (month === "4") {
+  } else if (month === "abril") {
     newMonth = "04";
-  } else if (month === "5") {
+  } else if (month === "mayo") {
     newMonth = "05";
-  } else if (month === "6") {
+  } else if (month === "junio") {
     newMonth = "06";
-  } else if (month === "7") {
+  } else if (month === "julio") {
     newMonth = "07";
-  } else if (month === "8") {
+  } else if (month === "agosto") {
     newMonth = "08";
-  } else if (month === "9") {
+  } else if (month === "septiembre") {
     newMonth = "09";
-  } else {
-    newMonth = month;
+  } else if (month === "octubre") {
+    newMonth = "10";
+  } else if (month === "noviembre") {
+    newMonth = "11";
+  } else if (month === "diciembre") {
+    newMonth = "12";
   }
 
   let date = "";

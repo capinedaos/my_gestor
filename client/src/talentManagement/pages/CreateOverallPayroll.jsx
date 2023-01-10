@@ -1,64 +1,80 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
+import axios from "axios";
 import {
   createOverallPayrollThunk,
   getOverallPayrollThunk,
 } from "../../app/slicesTalentManagement/overallPayroll.slice";
-import {
-  createEmployeePayrollThunk,
-  getEmployeePayrollThunk,
-} from "../../app/slicesTalentManagement/employeePayroll.slice";
+import { createEmployeePayrollThunk } from "../../app/slicesTalentManagement/employeePayroll.slice";
 import { getEmployeeThunk } from "../../app/slicesTalentManagement/employee.slice";
 import { useNavigate } from "react-router-dom";
 import { ButtonReturn } from "../components";
+import { useFormValidation } from "../../hooks";
+import getConfig from "../../utils/getConfig";
 
 const CreateOverallPayroll = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const employees = useSelector((state) => state.employee);
-  const overallPayrolls = useSelector((state) => state.overallPayroll);
-  // const employeePayrolls = useSelector((state) => state.employeePayroll);
-  const [employeesData, setEmployeesData] = useState([]);
-  const [ids, setIds] = useState([]);
+  const [employeeData, setEmployeeData] = useState([]);
 
   // handle events
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm({
-    shouldUseNativeValidation: true,
-  });
+  const { register, handleSubmit } = useForm();
+
+  useFormValidation();
 
   useEffect(() => {
     dispatch(getOverallPayrollThunk());
-    dispatch(getEmployeePayrollThunk());
     dispatch(getEmployeeThunk());
-    setEmployeesData(employees);
+    setEmployeeData(employees);
   }, [dispatch]);
+
+  const handleChange = (e) => {
+    const { name, checked } = e.target;
+    if (name === "allSelect") {
+      let tempEmployee = employeeData.map((employee) => {
+        return { ...employee, isChecked: checked };
+      });
+      setEmployeeData(tempEmployee);
+    } else {
+      let tempEmployee = employeeData.map((employee) =>
+        employee.names === name ? { ...employee, isChecked: checked } : employee
+      );
+      setEmployeeData(tempEmployee);
+    }
+  };
 
   // handle submit
   const onSubmit = (data) => {
+    let dataPayroll = {};
+
+    const employeePayroll = employeeData.filter(
+      (employee) => employee.isChecked === true
+    );
+
     dispatch(createOverallPayrollThunk(data));
 
-    //  let overallPayrollId = 0;
-    //  overallPayrolls.map((payroll) => {
-    //    overallPayrollId = payroll.id;
-    //  });
+    axios
+      .get(
+        "http://localhost:4000/api/v1/talent-management/overall-payroll",
+        getConfig()
+      )
+      .then((res) => {
+        // hacer map de arrays ids
 
-    //  let dataPayroll = {};
+        employeePayroll.map((employee) => {
+          dataPayroll = {
+            employeeId: employee.id,
+            overallPayrollId:
+              res.data.overallPayroll[res.data.overallPayroll.length - 1].id,
+          };
+          dispatch(createEmployeePayrollThunk(dataPayroll));
+        });
+      });
 
-    // // hacer map de arrays ids
-    // ids.map((employeeId) => {
-    //   dataPayroll = {
-    //     employeeId: employeeId,
-    //     overallPayrollId: overallPayrollId,
-    //   };
-    //   dispatch(createEmployeePayrollThunk(dataPayroll));
-    // });
     alert("Nomina creada");
-    // navigate("/talent-management/overall-payroll");
+    navigate("/talent-management/overall-payroll");
   };
 
   const returnOverallPayroll = () => {
@@ -75,53 +91,59 @@ const CreateOverallPayroll = () => {
         <div className="text-center">
           <h5>Detalle de nomina</h5>
         </div>
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          className="needs-validation"
+          noValidate
+        >
           <div className="justify-content-between  p-3 input-group">
-            <div className="mb-3">
-              <label htmlFor="typeOfSettlement" className="form-label">
-                Tipo de liquidacion
-              </label>
+            <div className="form-floating mb-1">
               <select
-                className="form-control"
-                {...register("typeOfSettlement", {
-                  required: "Seleccione un opcion",
-                })}
+                type="text"
                 id="typeOfSettlement"
+                className="form-control"
+                required
+                {...register("typeOfSettlement")}
               >
-                <option value="" disabled>
+                <option value="" defaultValue>
                   Seleccione una opcion
                 </option>
                 <option value="mensual">Mensual</option>
                 <option value="primera quincena">Primera quincena</option>
                 <option value="segunda quincena">Segunda quincena</option>
               </select>
+              <label htmlFor="typeOfSettlement">Tipo de liquidacion</label>
+              <div className="valid-feedback">
+                Campo ingresado correctamente
+              </div>
+              <div className="invalid-feedback">Campo obligatorio</div>
             </div>
 
-            <div className="mb-3">
-              <label htmlFor="description" className="form-label">
-                Descripción
-              </label>
+            <div className="form-floating mb-1">
               <input
                 type="text"
+                id="description"
                 className="form-control"
-                {...register("description", {
-                  required: "Ingrese una descripcion",
-                })}
+                required
+                placeholder="Ingresa una descripción"
+                {...register("description")}
               />
+              <label htmlFor="description">Descripción</label>
+              <div className="valid-feedback">
+                Campo ingresado correctamente
+              </div>
+              <div className="invalid-feedback">Campo obligatorio</div>
             </div>
 
-            <div className="mb-3">
-              <label htmlFor="month" className="form-label">
-                Mes
-              </label>
+            <div className="form-floating mb-1">
               <select
-                className="form-control"
-                {...register("month", {
-                  required: "Seleccione un mes",
-                })}
+                type="text"
                 id="month"
+                className="form-control"
+                required
+                {...register("month")}
               >
-                <option value="" disabled>
+                <option value="" defaultValue>
                   Seleccione una opcion
                 </option>
                 <option value="enero">Enero</option>
@@ -137,20 +159,27 @@ const CreateOverallPayroll = () => {
                 <option value="noviembre">Noviembre</option>
                 <option value="diciembre">Diciembre</option>
               </select>
+              <label htmlFor="month">Mes</label>
+              <div className="valid-feedback">
+                Campo ingresado correctamente
+              </div>
+              <div className="invalid-feedback">Campo obligatorio</div>
             </div>
 
-            <div className="mb-3">
-              <label htmlFor="year" className="form-label">
-                Año
-              </label>
+            <div className="form-floating mb-1">
               <input
                 type="number"
                 id="year"
                 className="form-control"
-                {...register("year", {
-                  required: "Ingrese un año",
-                })}
+                required
+                placeholder="Ingresa un año"
+                {...register("year")}
               />
+              <label htmlFor="year">Año</label>
+              <div className="valid-feedback">
+                Campo ingresado correctamente
+              </div>
+              <div className="invalid-feedback">Campo obligatorio</div>
             </div>
           </div>
 
@@ -168,7 +197,13 @@ const CreateOverallPayroll = () => {
                       <input
                         type="checkbox"
                         className="form-check-input"
-                        name="allselect"
+                        name="allSelect"
+                        checked={
+                          !employeeData.some(
+                            (employee) => employee?.isChecked !== true
+                          )
+                        }
+                        onChange={handleChange}
                       />
                     </th>
                     <th scope="col">N°</th>
@@ -178,13 +213,15 @@ const CreateOverallPayroll = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {employeesData.map((employee, index) => (
+                  {employeeData.map((employee, index) => (
                     <tr className="text-left" key={index}>
                       <th>
                         <input
                           type="checkbox"
-                          name={employee.names}
                           className="form-check-input"
+                          name={employee.names}
+                          checked={employee?.isChecked || false}
+                          onChange={handleChange}
                         />
                       </th>
                       <td>{index + 1} </td>

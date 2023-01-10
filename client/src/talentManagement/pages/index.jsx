@@ -13,3 +13,4 @@ export { default as Liquidation } from "./Liquidation";
 export { default as DetailLiquidation } from "./DetailLiquidation";
 export { default as Contract } from "./Contract";
 export { default as CompletePayroll } from "./CompletePayroll";
+export { default as AddNewsPayroll } from "./AddNewsPayroll";

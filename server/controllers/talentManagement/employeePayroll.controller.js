@@ -11,7 +11,6 @@ const {
 
 // Utils
 const { catchAsync } = require("../../utils/catchAsync.util");
-const { AppError } = require("../../utils/appError.util");
 
 const createEmployeePayroll = catchAsync(async (req, res, next) => {
   const { employeeId, overallPayrollId } = req.body;
@@ -49,7 +48,7 @@ const createEmployeePayroll = catchAsync(async (req, res, next) => {
   let workDisabilityAccumulator = 0;
 
   const unfitness = await Unfitness.findAll({
-    where: { status: "activo", employeeId },
+    where: { employeeId },
   });
 
   if (unfitness) {
@@ -134,7 +133,7 @@ const createEmployeePayroll = catchAsync(async (req, res, next) => {
   let suspensionAccumulator = 0;
 
   const missingWork = await MissingWork.findAll({
-    where: { status: "activo", employeeId },
+    where: { employeeId },
   });
 
   if (missingWork) {
@@ -296,7 +295,7 @@ const getEmployeePayrollById = catchAsync(async (req, res, next) => {
   const { employeePayroll } = req;
   res.status(201).json({
     status: "success",
-    employeePayroll,
+    employeePayrollById: employeePayroll,
   });
 });
 
@@ -320,10 +319,6 @@ const updateEmployeePayroll = catchAsync(async (req, res, next) => {
   const overallPayroll = await OverallPayroll.findOne({
     where: { id: overallPayrollId },
   });
-
-  if (!overallPayroll) {
-    return next(new AppError("Nomina no encontrada", 404));
-  }
 
   const newInitialDate = new Date(overallPayroll.initialDate);
   const newFinalDate = new Date(overallPayroll.finalDate);
@@ -385,7 +380,7 @@ const updateEmployeePayroll = catchAsync(async (req, res, next) => {
   let workDisabilityAccumulator = 0;
 
   const unfitness = await Unfitness.findAll({
-    where: { status: "activo", employeeId },
+    where: { employeeId },
   });
 
   if (unfitness) {
@@ -472,7 +467,7 @@ const updateEmployeePayroll = catchAsync(async (req, res, next) => {
   let recompensed = false;
 
   const missingWork = await MissingWork.findAll({
-    where: { status: "activo", employeeId },
+    where: { employeeId },
   });
 
   if (missingWork) {
@@ -634,7 +629,7 @@ const updateEmployeePayroll = catchAsync(async (req, res, next) => {
     // creation of subscription to active loan
     const payInMoney = await PayInMoney.create({
       quantity: loanMoney.installmentValue,
-      deductionDate: finalDate,
+      deductionDate: newFinalDate,
       loanMoneyId: loanMoney.id,
     });
 
@@ -727,13 +722,15 @@ const deleteEmployeePayroll = catchAsync(async (req, res, next) => {
 
 const getEmployeePayrollByOverallPayrollId = catchAsync(
   async (req, res, next) => {
-    const { id } = req.params;
+    const { overallPayrollId } = req.params;
 
-    const employeePayroll = await OverallPayroll.findAll({
-      where: { id },
+    const employeePayrollByOverallPayrollId = await EmployeePayroll.findAll({
+      where: { overallPayrollId },
     });
 
-    res.status(201).json({ status: "success", employeePayroll });
+    res
+      .status(201)
+      .json({ status: "success", employeePayrollByOverallPayrollId });
   }
 );
 

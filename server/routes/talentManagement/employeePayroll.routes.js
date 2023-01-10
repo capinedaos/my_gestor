@@ -30,7 +30,7 @@ employeePayrollRouter.use(protectSession);
 employeePayrollRouter.get("/", getAllEmployeePayroll);
 
 employeePayrollRouter.get(
-  "/overall-payroll/:id",
+  "/overall-payroll/:overallPayrollId",
   getEmployeePayrollByOverallPayrollId
 );
 
@@ -40,7 +40,6 @@ employeePayrollRouter.post(
   "/",
   createEmployeePayrollValidators,
   employeeExists,
-  contractExists,
   overallPayrollExists,
   createEmployeePayroll
 );

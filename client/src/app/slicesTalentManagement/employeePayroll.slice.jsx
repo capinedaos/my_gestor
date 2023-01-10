@@ -15,39 +15,32 @@ export const employeePayrollSlice = createSlice({
   },
 });
 
-export const getEmployeePayrollThunk = () => (dispatch) => {
-  dispatch(setIsLoading(true));
-  return axios
-    .get(URL, getConfig())
-    .then((res) => {
-      dispatch(setEmployeePayroll(res.data.employeePayroll));
-    })
-    .finally(() => dispatch(setIsLoading(false)));
-};
-
 export const createEmployeePayrollThunk = (data) => (dispatch) => {
+  console.log(data);
   dispatch(setIsLoading(true));
   return axios
     .post(URL, data, getConfig())
     .then((res) => {
-      dispatch(getEmployeePayrollThunk());
       dispatch(setEmployeePayroll(res.data.newEmployeePayroll));
     })
     .finally(() => dispatch(setIsLoading(false)));
 };
 
-export const getEmployeePayrollByOverallPayrollId = (id) => (dispatch) => {
-  dispatch(setIsLoading(true));
-  return axios
-    .get(
-      `http://localhost:4000/api/v1/talent-management/employee-payroll/overall-payroll${id}`,
-      getConfig()
-    )
-    .then((res) => {
-      dispatch(setEmployeePayroll(res.data.employeePayroll));
-    })
-    .finally(() => dispatch(setIsLoading(false)));
-};
+export const getEmployeePayrollByOverallPayrollId =
+  (overallPayrollId) => (dispatch) => {
+    dispatch(setIsLoading(true));
+    return axios
+      .get(
+        `http://localhost:4000/api/v1/talent-management/employee-payroll/overall-payroll/${overallPayrollId}`,
+        getConfig()
+      )
+      .then((res) => {
+        dispatch(
+          setEmployeePayroll(res.data.employeePayrollByOverallPayrollId)
+        );
+      })
+      .finally(() => dispatch(setIsLoading(false)));
+  };
 
 export const deleteEmployeePayrollByIdThunk = (id) => (dispatch) => {
   dispatch(setIsLoading(true));
@@ -58,8 +51,21 @@ export const deleteEmployeePayrollByIdThunk = (id) => (dispatch) => {
     )
     .then((res) => {
       dispatch(setEmployeePayroll(res.data.employeePayroll));
-      dispatch(getEmployeePayrollThunk());
     })
+    .finally(() => dispatch(setIsLoading(false)));
+};
+
+export const getEmployeePayrollByIdThunk = (id) => (dispatch) => {
+  dispatch(setIsLoading(true));
+  return axios
+    .get(
+      `http://localhost:4000/api/v1/talent-management/employee-payroll/${id}`,
+      getConfig()
+    )
+    .then((res) => {
+      dispatch(setEmployeePayroll(res.data.employeePayrollById));
+    })
+
     .finally(() => dispatch(setIsLoading(false)));
 };
 
