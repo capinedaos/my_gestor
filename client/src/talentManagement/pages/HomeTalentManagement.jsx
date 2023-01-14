@@ -1,6 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { ModuleCard } from "../../components";
+import { ButtonReturn } from "../components";
 import "../../assets/styles/HomeMyGestor.css";
 import { Link } from "react-router-dom";
 
@@ -17,6 +18,7 @@ const HomeTalentManagement = () => {
   return (
     <div className="container">
       <h1>Gestion De Talento Humano</h1>
+      <ButtonReturn route={`/home`} />
       <div className="container_module_card">
         <Link to="/talent-management/employee" className="link">
           <ModuleCard

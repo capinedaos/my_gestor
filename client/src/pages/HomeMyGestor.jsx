@@ -31,23 +31,24 @@ const HomeMyGestor = () => {
             <ModuleCard
               module_name="RRHH"
               icon={<i className="bi bi-people"></i>}
-              // counter={null}
             />
           </Link>
 
           <Link to="/job-security/home" className="link">
             <ModuleCard
-              module_name="SG-SST"
-              icon={<i className="bi bi-clipboard2-pulse"></i>}
-              // counter={null}
+              // module_name="SG-SST"
+              // icon={<i className="bi bi-clipboard2-pulse"></i>}
+              module_name=""
+              icon={<i className="bi bi-question-square"></i>}
             />
           </Link>
 
           <Link to="/accounting-system/home" className="link">
             <ModuleCard
-              module_name="CONTABLE"
-              icon={<i className="bi bi-calculator"></i>}
-              // counter={null}
+              // module_name="CONTABLE"
+              // icon={<i className="bi bi-calculator"></i>}
+              module_name=""
+              icon={<i className="bi bi-question-square"></i>}
             />
           </Link>
         </div>

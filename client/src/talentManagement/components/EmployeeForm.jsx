@@ -109,6 +109,7 @@ const EmployeeForm = ({
       } else {
         // crear
         dispatch(createEmployeeThunk(employee));
+        e.target.reset();
         alert("Empleado creado");
       }
     }

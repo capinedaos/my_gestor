@@ -7,6 +7,7 @@ const {
   MissingWork,
   OverallPayroll,
   SalaryIncrease,
+  Employee,
 } = require("../../models/talentManagement");
 
 // Utils
@@ -323,7 +324,9 @@ const updateEmployeePayroll = catchAsync(async (req, res, next) => {
   const newInitialDate = new Date(overallPayroll.initialDate);
   const newFinalDate = new Date(overallPayroll.finalDate);
 
-  const { employee } = req;
+  const employee = await Employee.findOne({
+    where: { id: employeeId },
+  });
   let salary = 0;
 
   const salaryIncrease = await SalaryIncrease.findAll({
@@ -711,6 +714,20 @@ const updateEmployeePayroll = catchAsync(async (req, res, next) => {
     overallPayrollId,
   });
 
+  const employeePayrollByOverallPayrollId = await EmployeePayroll.findAll({
+    where: { overallPayrollId },
+  });
+
+  let totalNetPayable = 0;
+
+  employeePayrollByOverallPayrollId.map((employeePayroll) => {
+    totalNetPayable += employeePayroll.netPayable;
+  });
+
+  await overallPayroll.update({
+    totalPayroll: totalNetPayable,
+  });
+
   res.status(201).json({ status: "success", employeePayroll });
 });
 
@@ -726,6 +743,16 @@ const getEmployeePayrollByOverallPayrollId = catchAsync(
 
     const employeePayrollByOverallPayrollId = await EmployeePayroll.findAll({
       where: { overallPayrollId },
+      include: [
+        {
+          model: Employee,
+          require: false,
+        },
+        {
+          model: OverallPayroll,
+          require: false,
+        },
+      ],
     });
 
     res

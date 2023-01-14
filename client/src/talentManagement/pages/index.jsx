@@ -13,4 +13,6 @@ export { default as Liquidation } from "./Liquidation";
 export { default as DetailLiquidation } from "./DetailLiquidation";
 export { default as Contract } from "./Contract";
 export { default as CompletePayroll } from "./CompletePayroll";
-export { default as AddNewsPayroll } from "./AddNewsPayroll";
+export { default as TableFirstFortnight } from "./TableFirstFortnight";
+export { default as TableMonthly } from "./TableMonthly";
+export { default as TableSecondFortnight } from "./TableSecondFortnight";

@@ -13,7 +13,6 @@ const OverallPayroll = () => {
   const [overallPayrollSelected, setOverallPayrollSelected] = useState(null);
   const [titleModal, setTitleModal] = useState("");
   const [textButton, setTextButton] = useState("");
-  const overallPayrolls = useSelector((state) => state.overallPayroll);
 
   const selectOverallPayroll = (overallPayroll) => {
     setOverallPayrollSelected(overallPayroll);

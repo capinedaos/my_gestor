@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import ModalDelete from "./ModalDelete";
 import { formatNumber } from "../../hooks";
 import { useCoinFormatter } from "../../hooks";
@@ -8,13 +9,48 @@ import {
   getEmployeePayrollByIdThunk,
 } from "../../app/slicesTalentManagement/employeePayroll.slice";
 import { useParams } from "react-router-dom";
-import { Link } from "react-router-dom";
 
-const EmployeePayrollList = () => {
+const EmployeePayrollList = ({
+  setTotalAccrued,
+  setTotalDeductions,
+  setTotalNetPayable,
+}) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const employeePayroll = useSelector((state) => state.employeePayroll);
   const [idEmployeePayroll, setIdEmployeePayroll] = useState(0);
   const { id } = useParams();
+  let totalAccrued = 0;
+  let totalDeductions = 0;
+  let totalNetPayable = 0;
+
+  const addNewsPayroll = (id) => {
+    dispatch(getEmployeePayrollByIdThunk(id));
+
+    employeePayroll.map((employeePayroll) => {
+      if (employeePayroll.overallPayroll.typeOfSettlement === "mensual") {
+        navigate(`/talent-management/monthly-payroll/${id}`);
+      } else if (
+        employeePayroll.overallPayroll.typeOfSettlement === "primera quincena"
+      ) {
+        navigate(`/talent-management/first-fortnight-payroll/${id}`);
+      } else {
+        // segunda quincena
+        navigate(`/talent-management/second-fortnight-payroll/${id}`);
+      }
+    });
+  };
+
+  if (employeePayroll.length > 0) {
+    employeePayroll.map((employeePayroll) => {
+      totalAccrued += employeePayroll.totalAccrued;
+      totalDeductions += employeePayroll.totalDeductions;
+      totalNetPayable += employeePayroll.netPayable;
+    });
+  }
+  setTotalAccrued(totalAccrued);
+  setTotalDeductions(totalDeductions);
+  setTotalNetPayable(totalNetPayable);
 
   useEffect(() => {
     dispatch(getEmployeePayrollByOverallPayrollId(id));
@@ -40,8 +76,10 @@ const EmployeePayrollList = () => {
           {Array.isArray(employeePayroll)
             ? employeePayroll.map((employeePayroll) => (
                 <tr className="text-left" key={employeePayroll.id}>
-                  <td>nombres</td>
-                  <td>documento</td>
+                  <td>{employeePayroll.employee?.names} </td>
+                  <td>
+                    {formatNumber(employeePayroll.employee?.identification)}{" "}
+                  </td>
                   <td>{useCoinFormatter.format(employeePayroll.salary)} </td>
                   <td>Ver detalle</td>
                   <td>
@@ -54,22 +92,15 @@ const EmployeePayrollList = () => {
                     {useCoinFormatter.format(employeePayroll.netPayable)}{" "}
                   </td>
                   <td>
-                    <Link
-                      to={`/talent-management/add-news-payroll/${employeePayroll.id}`}
-                      className="nav-link active"
+                    <button
+                      type="button"
+                      className="btn btn-info me-1"
+                      onClick={() => {
+                        addNewsPayroll(employeePayroll.id);
+                      }}
                     >
-                      <button
-                        type="button"
-                        className="btn btn-info me-1"
-                        onClick={() => {
-                          dispatch(
-                            getEmployeePayrollByIdThunk(employeePayroll.id)
-                          );
-                        }}
-                      >
-                        <i className="bi bi-pencil"></i>
-                      </button>
-                    </Link>
+                      <i className="bi bi-pencil"></i>
+                    </button>
                   </td>
                   <td>
                     <button

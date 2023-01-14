@@ -1,13 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { ButtonReturn } from "../components";
-import { getEmployeePayrollByIdThunk } from "../../app/slicesTalentManagement/employeePayroll.slice";
+import {
+  getEmployeePayrollByIdThunk,
+  updateEmployeePayrollByIdThunk,
+} from "../../app/slicesTalentManagement/employeePayroll.slice";
 import { useCoinFormatter } from "../../hooks";
 import "../assets/styles/AddNewsPayroll.css";
 
-const AddNewsPayroll = () => {
+const TableMonthly = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { id } = useParams();
   const employeePayroll = useSelector((state) => state.employeePayroll);
   const valueTimeBasicDiurnal = Math.floor(employeePayroll.salary / 240);
@@ -22,6 +27,8 @@ const AddNewsPayroll = () => {
     valueTimeBasicDiurnal * 1.5 + valueTimeBasicDiurnal;
   const valueTimeCompensatory =
     valueTimeFestiveDiurnalBasic - valueTimeBasicDiurnal;
+
+  const [otherDeductions, setOtherDeductions] = useState(0);
 
   const [a1, setA1] = useState(0);
   const [a2, setA2] = useState(0);
@@ -1052,6 +1059,598 @@ const AddNewsPayroll = () => {
     )
   );
 
+  const total_hourly_1 =
+    Number(a1) +
+    Number(a2) +
+    Number(a3) +
+    Number(a4) +
+    Number(a5) +
+    Number(a6) +
+    Number(a7) +
+    Number(a8) +
+    Number(a9) +
+    Number(a10) +
+    Number(a11) +
+    Number(a12) +
+    Number(a13) +
+    Number(a14) +
+    Number(a15) +
+    Number(a16) +
+    Number(a17) +
+    Number(a18) +
+    Number(a19) +
+    Number(a20) +
+    Number(a21) +
+    Number(a22) +
+    Number(a23) +
+    Number(a24) +
+    Number(a25) +
+    Number(a26) +
+    Number(a27) +
+    Number(a28) +
+    Number(a29) +
+    Number(a30);
+
+  const total_hourly_2 =
+    Number(b1) +
+    Number(b2) +
+    Number(b3) +
+    Number(b4) +
+    Number(b5) +
+    Number(b6) +
+    Number(b7) +
+    Number(b8) +
+    Number(b9) +
+    Number(b10) +
+    Number(b11) +
+    Number(b12) +
+    Number(b13) +
+    Number(b14) +
+    Number(b15) +
+    Number(b16) +
+    Number(b17) +
+    Number(b18) +
+    Number(b19) +
+    Number(b20) +
+    Number(b21) +
+    Number(b22) +
+    Number(b23) +
+    Number(b24) +
+    Number(b25) +
+    Number(b26) +
+    Number(b27) +
+    Number(b28) +
+    Number(b29) +
+    Number(b30);
+
+  const total_hourly_3 =
+    Number(c1) +
+    Number(c2) +
+    Number(c3) +
+    Number(c4) +
+    Number(c5) +
+    Number(c6) +
+    Number(c7) +
+    Number(c8) +
+    Number(c9) +
+    Number(c10) +
+    Number(c11) +
+    Number(c12) +
+    Number(c13) +
+    Number(c14) +
+    Number(c15) +
+    Number(c16) +
+    Number(c17) +
+    Number(c18) +
+    Number(c19) +
+    Number(c20) +
+    Number(c21) +
+    Number(c22) +
+    Number(c23) +
+    Number(c24) +
+    Number(c25) +
+    Number(c26) +
+    Number(c27) +
+    Number(c28) +
+    Number(c29) +
+    Number(c30);
+
+  const total_hourly_4 =
+    Number(d1) +
+    Number(d2) +
+    Number(d3) +
+    Number(d4) +
+    Number(d5) +
+    Number(d6) +
+    Number(d7) +
+    Number(d8) +
+    Number(d9) +
+    Number(d10) +
+    Number(d11) +
+    Number(d12) +
+    Number(d13) +
+    Number(d14) +
+    Number(d15) +
+    Number(d16) +
+    Number(d17) +
+    Number(d18) +
+    Number(d19) +
+    Number(d20) +
+    Number(d21) +
+    Number(d22) +
+    Number(d23) +
+    Number(d24) +
+    Number(d25) +
+    Number(d26) +
+    Number(d27) +
+    Number(d28) +
+    Number(d29) +
+    Number(d30);
+
+  const total_hourly_5 =
+    Number(e1) +
+    Number(e2) +
+    Number(e3) +
+    Number(e4) +
+    Number(e5) +
+    Number(e6) +
+    Number(e7) +
+    Number(e8) +
+    Number(e9) +
+    Number(e10) +
+    Number(e11) +
+    Number(e12) +
+    Number(e13) +
+    Number(e14) +
+    Number(e15) +
+    Number(e16) +
+    Number(e17) +
+    Number(e18) +
+    Number(e19) +
+    Number(e20) +
+    Number(e21) +
+    Number(e22) +
+    Number(e23) +
+    Number(e24) +
+    Number(e25) +
+    Number(e26) +
+    Number(e27) +
+    Number(e28) +
+    Number(e29) +
+    Number(e30);
+
+  const total_hourly_6 =
+    Number(f1) +
+    Number(f2) +
+    Number(f3) +
+    Number(f4) +
+    Number(f5) +
+    Number(f6) +
+    Number(f7) +
+    Number(f8) +
+    Number(f9) +
+    Number(f10) +
+    Number(f11) +
+    Number(f12) +
+    Number(f13) +
+    Number(f14) +
+    Number(f15) +
+    Number(f16) +
+    Number(f17) +
+    Number(f18) +
+    Number(f19) +
+    Number(f20) +
+    Number(f21) +
+    Number(f22) +
+    Number(f23) +
+    Number(f24) +
+    Number(f25) +
+    Number(f26) +
+    Number(f27) +
+    Number(f28) +
+    Number(f29) +
+    Number(f30);
+
+  const total_hourly_7 =
+    Number(g1) +
+    Number(g2) +
+    Number(g3) +
+    Number(g4) +
+    Number(g5) +
+    Number(g6) +
+    Number(g7) +
+    Number(g8) +
+    Number(g9) +
+    Number(g10) +
+    Number(g11) +
+    Number(g12) +
+    Number(g13) +
+    Number(g14) +
+    Number(g15) +
+    Number(g16) +
+    Number(g17) +
+    Number(g18) +
+    Number(g19) +
+    Number(g20) +
+    Number(g21) +
+    Number(g22) +
+    Number(g23) +
+    Number(g24) +
+    Number(g25) +
+    Number(g26) +
+    Number(g27) +
+    Number(g28) +
+    Number(g29) +
+    Number(g30);
+
+  const total_hourly_8 =
+    Number(h1) +
+    Number(h2) +
+    Number(h3) +
+    Number(h4) +
+    Number(h5) +
+    Number(h6) +
+    Number(h7) +
+    Number(h8) +
+    Number(h9) +
+    Number(h10) +
+    Number(h11) +
+    Number(h12) +
+    Number(h13) +
+    Number(h14) +
+    Number(h15) +
+    Number(h16) +
+    Number(h17) +
+    Number(h18) +
+    Number(h19) +
+    Number(h20) +
+    Number(h21) +
+    Number(h22) +
+    Number(h23) +
+    Number(h24) +
+    Number(h25) +
+    Number(h26) +
+    Number(h27) +
+    Number(h28) +
+    Number(h29) +
+    Number(h30);
+
+  const total_hourly_9 =
+    Number(i1) +
+    Number(i2) +
+    Number(i3) +
+    Number(i4) +
+    Number(i5) +
+    Number(i6) +
+    Number(i7) +
+    Number(i8) +
+    Number(i9) +
+    Number(i10) +
+    Number(i11) +
+    Number(i12) +
+    Number(i13) +
+    Number(i14) +
+    Number(i15) +
+    Number(i16) +
+    Number(i17) +
+    Number(i18) +
+    Number(i19) +
+    Number(i20) +
+    Number(i21) +
+    Number(i22) +
+    Number(i23) +
+    Number(i24) +
+    Number(i25) +
+    Number(i26) +
+    Number(i27) +
+    Number(i28) +
+    Number(i29) +
+    Number(i30);
+
+  const cleanTable = () => {
+    setA1(0);
+    setA2(0);
+    setA3(0);
+    setA4(0);
+    setA5(0);
+    setA6(0);
+    setA7(0);
+    setA8(0);
+    setA9(0);
+    setA10(0);
+    setA11(0);
+    setA12(0);
+    setA13(0);
+    setA14(0);
+    setA15(0);
+    setA16(0);
+    setA17(0);
+    setA18(0);
+    setA19(0);
+    setA20(0);
+    setA21(0);
+    setA22(0);
+    setA23(0);
+    setA24(0);
+    setA25(0);
+    setA26(0);
+    setA27(0);
+    setA28(0);
+    setA29(0);
+    setA30(0);
+
+    setB1(0);
+    setB2(0);
+    setB3(0);
+    setB4(0);
+    setB5(0);
+    setB6(0);
+    setB7(0);
+    setB8(0);
+    setB9(0);
+    setB10(0);
+    setB11(0);
+    setB12(0);
+    setB13(0);
+    setB14(0);
+    setB15(0);
+    setB16(0);
+    setB17(0);
+    setB18(0);
+    setB19(0);
+    setB20(0);
+    setB21(0);
+    setB22(0);
+    setB23(0);
+    setB24(0);
+    setB25(0);
+    setB26(0);
+    setB27(0);
+    setB28(0);
+    setB29(0);
+    setB30(0);
+
+    setC1(0);
+    setC2(0);
+    setC3(0);
+    setC4(0);
+    setC5(0);
+    setC6(0);
+    setC7(0);
+    setC8(0);
+    setC9(0);
+    setC10(0);
+    setC11(0);
+    setC12(0);
+    setC13(0);
+    setC14(0);
+    setC15(0);
+    setC16(0);
+    setC17(0);
+    setC18(0);
+    setC19(0);
+    setC20(0);
+    setC21(0);
+    setC22(0);
+    setC23(0);
+    setC24(0);
+    setC25(0);
+    setC26(0);
+    setC27(0);
+    setC28(0);
+    setC29(0);
+    setC30(0);
+
+    setD1(0);
+    setD2(0);
+    setD3(0);
+    setD4(0);
+    setD5(0);
+    setD6(0);
+    setD7(0);
+    setD8(0);
+    setD9(0);
+    setD10(0);
+    setD11(0);
+    setD12(0);
+    setD13(0);
+    setD14(0);
+    setD15(0);
+    setD16(0);
+    setD17(0);
+    setD18(0);
+    setD19(0);
+    setD20(0);
+    setD21(0);
+    setD22(0);
+    setD23(0);
+    setD24(0);
+    setD25(0);
+    setD26(0);
+    setD27(0);
+    setD28(0);
+    setD29(0);
+    setD30(0);
+
+    setE1(0);
+    setE2(0);
+    setE3(0);
+    setE4(0);
+    setE5(0);
+    setE6(0);
+    setE7(0);
+    setE8(0);
+    setE9(0);
+    setE10(0);
+    setE11(0);
+    setE12(0);
+    setE13(0);
+    setE14(0);
+    setE15(0);
+    setE16(0);
+    setE17(0);
+    setE18(0);
+    setE19(0);
+    setE20(0);
+    setE21(0);
+    setE22(0);
+    setE23(0);
+    setE24(0);
+    setE25(0);
+    setE26(0);
+    setE27(0);
+    setE28(0);
+    setE29(0);
+    setE30(0);
+
+    setF1(0);
+    setF2(0);
+    setF3(0);
+    setF4(0);
+    setF5(0);
+    setF6(0);
+    setF7(0);
+    setF8(0);
+    setF9(0);
+    setF10(0);
+    setF11(0);
+    setF12(0);
+    setF13(0);
+    setF14(0);
+    setF15(0);
+    setF16(0);
+    setF17(0);
+    setF18(0);
+    setF19(0);
+    setF20(0);
+    setF21(0);
+    setF22(0);
+    setF23(0);
+    setF24(0);
+    setF25(0);
+    setF26(0);
+    setF27(0);
+    setF28(0);
+    setF29(0);
+    setF30(0);
+
+    setG1(0);
+    setG2(0);
+    setG3(0);
+    setG4(0);
+    setG5(0);
+    setG6(0);
+    setG7(0);
+    setG8(0);
+    setG9(0);
+    setG10(0);
+    setG11(0);
+    setG12(0);
+    setG13(0);
+    setG14(0);
+    setG15(0);
+    setG16(0);
+    setG17(0);
+    setG18(0);
+    setG19(0);
+    setG20(0);
+    setG21(0);
+    setG22(0);
+    setG23(0);
+    setG24(0);
+    setG25(0);
+    setG26(0);
+    setG27(0);
+    setG28(0);
+    setG29(0);
+    setG30(0);
+
+    setH1(0);
+    setH2(0);
+    setH3(0);
+    setH4(0);
+    setH5(0);
+    setH6(0);
+    setH7(0);
+    setH8(0);
+    setH9(0);
+    setH10(0);
+    setH11(0);
+    setH12(0);
+    setH13(0);
+    setH14(0);
+    setH15(0);
+    setH16(0);
+    setH17(0);
+    setH18(0);
+    setH19(0);
+    setH20(0);
+    setH21(0);
+    setH22(0);
+    setH23(0);
+    setH24(0);
+    setH25(0);
+    setH26(0);
+    setH27(0);
+    setH28(0);
+    setH29(0);
+    setH30(0);
+
+    setI1(0);
+    setI2(0);
+    setI3(0);
+    setI4(0);
+    setI5(0);
+    setI6(0);
+    setI7(0);
+    setI8(0);
+    setI9(0);
+    setI10(0);
+    setI11(0);
+    setI12(0);
+    setI13(0);
+    setI14(0);
+    setI15(0);
+    setI16(0);
+    setI17(0);
+    setI18(0);
+    setI19(0);
+    setI20(0);
+    setI21(0);
+    setI22(0);
+    setI23(0);
+    setI24(0);
+    setI25(0);
+    setI26(0);
+    setI27(0);
+    setI28(0);
+    setI29(0);
+    setI30(0);
+  };
+
+  const completePayroll = () => {
+    const data = {
+      hDiurnalBasic: total_hourly_1,
+      hNocturnalBasic: total_hourly_2,
+      hDiurnalExtra: total_hourly_3,
+      hNocturnalExtra: total_hourly_4,
+      hFestiveDiurnalBasic: total_hourly_5,
+      hFestiveNocturnalBasic: total_hourly_6,
+      hFestiveDiurnalExtra: total_hourly_7,
+      hFestiveNocturnalExtra: total_hourly_8,
+      hCompensated: total_hourly_9,
+      otherDeductions,
+      employeeId: employeePayroll.employee.id,
+      overallPayrollId: employeePayroll.overallPayroll.id,
+    };
+
+    dispatch(updateEmployeePayrollByIdThunk(data, employeePayroll.id));
+    alert("Nomina modificada");
+    navigate(
+      `/talent-management/complete-payroll/${employeePayroll.overallPayrollId}`
+    );
+  };
+
   useEffect(() => {
     dispatch(getEmployeePayrollByIdThunk(id));
   }, [id, dispatch]);
@@ -1064,6 +1663,26 @@ const AddNewsPayroll = () => {
       />
       <h6>Novedades de {employeePayroll.employee?.names} </h6>
       <h6>Salario: {useCoinFormatter.format(employeePayroll.salary)} </h6>
+
+      <div className="form-floating mb-2">
+        <input
+          type="number"
+          value={otherDeductions}
+          onChange={(e) => setOtherDeductions(e.target.value)}
+          className="form-control"
+          min={0}
+        />
+        <label htmlFor="#">
+          Otras decucciones (deduccion no especificada){" "}
+        </label>
+      </div>
+      <button className="btn btn-warning mb-2" onClick={cleanTable}>
+        Limpiar tabla
+      </button>
+      <button className="btn btn-success mb-2 mx-2" onClick={completePayroll}>
+        <i className="bi bi-send-check"></i>
+      </button>
+      <h3>Registro de tiempo</h3>
       <table className="table table-bordered border-warning table-sm text-center align-middle">
         <thead>
           <tr className="text-center align-middle bg-dark text-white">
@@ -1100,6 +1719,7 @@ const AddNewsPayroll = () => {
             <th scope="col">28</th>
             <th scope="col">29</th>
             <th scope="col">30</th>
+            <th scope="col">Horas X jornada</th>
           </tr>
         </thead>
         <tbody>
@@ -1120,6 +1740,7 @@ const AddNewsPayroll = () => {
                   value={a1}
                   onChange={(e) => setA1(e.target.value)}
                   className="form-control"
+                  min={0}
                 />
               </div>
             </td>
@@ -1413,6 +2034,7 @@ const AddNewsPayroll = () => {
                 />
               </div>
             </td>
+            <td>{total_hourly_1}</td>
           </tr>
           <tr>
             <th scope="row" className="bg-primary text-white">
@@ -1724,6 +2346,7 @@ const AddNewsPayroll = () => {
                 />
               </div>
             </td>
+            <td>{total_hourly_2}</td>
           </tr>
           <tr>
             <th scope="row" className="bg-primary text-white">
@@ -2035,6 +2658,7 @@ const AddNewsPayroll = () => {
                 />
               </div>
             </td>
+            <td>{total_hourly_3}</td>
           </tr>
           <tr>
             <th scope="row" className="bg-primary text-white">
@@ -2346,6 +2970,7 @@ const AddNewsPayroll = () => {
                 />
               </div>
             </td>
+            <td>{total_hourly_4}</td>
           </tr>
           <tr>
             <th scope="row" className="bg-primary text-white">
@@ -2659,6 +3284,7 @@ const AddNewsPayroll = () => {
                 />
               </div>
             </td>
+            <td>{total_hourly_5}</td>
           </tr>
           <tr>
             <th scope="row" className="bg-primary text-white">
@@ -2972,6 +3598,7 @@ const AddNewsPayroll = () => {
                 />
               </div>
             </td>
+            <td>{total_hourly_6}</td>
           </tr>
           <tr>
             <th scope="row" className="bg-primary text-white">
@@ -3285,6 +3912,7 @@ const AddNewsPayroll = () => {
                 />
               </div>
             </td>
+            <td>{total_hourly_7}</td>
           </tr>
           <tr>
             <th scope="row" className="bg-primary text-white">
@@ -3598,6 +4226,7 @@ const AddNewsPayroll = () => {
                 />
               </div>
             </td>
+            <td>{total_hourly_8}</td>
           </tr>
           <tr>
             <th scope="row" className="bg-primary text-white">
@@ -3909,10 +4538,11 @@ const AddNewsPayroll = () => {
                 />
               </div>
             </td>
+            <td>{total_hourly_9}</td>
           </tr>
-          <tr className="border-secondary">
+          <tr className="border-warning">
             <th scope="row" colSpan="3" className="bg-dark text-white">
-              Total Horas
+              Horas X dia
             </th>
             <td>{total_1}</td>
             <td>{total_2}</td>
@@ -3944,8 +4574,19 @@ const AddNewsPayroll = () => {
             <td>{total_28}</td>
             <td>{total_29}</td>
             <td>{total_30}</td>
+            <td rowSpan="2">
+              {total_hourly_1 +
+                total_hourly_2 +
+                total_hourly_3 +
+                total_hourly_4 +
+                total_hourly_5 +
+                total_hourly_6 +
+                total_hourly_7 +
+                total_hourly_8 +
+                total_hourly_9}
+            </td>
           </tr>
-          <tr className="border-secondary">
+          <tr className="border-warning">
             <th scope="row" colSpan="3" className="bg-dark text-white">
               Valor dia
             </th>
@@ -3986,4 +4627,4 @@ const AddNewsPayroll = () => {
   );
 };
 
-export default AddNewsPayroll;
+export default TableMonthly;

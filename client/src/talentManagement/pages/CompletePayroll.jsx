@@ -13,6 +13,9 @@ const CompletePayroll = () => {
   const dispatch = useDispatch();
   const employeePayroll = useSelector((state) => state.employeePayroll);
   const [overallPayroll, setOverallPayroll] = useState({});
+  const [totalAccrued, setTotalAccrued] = useState(0);
+  const [totalDeductions, setTotalDeductions] = useState(0);
+  const [totalNetPayable, setTotalNetPayable] = useState(0);
   const { id } = useParams();
 
   useEffect(() => {
@@ -42,12 +45,20 @@ const CompletePayroll = () => {
             <h5>Empleados: {employeePayroll.length} </h5>
           </div>
           <div className="item-header">
-            <p>Total ingresos:</p>
-            <p>Total decucciones:</p>
-            <p>Total neto a pagar:</p>
+            <p>Total ingresos: {useCoinFormatter.format(totalAccrued)} </p>
+            <p>
+              Total decucciones: {useCoinFormatter.format(totalDeductions)}{" "}
+            </p>
+            <p>
+              Total neto a pagar: {useCoinFormatter.format(totalNetPayable)}{" "}
+            </p>
           </div>
         </div>
-        <EmployeePayrollList />
+        <EmployeePayrollList
+          setTotalAccrued={setTotalAccrued}
+          setTotalDeductions={setTotalDeductions}
+          setTotalNetPayable={setTotalNetPayable}
+        />
       </div>
     </div>
   );

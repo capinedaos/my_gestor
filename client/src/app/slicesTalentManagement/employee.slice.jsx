@@ -51,7 +51,6 @@ export const getEmployeeByIdThunk = (id) => (dispatch) => {
 };
 
 export const updateEmployeeThunk = (data, id) => (dispatch) => {
-  console.log(data);
   dispatch(setIsLoading(true));
   return axios
     .patch(

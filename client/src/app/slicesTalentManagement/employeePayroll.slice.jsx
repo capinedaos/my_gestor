@@ -16,7 +16,6 @@ export const employeePayrollSlice = createSlice({
 });
 
 export const createEmployeePayrollThunk = (data) => (dispatch) => {
-  console.log(data);
   dispatch(setIsLoading(true));
   return axios
     .post(URL, data, getConfig())
@@ -41,6 +40,20 @@ export const getEmployeePayrollByOverallPayrollId =
       })
       .finally(() => dispatch(setIsLoading(false)));
   };
+
+export const updateEmployeePayrollByIdThunk = (data, id) => (dispatch) => {
+  dispatch(setIsLoading(true));
+  return axios
+    .patch(
+      `http://localhost:4000/api/v1/talent-management/employee-payroll/${id}`,
+      data,
+      getConfig()
+    )
+    .then((res) => {
+      dispatch(setEmployeePayroll(res.data.employeePayroll));
+    })
+    .finally(() => dispatch(setIsLoading(false)));
+};
 
 export const deleteEmployeePayrollByIdThunk = (id) => (dispatch) => {
   dispatch(setIsLoading(true));
