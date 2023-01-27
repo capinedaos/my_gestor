@@ -32,7 +32,8 @@ const OverallPayrollList = ({
             <th scope="col">Descripción</th>
             <th scope="col">Periodo de pago</th>
             <th scope="col">Total nomina</th>
-            <th scope="col">Completar</th>
+
+            <th scope="col">Accion</th>
             <th scope="col">Editar</th>
             <th scope="col">Eliminar</th>
           </tr>
@@ -43,32 +44,61 @@ const OverallPayrollList = ({
                 <tr className="text-left" key={overallPayroll.id}>
                   <td>{overallPayroll.status}</td>
                   <td>{overallPayroll.typeOfSettlement}</td>
-                  <td>{overallPayroll.description}</td>
+                  <td>
+                    <Link
+                      to={`/talent-management/proof-payment/${overallPayroll.id} `}
+                    >
+                      {overallPayroll.description}
+                    </Link>
+                  </td>
                   <td>{overallPayroll.paymentPeriod}</td>
                   <td>
                     {useCoinFormatter.format(overallPayroll.totalPayroll)}
                   </td>
 
-                  <td>
-                    <Link
-                      to={`/talent-management/complete-payroll/${overallPayroll.id} `}
-                    >
-                      <button
-                        type="button"
-                        className="btn btn-info"
-                        onClick={() => {
-                          dispatch(
-                            getOverallPayrollByIdThunk(overallPayroll.id),
-                            getEmployeePayrollByOverallPayrollId(
-                              overallPayroll.id
-                            )
-                          );
-                        }}
+                  {overallPayroll.status === "En proceso" ? (
+                    <td>
+                      <Link
+                        to={`/talent-management/complete-payroll/${overallPayroll.id} `}
                       >
-                        <i className="bi bi-check-circle"></i>
-                      </button>
-                    </Link>
-                  </td>
+                        <button
+                          type="button"
+                          className="btn btn-info"
+                          onClick={() => {
+                            dispatch(
+                              getOverallPayrollByIdThunk(overallPayroll.id),
+                              getEmployeePayrollByOverallPayrollId(
+                                overallPayroll.id
+                              )
+                            );
+                          }}
+                        >
+                          <i className="bi bi-gear-wide-connected"></i>
+                        </button>
+                      </Link>
+                    </td>
+                  ) : (
+                    <td>
+                      <Link
+                        to={`/talent-management/payroll-information/${overallPayroll.id} `}
+                      >
+                        <button
+                          type="button"
+                          className="btn btn-primary"
+                          onClick={() => {
+                            dispatch(
+                              getOverallPayrollByIdThunk(overallPayroll.id),
+                              getEmployeePayrollByOverallPayrollId(
+                                overallPayroll.id
+                              )
+                            );
+                          }}
+                        >
+                          <i className="bi bi-info-circle"></i>
+                        </button>
+                      </Link>
+                    </td>
+                  )}
 
                   <td>
                     <button

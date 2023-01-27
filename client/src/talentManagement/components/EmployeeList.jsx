@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getEmployeeThunk } from "../../app/slicesTalentManagement/employee.slice";
 import ModalDelete from "./ModalDelete";
-
 import { formatNumber } from "../../hooks";
 import { getContractByEmployeeIdThunk } from "../../app/slicesTalentManagement/contract.slice";
 import { getSocialSecurityByEmployeeIdThunk } from "../../app/slicesTalentManagement/socialSecurity.slice";
@@ -113,6 +112,7 @@ const EmployeeList = ({ setTitleModal, selectEmployee, setTextButton }) => {
         aria-hidden={"true"}
         idEmployee={idEmployee}
       />
+     
     </div>
   );
 };

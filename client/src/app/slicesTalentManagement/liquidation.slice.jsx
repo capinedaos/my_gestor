@@ -26,7 +26,6 @@ export const getLiquidationThunk = () => (dispatch) => {
 };
 
 export const createLiquidationThunk = (data) => (dispatch) => {
-  console.log(data);
   dispatch(setIsLoading(true));
   return axios
     .post(URL, data, getConfig())

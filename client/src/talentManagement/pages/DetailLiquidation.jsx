@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import getConfig from "../../utils/getConfig";
 import { useCoinFormatter, formatNumber } from "../../hooks";
 import { getContractByEmployeeIdThunk } from "../../app/slicesTalentManagement/contract.slice";

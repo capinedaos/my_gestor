@@ -37,13 +37,25 @@ export const createOverallPayrollThunk = (data) => (dispatch) => {
 };
 
 export const updateOverallPayrollThunk = (data, id) => (dispatch) => {
-  console.log(data);
-  console.log(id);
   dispatch(setIsLoading(true));
   return axios
     .patch(
       `http://localhost:4000/api/v1/talent-management/overall-payroll/${id}`,
       data,
+      getConfig()
+    )
+    .then((res) => {
+      dispatch(getOverallPayrollThunk());
+      dispatch(setOverallPayroll(res.data.overallPayroll));
+    })
+    .finally(() => dispatch(setIsLoading(false)));
+};
+
+export const finishPayrollThunk = (id) => (dispatch) => {
+  dispatch(setIsLoading(true));
+  return axios
+    .patch(
+      `http://localhost:4000/api/v1/talent-management/overall-payroll/finish-payroll/${id}`,
       getConfig()
     )
     .then((res) => {

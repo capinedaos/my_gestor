@@ -1,8 +1,10 @@
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useForm } from "react-hook-form";
 import { useFormValidation } from "../../hooks";
 import { createSalaryIncreaseThunk } from "../../app/slicesTalentManagement/salaryIncrease.slice";
 import { useParams } from "react-router-dom";
+import ModalInformation from "./ModalInformation";
 
 const SalaryIncreaseForm = ({
   className,
@@ -15,11 +17,12 @@ const SalaryIncreaseForm = ({
 }) => {
   const dispatch = useDispatch();
   const { id } = useParams();
+  const [information, setInformation] = useState("");
   const { register, handleSubmit } = useForm();
   function onSubmit(data) {
     data.employeeId = id;
     dispatch(createSalaryIncreaseThunk(data, id));
-    alert("Aumento registrado");
+    setInformation("Aumento registrado");
   }
   useFormValidation();
   return (
@@ -130,6 +133,8 @@ const SalaryIncreaseForm = ({
                 type="submit"
                 className="btn btn-primary"
                 data-bs-dismiss="modal"
+                data-bs-target="#modalInformation"
+                data-bs-toggle="modal"
               >
                 {textButton}
               </button>
@@ -137,6 +142,14 @@ const SalaryIncreaseForm = ({
           </div>
         </div>
       </div>
+      <ModalInformation
+        idModal={"modalInformation"}
+        className={"modal fade"}
+        tabIndex={"-1"}
+        aria-labelledby={"exampleModalLabel"}
+        aria-hidden={"true"}
+        information={information}
+      />
     </form>
   );
 };

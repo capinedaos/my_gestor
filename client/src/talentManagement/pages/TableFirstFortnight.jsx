@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { ButtonReturn } from "../components";
+import { ButtonReturn, ModalInformation } from "../components";
 import {
   getEmployeePayrollByIdThunk,
   updateEmployeePayrollByIdThunk,
@@ -14,6 +14,7 @@ const TableFirstFortnight = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { id } = useParams();
+  const [information, setInformation] = useState("");
   const employeePayroll = useSelector((state) => state.employeePayroll);
   const valueTimeBasicDiurnal = Math.floor(employeePayroll.salary / 240);
   const valueTimeNocturnalBasic = valueTimeBasicDiurnal * 1.35;
@@ -865,7 +866,7 @@ const TableFirstFortnight = () => {
     };
 
     dispatch(updateEmployeePayrollByIdThunk(data, employeePayroll.id));
-    alert("Nomina modificada");
+    setInformation("Nomina modificada");
     navigate(
       `/talent-management/complete-payroll/${employeePayroll.overallPayrollId}`
     );
@@ -899,7 +900,12 @@ const TableFirstFortnight = () => {
       <button className="btn btn-warning mb-2" onClick={cleanTable}>
         Limpiar tabla
       </button>
-      <button className="btn btn-success mb-2 mx-2" onClick={completePayroll}>
+      <button
+        className="btn btn-success mb-2 mx-2"
+        onClick={completePayroll}
+        data-bs-target="#modalInformation"
+        data-bs-toggle="modal"
+      >
         <i className="bi bi-send-check"></i>
       </button>
       <h3>Registro de tiempo</h3>
@@ -933,7 +939,7 @@ const TableFirstFortnight = () => {
               Basico diurno (6AM-9PM)
             </th>
             <th scope="row" className="bg-dark text-white">
-              0%
+              100%
             </th>
             <td className="bg-dark text-white">
               {useCoinFormatter.format(valueTimeBasicDiurnal)}{" "}
@@ -1096,7 +1102,7 @@ const TableFirstFortnight = () => {
               Basico nocturno (9PM-6AM)
             </th>
             <th scope="row" className="bg-dark text-white">
-              35%
+              135%
             </th>
             <td className="bg-dark text-white">
               {useCoinFormatter.format(Math.floor(valueTimeNocturnalBasic))}{" "}
@@ -1259,7 +1265,7 @@ const TableFirstFortnight = () => {
               Extra diurno
             </th>
             <th scope="row" className="bg-dark text-white">
-              25%
+              125%
             </th>
             <td className="bg-dark text-white">
               {useCoinFormatter.format(Math.floor(valueTimeDiurnalExtra))}{" "}
@@ -1422,7 +1428,7 @@ const TableFirstFortnight = () => {
               Extra nocturno
             </th>
             <th scope="row" className="bg-dark text-white">
-              75%
+              175%
             </th>
             <td className="bg-dark text-white">
               {useCoinFormatter.format(Math.floor(valueTimeNocturnalExtra))}{" "}
@@ -1585,7 +1591,7 @@ const TableFirstFortnight = () => {
               Festivo basico diurno
             </th>
             <th scope="row" className="bg-dark text-white">
-              75%
+              175%
             </th>
             <td className="bg-dark text-white">
               {useCoinFormatter.format(
@@ -1750,7 +1756,7 @@ const TableFirstFortnight = () => {
               Festivo basico nocturno
             </th>
             <th scope="row" className="bg-dark text-white">
-              110%
+              210%
             </th>
             <td className="bg-dark text-white">
               {useCoinFormatter.format(
@@ -2457,6 +2463,14 @@ const TableFirstFortnight = () => {
           </tr>
         </tbody>
       </table>
+      <ModalInformation
+        idModal={"modalInformation"}
+        className={"modal fade"}
+        tabIndex={"-1"}
+        aria-labelledby={"exampleModalLabel"}
+        aria-hidden={"true"}
+        information={information}
+      />
     </div>
   );
 };

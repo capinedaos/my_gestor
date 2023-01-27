@@ -7,6 +7,7 @@ const {
   getOverallPayrollById,
   updateOverallPayroll,
   deleteOverallPayroll,
+  finishPayroll,
 } = require("../../controllers/talentManagement/overallPayroll.controller");
 
 // Middlewares
@@ -22,6 +23,12 @@ const {
 } = require("../../middlewares/auth.middleware");
 
 const overallPayrollRouter = express.Router();
+
+overallPayrollRouter.patch(
+  "/finish-payroll/:id",
+  overallPayrollExists,
+  finishPayroll
+);
 
 overallPayrollRouter.use(protectSession);
 

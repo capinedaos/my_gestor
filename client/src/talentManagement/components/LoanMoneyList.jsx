@@ -51,7 +51,7 @@ const LoanMoneyList = ({ setTitleModal, selectLoanMoney, setTextButton }) => {
                   </td>
                   <td>{useCoinFormatter.format(loanMoney.quantity)}</td>
                   <td>{new Date(loanMoney.outlayDate).toLocaleDateString()}</td>
-                  <td>{loanMoney.numberAmount}</td>
+                  <td className="text-center">{loanMoney.numberAmount}</td>
                   <td>{useCoinFormatter.format(loanMoney.installmentValue)}</td>
                   <td>
                     {new Date(loanMoney.paymentDate).toLocaleDateString()}

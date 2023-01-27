@@ -62,14 +62,14 @@ const ModalDelete = ({
     } else if (idOverallPayroll) {
       dispatch(deleteOverallPayrollByIdThunk(idOverallPayroll));
     } else if (idEmployeePayroll) {
-      dispatch(deleteEmployeePayrollByIdThunk(idEmployeePayroll));
+      dispatch(deleteEmployeePayrollByIdThunk(idEmployeePayroll, id));
     }
   };
 
   return (
     <div
-      className={className}
       id={idModal}
+      className={className}
       tabIndex={tabIndex}
       aria-labelledby={ariaLabelledby}
       aria-hidden={ariaHidden}

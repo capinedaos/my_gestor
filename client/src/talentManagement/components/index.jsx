@@ -21,3 +21,4 @@ export { default as SalaryIncreaseList } from "./SalaryIncreaseList";
 export { default as OverallPayrollForm } from "./OverallPayrollForm";
 export { default as OverallPayrollList } from "./OverallPayrollList";
 export { default as EmployeePayrollList } from "./EmployeePayrollList";
+export { default as ModalInformation } from "./ModalInformation";

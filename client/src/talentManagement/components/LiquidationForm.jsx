@@ -8,6 +8,7 @@ import {
 
 import { getEmployeeThunk } from "../../app/slicesTalentManagement/employee.slice";
 import { useFormValidation } from "../../hooks";
+import ModalInformation from "./ModalInformation";
 
 const LiquidationForm = ({
   className,
@@ -27,6 +28,7 @@ const LiquidationForm = ({
   const [transportationAssistance, setTransportationAssistance] = useState(0);
   const [employeeId, setEmployeeId] = useState("");
   const employees = useSelector((state) => state.employee);
+  const [information, setInformation] = useState("");
 
   useFormValidation();
 
@@ -72,12 +74,12 @@ const LiquidationForm = ({
       if (liquidationSelected !== null) {
         dispatch(updateLiquidationThunk(liquidation, liquidationSelected.id));
         deselectLiquidation();
-        alert("Liquidacion modificada");
+        setInformation("Liquidacion modificada");
       } else {
         // crear
         dispatch(createLiquidationThunk(liquidation));
         deselectLiquidation();
-        alert("Liquidacion registrada");
+        setInformation("Liquidacion registrada");
       }
     }
   };
@@ -219,7 +221,9 @@ const LiquidationForm = ({
               <button
                 type="submit"
                 className="btn btn-primary"
-                // data-bs-dismiss="modal"
+                data-bs-dismiss="modal"
+                data-bs-target="#modalInformation"
+                data-bs-toggle="modal"
               >
                 {textButton}
               </button>
@@ -227,6 +231,14 @@ const LiquidationForm = ({
           </div>
         </div>
       </div>
+      <ModalInformation
+        idModal={"modalInformation"}
+        className={"modal fade"}
+        tabIndex={"-1"}
+        aria-labelledby={"exampleModalLabel"}
+        aria-hidden={"true"}
+        information={information}
+      />
     </form>
   );
 };

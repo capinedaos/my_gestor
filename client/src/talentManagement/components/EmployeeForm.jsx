@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
 import moment from "moment";
 import {
   createEmployeeThunk,
   updateEmployeeThunk,
 } from "../../app/slicesTalentManagement/employee.slice";
 import { getAreaThunk } from "../../app/slicesTalentManagement/area.slice";
+import { getContractByEmployeeIdThunk } from "../../app/slicesTalentManagement/contract.slice";
 import { useFormValidation } from "../../hooks";
+import ModalInformation from "./ModalInformation";
 
 const EmployeeForm = ({
   className,
@@ -21,60 +22,50 @@ const EmployeeForm = ({
   textButton,
 }) => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const [names, setNames] = useState("");
   const [identification, setIdentification] = useState("");
-  const [bankAccount, setBankAccount] = useState("");
-  const [gender, setGender] = useState("");
   const [birthday, setBirthday] = useState("");
-  const [bloodTypes, setBloodTypes] = useState("");
-  const [rh, setRh] = useState("");
   const [phone, setPhone] = useState("");
-  const [city, setCity] = useState("");
-  const [address, setAddress] = useState("");
-  const [email, setEmail] = useState("");
-  const [studies, setStudies] = useState("");
   const [areaId, setAreaId] = useState("");
   const areas = useSelector((state) => state.area);
 
+  const contract = useSelector((state) => state.contract);
+  const [contracActive, setContracActive] = useState({});
   const [salary, setSalary] = useState("");
   const [initialDate, setInitialDate] = useState("");
   const [finalDate, setFinalDate] = useState("");
+
+  const [information, setInformation] = useState("");
 
   useFormValidation();
 
   useEffect(() => {
     dispatch(getAreaThunk());
     if (employeeSelected !== null) {
+      dispatch(getContractByEmployeeIdThunk(employeeSelected.id));
+      const contractFind = contract.find(
+        (contract) => contract.status === "activo"
+      );
+      setContracActive(contractFind);
       setNames(employeeSelected.names);
       setIdentification(employeeSelected.identification);
-      setBankAccount(employeeSelected.bankAccount);
-      setGender(employeeSelected.gender);
       setBirthday(moment(employeeSelected.birthday).format("YYYY-MM-DD"));
-      setBloodTypes(employeeSelected.bloodTypes);
-      setRh(employeeSelected.rh);
       setPhone(employeeSelected.phone);
-      setCity(employeeSelected.city);
-      setAddress(employeeSelected.address);
-      setEmail(employeeSelected.email);
-      setStudies(employeeSelected.studies);
       setAreaId(employeeSelected.areaId);
+      setSalary(contracActive?.salary);
+      setInitialDate(moment(contracActive?.initialDate).format("YYYY-MM-DD"));
+      setFinalDate(moment(contracActive?.finalDate).format("YYYY-MM-DD"));
     } else {
       setNames("");
       setIdentification("");
-      setBankAccount("");
-      setGender("");
       setBirthday("");
-      setBloodTypes("");
-      setRh("");
       setPhone("");
-      setCity("");
-      setAddress("");
-      setEmail("");
-      setStudies("");
       setAreaId("");
+      setSalary("");
+      setInitialDate("");
+      setFinalDate("");
     }
-  }, [employeeSelected, dispatch]);
+  }, [employeeSelected, contracActive, dispatch]);
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -82,16 +73,16 @@ const EmployeeForm = ({
     const employee = {
       names,
       identification,
-      bankAccount,
-      gender,
+      bankAccount: "",
+      gender: "",
       birthday,
-      bloodTypes,
-      rh,
+      bloodTypes: "",
+      rh: "",
       phone,
-      city,
-      address,
-      email,
-      studies,
+      city: "",
+      address: "",
+      email: "",
+      studies: "",
       areaId,
       salary,
       initialDate,
@@ -105,12 +96,13 @@ const EmployeeForm = ({
       if (employeeSelected !== null) {
         dispatch(updateEmployeeThunk(employee, employeeSelected.id));
         deselectEmployee();
-        alert("Empleado modificado");
+        setInformation("Empleado modificado");
       } else {
         // crear
         dispatch(createEmployeeThunk(employee));
+        deselectEmployee();
+        setInformation("Empleado creado");
         e.target.reset();
-        alert("Empleado creado");
       }
     }
   };
@@ -146,7 +138,7 @@ const EmployeeForm = ({
                   type="text"
                   id="names"
                   onChange={(e) => setNames(e.target.value)}
-                  value={names}
+                  value={names || ""}
                   placeholder="Ingresa los nombres"
                   className="form-control"
                   required
@@ -164,7 +156,7 @@ const EmployeeForm = ({
                   type="text"
                   id="identification"
                   onChange={(e) => setIdentification(e.target.value)}
-                  value={identification}
+                  value={identification || ""}
                   placeholder="Ingresa numero de documento"
                   className="form-control"
                   required
@@ -174,48 +166,7 @@ const EmployeeForm = ({
                 </div>
                 <div className="invalid-feedback">Campo obligatorio</div>
               </div>
-              {/* <div className="mb-3">
-                <label htmlFor="bankAccount" className="form-label">
-                  N° Cuenta Bancaria
-                </label>
-                <input
-                  type="text"
-                  id="bankAccount"
-                  onChange={(e) => setBankAccount(e.target.value)}
-                  value={bankAccount}
-                  placeholder="Ingresa una cuenta bancaria"
-                  className="form-control"
-                  required
-                />
-                <div className="valid-feedback">
-                  Campo ingresado correctamente
-                </div>
-                <div className="invalid-feedback">Campo obligatorio</div>
-              </div> */}
-              {/* <div className="mb-3">
-                <label htmlFor="gender" className="form-label">
-                  Genero
-                </label>
-                <select
-                  type="text"
-                  id="gender"
-                  onChange={(e) => setGender(e.target.value)}
-                  value={gender}
-                  className="form-control"
-                  required
-                >
-                  <option value="" disabled>
-                    Seleccione una opcion
-                  </option>
-                  <option value="femenino">Femenino</option>
-                  <option value="masculino">Masculino</option>
-                  <option value="otro">Otro</option>
-                </select>
-                <div className="valid-feedback">
-                  Campo ingresado correctamente
-                </div>
-                <div className="invalid-feedback">Campo obligatorio</div>
-              </div> */}
+
               <div className="mb-3">
                 <label htmlFor="birthday" className="form-label">
                   Fecha de Nacimiento
@@ -224,7 +175,7 @@ const EmployeeForm = ({
                   type="date"
                   id="birthday"
                   onChange={(e) => setBirthday(e.target.value)}
-                  value={birthday}
+                  value={birthday || ""}
                   className="form-control"
                   required
                 />
@@ -233,54 +184,7 @@ const EmployeeForm = ({
                 </div>
                 <div className="invalid-feedback">Campo obligatorio</div>
               </div>
-              {/* <div className="mb-3">
-                <label htmlFor="bloodTypes" className="form-label">
-                  Tipo de Sangre
-                </label>
-                <select
-                  type="text"
-                  id="bloodTypes"
-                  onChange={(e) => setBloodTypes(e.target.value)}
-                  value={bloodTypes}
-                  className="form-control"
-                  required
-                >
-                  <option value="" disabled>
-                    Seleccione una opcion
-                  </option>
-                  <option value="a">A</option>
-                  <option value="b">B</option>
-                  <option value="ab">AB</option>
-                  <option value="o">O</option>
-                </select>
-                <div className="valid-feedback">
-                  Campo ingresado correctamente
-                </div>
-                <div className="invalid-feedback">Campo obligatorio</div>
-              </div> */}
-              {/* <div className="mb-3">
-                <label htmlFor="rh" className="form-label">
-                  RH
-                </label>
-                <select
-                  type="text"
-                  id="rh"
-                  onChange={(e) => setRh(e.target.value)}
-                  value={rh}
-                  className="form-control"
-                  required
-                >
-                  <option value="" disabled>
-                    Seleccione una opcion
-                  </option>
-                  <option value="+">+</option>
-                  <option value="-">-</option>
-                </select>
-                <div className="valid-feedback">
-                  Campo ingresado correctamente
-                </div>
-                <div className="invalid-feedback">Campo obligatorio</div>
-              </div> */}
+
               <div className="mb-3">
                 <label htmlFor="phone" className="form-label">
                   Telefono
@@ -289,7 +193,7 @@ const EmployeeForm = ({
                   type="text"
                   id="phone"
                   onChange={(e) => setPhone(e.target.value)}
-                  value={phone}
+                  value={phone || ""}
                   placeholder="Ingresa un numero de telefono"
                   className="form-control"
                   required
@@ -299,89 +203,6 @@ const EmployeeForm = ({
                 </div>
                 <div className="invalid-feedback">Campo obligatorio</div>
               </div>
-              {/* <div className="mb-3">
-                <label htmlFor="city" className="form-label">
-                  Ciudad
-                </label>
-                <input
-                  type="text"
-                  id="city"
-                  onChange={(e) => setCity(e.target.value)}
-                  value={city}
-                  placeholder="Ingresa la ciudad"
-                  className="form-control"
-                  required
-                />
-                <div className="valid-feedback">
-                  Campo ingresado correctamente
-                </div>
-                <div className="invalid-feedback">Campo obligatorio</div>
-              </div> */}
-              {/* <div className="mb-3">
-                <label htmlFor="address" className="form-label">
-                  Direccion
-                </label>
-                <input
-                  type="text"
-                  id="address"
-                  onChange={(e) => setAddress(e.target.value)}
-                  value={address}
-                  placeholder="Ingresa una direccion"
-                  className="form-control"
-                  required
-                />
-                <div className="valid-feedback">
-                  Campo ingresado correctamente
-                </div>
-                <div className="invalid-feedback">Campo obligatorio</div>
-              </div> */}
-              {/* <div className="mb-3">
-                <label htmlFor="email" className="form-label">
-                  Email
-                </label>
-                <input
-                  type="email"
-                  id="email"
-                  onChange={(e) => setEmail(e.target.value)}
-                  value={email}
-                  className="form-control"
-                  aria-describedby="emailHelp"
-                  placeholder="Ingresa un email"
-                  required
-                />
-                <div className="valid-feedback">
-                  Campo ingresado correctamente
-                </div>
-                <div className="invalid-feedback">Campo obligatorio</div>
-              </div> */}
-              {/* <div className="mb-3">
-                <label htmlFor="studies" className="form-label">
-                  Grado Academico
-                </label>
-                <select
-                  type="text"
-                  id="studies"
-                  onChange={(e) => setStudies(e.target.value)}
-                  value={studies}
-                  className="form-control"
-                  required
-                >
-                  <option value="" disabled>
-                    Seleccione una opcion
-                  </option>
-                  <option value="profesional">Profesional</option>
-                  <option value="tecnico-tecnologo">Tecnico/Tecnologo</option>
-                  <option value="otro">Otro</option>
-                  <option value="bachillerato">Bachillerato</option>
-                  <option value="primaria">Primaria</option>
-                  <option value="ninguno">Ninguno</option>
-                </select>
-                <div className="valid-feedback">
-                  Campo ingresado correctamente
-                </div>
-                <div className="invalid-feedback">Campo obligatorio</div>
-              </div> */}
-
               <div className="mb-3">
                 <label htmlFor="salary" className="form-label">
                   Salario
@@ -390,7 +211,7 @@ const EmployeeForm = ({
                   type="number"
                   id="salary"
                   onChange={(e) => setSalary(e.target.value)}
-                  value={salary}
+                  value={salary || ""}
                   placeholder="Ingresa un salario"
                   className="form-control"
                   required
@@ -409,7 +230,7 @@ const EmployeeForm = ({
                   type="date"
                   id="initialDate"
                   onChange={(e) => setInitialDate(e.target.value)}
-                  value={initialDate}
+                  value={initialDate || ""}
                   className="form-control"
                   required
                 />
@@ -427,7 +248,7 @@ const EmployeeForm = ({
                   type="date"
                   id="finalDate"
                   onChange={(e) => setFinalDate(e.target.value)}
-                  value={finalDate}
+                  value={finalDate || ""}
                   className="form-control"
                   required
                 />
@@ -479,6 +300,8 @@ const EmployeeForm = ({
                 type="submit"
                 className="btn btn-primary"
                 data-bs-dismiss="modal"
+                data-bs-target="#modalInformation"
+                data-bs-toggle="modal"
               >
                 {textButton}
               </button>
@@ -486,6 +309,14 @@ const EmployeeForm = ({
           </div>
         </div>
       </div>
+      <ModalInformation
+        idModal={"modalInformation"}
+        className={"modal fade"}
+        tabIndex={"-1"}
+        aria-labelledby={"exampleModalLabel"}
+        aria-hidden={"true"}
+        information={information}
+      />
     </form>
   );
 };

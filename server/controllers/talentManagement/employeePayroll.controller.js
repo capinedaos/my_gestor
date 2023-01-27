@@ -300,6 +300,29 @@ const getEmployeePayrollById = catchAsync(async (req, res, next) => {
   });
 });
 
+const getEmployeePayrollByEmployeeId = catchAsync(async (req, res, next) => {
+  const { employeeId } = req;
+
+  const employeePayroll = await EmployeePayroll.findOne({
+    where: { employeeId },
+    include: [
+      {
+        model: Employee,
+        required: false,
+      },
+      {
+        model: OverallPayroll,
+        required: false,
+      },
+    ],
+  });
+
+  res.status(201).json({
+    status: "success",
+    employeePayrollByEmployeeId: employeePayroll,
+  });
+});
+
 const updateEmployeePayroll = catchAsync(async (req, res, next) => {
   const { employeePayroll } = req;
   const {
@@ -661,7 +684,7 @@ const updateEmployeePayroll = catchAsync(async (req, res, next) => {
     pension +
     quantity +
     deductionAbsence +
-    otherDeductions +
+    Number(otherDeductions) +
     deductionLicense +
     deductionSuspension;
 
@@ -742,7 +765,7 @@ const getEmployeePayrollByOverallPayrollId = catchAsync(
     const { overallPayrollId } = req.params;
 
     const employeePayrollByOverallPayrollId = await EmployeePayroll.findAll({
-      where: { overallPayrollId },
+      where: { overallPayrollId, status: "activo" },
       include: [
         {
           model: Employee,
@@ -768,4 +791,5 @@ module.exports = {
   updateEmployeePayroll,
   deleteEmployeePayroll,
   getEmployeePayrollByOverallPayrollId,
+  getEmployeePayrollByEmployeeId,
 };

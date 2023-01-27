@@ -76,6 +76,12 @@ const HomeTalentManagement = () => {
             counter={liquidation.length}
           />
         </Link>
+        <Link to="/talent-management/calendar" className="link">
+          <ModuleCard
+            module_name="Calendario"
+            icon={<i className="bi bi-calendar-plus"></i>}
+          />
+        </Link>
       </div>
     </div>
   );

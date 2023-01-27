@@ -7,6 +7,7 @@ import {
 } from "../../app/slicesTalentManagement/unfitness.slice";
 import { getEmployeeThunk } from "../../app/slicesTalentManagement/employee.slice";
 import { useFormValidation } from "../../hooks";
+import ModalInformation from "./ModalInformation";
 
 const UnfitnessForm = ({
   className,
@@ -26,6 +27,7 @@ const UnfitnessForm = ({
   const [finalDate, setFinalDate] = useState("");
   const [employeeId, setEmployeeId] = useState("");
   const employees = useSelector((state) => state.employee);
+  const [information, setInformation] = useState("");
 
   useFormValidation();
 
@@ -66,11 +68,11 @@ const UnfitnessForm = ({
       if (unfitnessSelected !== null) {
         dispatch(updateUnfitnessThunk(unfitness, unfitnessSelected.id));
         deselectUnfitness();
-        alert("Incapacidad modificada");
+        setInformation("Incapacidad modificada");
       } else {
         // crear
         dispatch(createUnfitnessThunk(unfitness));
-        alert("Incapacidad registrada");
+        setInformation("Incapacidad registrada");
       }
     }
   };
@@ -215,7 +217,9 @@ const UnfitnessForm = ({
               <button
                 type="submit"
                 className="btn btn-primary"
-                // data-bs-dismiss="modal"
+                data-bs-dismiss="modal"
+                data-bs-target="#modalInformation"
+                data-bs-toggle="modal"
               >
                 {textButton}
               </button>
@@ -223,6 +227,14 @@ const UnfitnessForm = ({
           </div>
         </div>
       </div>
+      <ModalInformation
+        idModal={"modalInformation"}
+        className={"modal fade"}
+        tabIndex={"-1"}
+        aria-labelledby={"exampleModalLabel"}
+        aria-hidden={"true"}
+        information={information}
+      />
     </form>
   );
 };

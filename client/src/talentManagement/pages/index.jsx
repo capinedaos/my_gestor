@@ -16,3 +16,7 @@ export { default as CompletePayroll } from "./CompletePayroll";
 export { default as TableFirstFortnight } from "./TableFirstFortnight";
 export { default as TableMonthly } from "./TableMonthly";
 export { default as TableSecondFortnight } from "./TableSecondFortnight";
+export { default as DetailEmployeePayroll } from "./DetailEmployeePayroll";
+export { default as PayrollInformation } from "./PayrollInformation";
+export { default as ProofPayment } from "./ProofPayment";
+export { default as CalendarPage } from "./CalendarPage";

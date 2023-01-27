@@ -8,6 +8,7 @@ import {
 
 import { getEmployeeThunk } from "../../app/slicesTalentManagement/employee.slice";
 import { useFormValidation } from "../../hooks";
+import ModalInformation from "./ModalInformation";
 
 const LoanMoneyForm = ({
   className,
@@ -29,6 +30,7 @@ const LoanMoneyForm = ({
   const [cause, setCause] = useState("");
   const [employeeId, setEmployeeId] = useState("");
   const employees = useSelector((state) => state.employee);
+  const [information, setInformation] = useState("");
 
   useFormValidation();
 
@@ -70,12 +72,12 @@ const LoanMoneyForm = ({
     if (loanMoneySelected !== null) {
       dispatch(updateLoanMoneyThunk(loanMoney, loanMoneySelected.id));
       deselectLoanMoney();
-      alert("Prestamo modificado");
+      setInformation("Prestamo modificado");
     } else {
       // crear
       dispatch(createLoanMoneyThunk(loanMoney));
       deselectLoanMoney();
-      alert("Prestamo registrado");
+      setInformation("Prestamo registrado");
     }
   };
 
@@ -284,7 +286,9 @@ const LoanMoneyForm = ({
               <button
                 type="submit"
                 className="btn btn-primary"
-                // data-bs-dismiss="modal"
+                data-bs-dismiss="modal"
+                data-bs-target="#modalInformation"
+                data-bs-toggle="modal"
               >
                 {textButton}
               </button>
@@ -292,6 +296,14 @@ const LoanMoneyForm = ({
           </div>
         </div>
       </div>
+      <ModalInformation
+        idModal={"modalInformation"}
+        className={"modal fade"}
+        tabIndex={"-1"}
+        aria-labelledby={"exampleModalLabel"}
+        aria-hidden={"true"}
+        information={information}
+      />
     </form>
   );
 };

@@ -55,18 +55,20 @@ export const updateEmployeePayrollByIdThunk = (data, id) => (dispatch) => {
     .finally(() => dispatch(setIsLoading(false)));
 };
 
-export const deleteEmployeePayrollByIdThunk = (id) => (dispatch) => {
-  dispatch(setIsLoading(true));
-  return axios
-    .delete(
-      `http://localhost:4000/api/v1/talent-management/employee-payroll/${id}`,
-      getConfig()
-    )
-    .then((res) => {
-      dispatch(setEmployeePayroll(res.data.employeePayroll));
-    })
-    .finally(() => dispatch(setIsLoading(false)));
-};
+export const deleteEmployeePayrollByIdThunk =
+  (idEmployeePayroll, idOverallPayroll) => (dispatch) => {
+    dispatch(setIsLoading(true));
+    return axios
+      .delete(
+        `http://localhost:4000/api/v1/talent-management/employee-payroll/${idEmployeePayroll}`,
+        getConfig()
+      )
+      .then((res) => {
+        dispatch(setEmployeePayroll(res.data.employeePayroll));
+        dispatch(getEmployeePayrollByOverallPayrollId(idOverallPayroll));
+      })
+      .finally(() => dispatch(setIsLoading(false)));
+  };
 
 export const getEmployeePayrollByIdThunk = (id) => (dispatch) => {
   dispatch(setIsLoading(true));
@@ -77,6 +79,20 @@ export const getEmployeePayrollByIdThunk = (id) => (dispatch) => {
     )
     .then((res) => {
       dispatch(setEmployeePayroll(res.data.employeePayrollById));
+    })
+
+    .finally(() => dispatch(setIsLoading(false)));
+};
+
+export const getEmployeePayrollByEmployeeIdThunk = (id) => (dispatch) => {
+  dispatch(setIsLoading(true));
+  return axios
+    .get(
+      `http://localhost:4000/api/v1/talent-management/employee-payroll/detail-payroll/${id}`,
+      getConfig()
+    )
+    .then((res) => {
+      dispatch(setEmployeePayroll(res.data.employeePayrollByEmployeeId));
     })
 
     .finally(() => dispatch(setIsLoading(false)));

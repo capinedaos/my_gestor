@@ -7,6 +7,7 @@ import {
 } from "../../app/slicesTalentManagement/contract.slice";
 import { getEmployeeThunk } from "../../app/slicesTalentManagement/employee.slice";
 import { useFormValidation } from "../../hooks";
+import ModalInformation from "./ModalInformation";
 
 const ContractForm = ({
   className,
@@ -27,6 +28,7 @@ const ContractForm = ({
   const [finalDate, setFinalDate] = useState("");
   const [employeeId, setEmployeeId] = useState("");
   const employees = useSelector((state) => state.employee);
+  const [information, setInformation] = useState("");
 
   useFormValidation();
 
@@ -68,12 +70,12 @@ const ContractForm = ({
       if (contractSelected !== null) {
         dispatch(updateContractThunk(contract, contractSelected.id));
         deselectContract();
-        alert("Contrato modificado");
+        setInformation("Contrato modificado");
       } else {
         // crear
         dispatch(createContractThunk(contract));
         deselectContract();
-        alert("Contrato registrado");
+        setInformation("Contrato registrado");
       }
     }
   };
@@ -242,6 +244,8 @@ const ContractForm = ({
                 type="submit"
                 className="btn btn-primary"
                 data-bs-dismiss="modal"
+                data-bs-target="#modalInformation"
+                data-bs-toggle="modal"
               >
                 {textButton}
               </button>
@@ -249,6 +253,14 @@ const ContractForm = ({
           </div>
         </div>
       </div>
+      <ModalInformation
+        idModal={"modalInformation"}
+        className={"modal fade"}
+        tabIndex={"-1"}
+        aria-labelledby={"exampleModalLabel"}
+        aria-hidden={"true"}
+        information={information}
+      />
     </form>
   );
 };

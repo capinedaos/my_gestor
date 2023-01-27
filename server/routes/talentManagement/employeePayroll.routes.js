@@ -8,6 +8,7 @@ const {
   updateEmployeePayroll,
   deleteEmployeePayroll,
   getEmployeePayrollByOverallPayrollId,
+  getEmployeePayrollByEmployeeId,
 } = require("../../controllers/talentManagement/employeePayroll.controller");
 
 // Middlewares
@@ -32,6 +33,11 @@ employeePayrollRouter.get("/", getAllEmployeePayroll);
 employeePayrollRouter.get(
   "/overall-payroll/:overallPayrollId",
   getEmployeePayrollByOverallPayrollId
+);
+
+employeePayrollRouter.get(
+  "/detail-payroll/:employeeId",
+  getEmployeePayrollByEmployeeId
 );
 
 employeePayrollRouter.use(userAdmin);

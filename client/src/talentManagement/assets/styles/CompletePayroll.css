@@ -9,11 +9,15 @@
 .item-header {
   display: flex;
   margin: 0.5rem;
+  align-items: center;
 }
 
 .item-header p {
   text-align: center;
   box-shadow: none;
+  border: 1px solid lightgray;
+  margin-left: 0.5rem;
+  padding: 0.5rem;
 }
 
 .buttons {

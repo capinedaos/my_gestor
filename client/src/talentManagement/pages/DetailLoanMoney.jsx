@@ -205,8 +205,12 @@ const DetailLoanMoney = () => {
                 {Array.isArray(payInMoney)
                   ? payInMoney.map((payInMoney) => (
                       <tr className="text-left" key={payInMoney.id}>
-                        <td>{payInMoney.quantity}</td>
-                        <td>{payInMoney.deductionDate}</td>
+                        <td>{useCoinFormatter.format(payInMoney.quantity)}</td>
+                        <td>
+                          {new Date(
+                            payInMoney.deductionDate
+                          ).toLocaleDateString()}
+                        </td>
                       </tr>
                     ))
                   : []}

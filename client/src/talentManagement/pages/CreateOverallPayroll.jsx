@@ -9,7 +9,7 @@ import {
 import { createEmployeePayrollThunk } from "../../app/slicesTalentManagement/employeePayroll.slice";
 import { getEmployeeThunk } from "../../app/slicesTalentManagement/employee.slice";
 import { useNavigate } from "react-router-dom";
-import { ButtonReturn } from "../components";
+import { ButtonReturn, ModalInformation } from "../components";
 import { useFormValidation } from "../../hooks";
 import getConfig from "../../utils/getConfig";
 
@@ -18,6 +18,7 @@ const CreateOverallPayroll = () => {
   const navigate = useNavigate();
   const employees = useSelector((state) => state.employee);
   const [employeeData, setEmployeeData] = useState([]);
+  const [information, setInformation] = useState("");
 
   // handle events
   const { register, handleSubmit } = useForm();
@@ -62,18 +63,17 @@ const CreateOverallPayroll = () => {
       )
       .then((res) => {
         // hacer map de arrays ids
-
         employeePayroll.map((employee) => {
           dataPayroll = {
             employeeId: employee.id,
             overallPayrollId:
               res.data.overallPayroll[res.data.overallPayroll.length - 1].id,
           };
+          // console.log(dataPayroll);
           dispatch(createEmployeePayrollThunk(dataPayroll));
         });
       });
-
-    alert("Nomina creada");
+    setInformation("Nomina creada");
     navigate("/talent-management/overall-payroll");
   };
 
@@ -243,11 +243,25 @@ const CreateOverallPayroll = () => {
               >
                 Regresar
               </button>
-              <button type="submit" value="Submit" className="btn btn-success">
+              <button
+                type="submit"
+                value="Submit"
+                className="btn btn-success"
+                data-bs-target="#modalInformation"
+                data-bs-toggle="modal"
+              >
                 Crear
               </button>
             </div>
           </div>
+          <ModalInformation
+            idModal={"modalInformation"}
+            className={"modal fade"}
+            tabIndex={"-1"}
+            aria-labelledby={"exampleModalLabel"}
+            aria-hidden={"true"}
+            information={information}
+          />
         </form>
       </div>
     </div>

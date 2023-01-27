@@ -19,6 +19,10 @@ import {
   TableFirstFortnight,
   TableMonthly,
   TableSecondFortnight,
+  DetailEmployeePayroll,
+  PayrollInformation,
+  ProofPayment,
+  CalendarPage,
   // Contract,
 } from "../talentManagement/pages";
 
@@ -29,6 +33,7 @@ const RoutesTalentManagement = () => {
       <Routes>
         <Route path="/home" element={<HomeTalentManagement />} />
         <Route path="/employee" element={<Employee />} />
+        <Route path="/calendar" element={<CalendarPage />} />
         <Route path="/overall-payroll" element={<OverallPayroll />} />
         <Route
           path="/create-overall-payroll"
@@ -37,6 +42,15 @@ const RoutesTalentManagement = () => {
         <Route path="/employee/:id" element={<DetailEmployee />} />
         <Route path="/loan-money/:id" element={<DetailLoanMoney />} />
         <Route path="/bonus-service/:id" element={<DetailBonusService />} />
+        <Route
+          path="/employee-payroll/:id"
+          element={<DetailEmployeePayroll />}
+        />
+        <Route
+          path="/payroll-information/:id"
+          element={<PayrollInformation />}
+        />
+        <Route path="/proof-payment/:id" element={<ProofPayment />} />
         <Route path="/complete-payroll/:id" element={<CompletePayroll />} />
         <Route path="/liquidation/:id" element={<DetailLiquidation />} />
         <Route path="/unfitness" element={<Unfitness />} />

@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
+import axios from "axios";
+import getConfig from "../../utils/getConfig";
 import moment from "moment";
-import {
-  getEmployeeByIdThunk,
-  updateEmployeeThunk,
-} from "../../app/slicesTalentManagement/employee.slice";
+import { updateEmployeeThunk } from "../../app/slicesTalentManagement/employee.slice";
 import {
   createContractThunk,
   getContractByEmployeeIdThunk,
@@ -35,15 +34,15 @@ import {
   SalaryIncreaseForm,
   SalaryIncreaseList,
   ContractList,
+  ModalInformation,
 } from "../components";
-
-import "../assets/styles/DetailEmployee.css";
 
 const DetailEmployee = () => {
   const dispatch = useDispatch();
   const areas = useSelector((state) => state.area);
   const [titleModal, setTitleModal] = useState("");
   const [textButton, setTextButton] = useState("");
+  const [information, setInformation] = useState("");
   const { id } = useParams();
 
   const contract = useSelector((state) => state.contract);
@@ -102,39 +101,47 @@ const DetailEmployee = () => {
   const [medicines, setMedicines] = useState("");
 
   useEffect(() => {
-    dispatch(getEmployeeByIdThunk(id));
-    const currentDate = new Date();
-    const birthday = new Date(employee.birthday);
-    const difference = Math.abs(currentDate - birthday);
-    const days = difference / (1000 * 3600 * 24) + 1;
-    const age = Math.floor(days / 360);
+    axios
+      .get(
+        `http://localhost:4000/api/v1/talent-management/employee/${id}`,
+        getConfig()
+      )
+      .then((res) => {
+        const currentDate = new Date();
+        const birthday = new Date(res.data.employeeById.birthday);
+        const difference = Math.abs(currentDate - birthday);
+        const days = difference / (1000 * 3600 * 24) + 1;
+        const age = Math.floor(days / 360);
 
-    setNames(employee?.names);
-    setIdentification(employee?.identification);
-    setBankAccount(employee?.bankAccount);
-    setGender(employee?.gender);
-    setBirthday(moment(employee?.birthday).format("YYYY-MM-DD"));
-    setAge(age);
-    setBloodTypes(employee?.bloodTypes);
-    setRh(employee?.rh);
-    setPhone(employee?.phone);
-    setCity(employee?.city);
-    setAddress(employee?.address);
-    setEmail(employee?.email);
-    setStudies(employee?.studies);
-    setAreaId(employee?.areaId);
+        setNames(res.data.employeeById?.names);
+        setIdentification(res.data.employeeById?.identification);
+        setBankAccount(res.data.employeeById?.bankAccount);
+        setGender(res.data.employeeById?.gender);
+        setBirthday(
+          moment(res.data.employeeById?.birthday).format("YYYY-MM-DD")
+        );
+        setAge(age);
+        setBloodTypes(res.data.employeeById?.bloodTypes);
+        setRh(res.data.employeeById?.rh);
+        setPhone(res.data.employeeById?.phone);
+        setCity(res.data.employeeById?.city);
+        setAddress(res.data.employeeById?.address);
+        setEmail(res.data.employeeById?.email);
+        setStudies(res.data.employeeById?.studies);
+        setAreaId(res.data.employeeById?.areaId);
+      });
 
     dispatch(getContractByEmployeeIdThunk(id));
-
     const contractFind = contract.find(
       (contract) => contract.status === "activo"
     );
     setContracActive(contractFind);
-    setTypeContract(contracActive?.typeContract);
-    setSalary(contracActive?.salary);
-    setPosition(contracActive?.position);
-    setInitialDate(moment(contracActive?.initialDate).format("YYYY-MM-DD"));
-    setFinalDate(moment(contracActive?.finalDate).format("YYYY-MM-DD"));
+
+    setTypeContract(contractFind?.typeContract);
+    setSalary(contractFind?.salary);
+    setPosition(contractFind?.position);
+    setInitialDate(moment(contractFind?.initialDate).format("YYYY-MM-DD"));
+    setFinalDate(moment(contractFind?.finalDate).format("YYYY-MM-DD"));
 
     dispatch(getSocialSecurityByEmployeeIdThunk(id));
     setArl(socialSecurity?.arl);
@@ -180,7 +187,7 @@ const DetailEmployee = () => {
       afp,
     };
     dispatch(updateSocialSecurityByIdThunk(data, socialSecurity.id));
-    alert("Seguridad social modificada");
+    setInformation("Seguridad social modificada");
   };
 
   const onSubmitEndowment = (e) => {
@@ -191,7 +198,7 @@ const DetailEmployee = () => {
       shod,
     };
     dispatch(updateEndowmentByIdThunk(data, endowment.id));
-    alert("Info dotacion modificada");
+    setInformation("Informacion dotacion modificada");
   };
 
   const onSubmitFamilyInformation = (e) => {
@@ -206,7 +213,7 @@ const DetailEmployee = () => {
       socialStratum,
     };
     dispatch(updateFamilyInformationByIdThunk(data, familyInformation.id));
-    alert("Info familiar modificada");
+    setInformation("Informacion familiar modificada");
   };
 
   const onSubmitHealthyLife = (e) => {
@@ -223,7 +230,7 @@ const DetailEmployee = () => {
       medicines,
     };
     dispatch(updateHealthyLifeByIdThunk(data, healthyLife.id));
-    alert("Info vida saludable modificada");
+    setInformation("Informacion vida saludable modificada");
   };
 
   const onSubmitEmployee = (e) => {
@@ -243,8 +250,8 @@ const DetailEmployee = () => {
       studies,
       areaId,
     };
-    dispatch(updateEmployeeThunk(data, employee.id));
-    alert("Info empleado modificado");
+    dispatch(updateEmployeeThunk(data, id));
+    setInformation("Informacion empleado modificado");
   };
 
   const onSubmitContract = (e) => {
@@ -263,10 +270,10 @@ const DetailEmployee = () => {
     } else {
       if (contracActive === undefined) {
         dispatch(createContractThunk(data));
-        alert("Contrato creado");
+        setInformation("Contrato creado");
       } else {
         dispatch(updateContractThunk(data, contracActive.id));
-        alert("Contrato modificado");
+        setInformation("Contrato modificado");
       }
     }
   };
@@ -277,6 +284,14 @@ const DetailEmployee = () => {
         <div className="container">
           <h1>Detalle de empleado</h1>
           <ButtonReturn route={"/talent-management/employee"} />
+          <ModalInformation
+            idModal={"modalInformation"}
+            className={"modal fade"}
+            tabIndex={"-1"}
+            aria-labelledby={"exampleModalLabel"}
+            aria-hidden={"true"}
+            information={information}
+          />
 
           <div className="accordion" id="accordionExample">
             <div className="accordion-item">
@@ -507,7 +522,12 @@ const DetailEmployee = () => {
                       </div>
 
                       <div className="d-grid gap-2">
-                        <button className="btn btn-warning" type="submit">
+                        <button
+                          className="btn btn-warning"
+                          type="submit"
+                          data-bs-target="#modalInformation"
+                          data-bs-toggle="modal"
+                        >
                           <i className="bi bi-pencil"></i>
                         </button>
                       </div>
@@ -604,11 +624,21 @@ const DetailEmployee = () => {
 
                       <div className="d-grid gap-2">
                         {contracActive === undefined ? (
-                          <button className="btn btn-primary" type="submit">
+                          <button
+                            className="btn btn-primary"
+                            type="submit"
+                            data-bs-target="#modalInformation"
+                            data-bs-toggle="modal"
+                          >
                             <i className="bi bi-plus-circle"></i>
                           </button>
                         ) : (
-                          <button className="btn btn-warning" type="submit">
+                          <button
+                            className="btn btn-warning"
+                            type="submit"
+                            data-bs-target="#modalInformation"
+                            data-bs-toggle="modal"
+                          >
                             <i className="bi bi-pencil"></i>
                           </button>
                         )}
@@ -748,7 +778,12 @@ const DetailEmployee = () => {
                       </div>
 
                       <div className="d-grid gap-2">
-                        <button className="btn btn-warning" type="submit">
+                        <button
+                          className="btn btn-warning"
+                          type="submit"
+                          data-bs-target="#modalInformation"
+                          data-bs-toggle="modal"
+                        >
                           <i className="bi bi-pencil"></i>
                         </button>
                       </div>
@@ -815,7 +850,12 @@ const DetailEmployee = () => {
                         <label htmlFor="shod">Calzado</label>
                       </div>
                       <div className="d-grid gap-2">
-                        <button className="btn btn-warning" type="submit">
+                        <button
+                          className="btn btn-warning"
+                          type="submit"
+                          data-bs-target="#modalInformation"
+                          data-bs-toggle="modal"
+                        >
                           <i className="bi bi-pencil"></i>
                         </button>
                       </div>
@@ -870,7 +910,7 @@ const DetailEmployee = () => {
                           type="number"
                           id="dependents"
                           onChange={(e) => setDependents(e.target.value)}
-                          value={dependents || 0}
+                          value={dependents || ""}
                           placeholder="Ingresa una cantidad"
                           className="form-control"
                         />
@@ -884,7 +924,7 @@ const DetailEmployee = () => {
                           type="number"
                           id="numberOfChildren"
                           onChange={(e) => setNumberOfChildren(e.target.value)}
-                          value={numberOfChildren || 0}
+                          value={numberOfChildren || ""}
                           placeholder="Ingresa una cantidad"
                           className="form-control"
                         />
@@ -966,7 +1006,12 @@ const DetailEmployee = () => {
                       </div>
 
                       <div className="d-grid gap-2">
-                        <button className="btn btn-warning" type="submit">
+                        <button
+                          className="btn btn-warning"
+                          type="submit"
+                          data-bs-target="#modalInformation"
+                          data-bs-toggle="modal"
+                        >
                           <i className="bi bi-pencil"></i>
                         </button>
                       </div>
@@ -1135,7 +1180,12 @@ const DetailEmployee = () => {
                       </div>
 
                       <div className="d-grid gap-2">
-                        <button className="btn btn-warning" type="submit">
+                        <button
+                          className="btn btn-warning"
+                          type="submit"
+                          data-bs-target="#modalInformation"
+                          data-bs-toggle="modal"
+                        >
                           <i className="bi bi-pencil"></i>
                         </button>
                       </div>

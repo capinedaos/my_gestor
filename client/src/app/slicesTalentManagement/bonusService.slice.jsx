@@ -26,7 +26,6 @@ export const getBonusServiceThunk = () => (dispatch) => {
 };
 
 export const createBonusServiceThunk = (data) => (dispatch) => {
-  console.log(data);
   dispatch(setIsLoading(true));
   return axios
     .post(URL, data, getConfig())

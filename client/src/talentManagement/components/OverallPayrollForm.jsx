@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { updateOverallPayrollThunk } from "../../app/slicesTalentManagement/overallPayroll.slice";
 import { useFormValidation } from "../../hooks";
+import ModalInformation from "./ModalInformation";
 
 const OverallPayrollForm = ({
   className,
@@ -19,6 +20,7 @@ const OverallPayrollForm = ({
   const [description, setDescription] = useState("");
   const [month, setMonth] = useState("");
   const [year, setYear] = useState("");
+  const [information, setInformation] = useState("");
 
   useFormValidation();
 
@@ -50,7 +52,7 @@ const OverallPayrollForm = ({
       updateOverallPayrollThunk(overallPayroll, overallPayrollSelected.id)
     );
     deselectOverallPayroll();
-    alert("Nomina modificada");
+    setInformation("Nomina modificada");
   };
 
   return (
@@ -183,7 +185,9 @@ const OverallPayrollForm = ({
               <button
                 type="submit"
                 className="btn btn-primary"
-                // data-bs-dismiss="modal"
+                data-bs-dismiss="modal"
+                data-bs-target="#modalInformation"
+                data-bs-toggle="modal"
               >
                 {textButton}
               </button>
@@ -191,6 +195,14 @@ const OverallPayrollForm = ({
           </div>
         </div>
       </div>
+      <ModalInformation
+        idModal={"modalInformation"}
+        className={"modal fade"}
+        tabIndex={"-1"}
+        aria-labelledby={"exampleModalLabel"}
+        aria-hidden={"true"}
+        information={information}
+      />
     </form>
   );
 };

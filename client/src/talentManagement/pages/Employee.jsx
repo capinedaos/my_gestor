@@ -1,5 +1,9 @@
 import React, { useState } from "react";
-import { EmployeeForm, EmployeeList, ButtonReturn } from "../components";
+import {
+  EmployeeForm,
+  EmployeeList,
+  ButtonReturn,
+} from "../components";
 
 const Employee = () => {
   const [employeeSelected, setEmployeeSelected] = useState(null);

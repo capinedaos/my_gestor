@@ -7,6 +7,7 @@ import {
 } from "../../app/slicesTalentManagement/bonusService.slice";
 import { getEmployeeThunk } from "../../app/slicesTalentManagement/employee.slice";
 import { useFormValidation } from "../../hooks";
+import ModalInformation from "./ModalInformation";
 
 const BonusServiceForm = ({
   className,
@@ -25,6 +26,8 @@ const BonusServiceForm = ({
   const [transportationAssistance, setTransportationAssistance] = useState("");
   const [employeeId, setEmployeeId] = useState("");
   const employees = useSelector((state) => state.employee);
+
+  const [information, setInformation] = useState("");
 
   useFormValidation();
 
@@ -66,12 +69,12 @@ const BonusServiceForm = ({
           updateBonusServiceThunk(bonusService, bonusServiceSelected.id)
         );
         deselectBonusService();
-        alert("Prima modificada");
+        setInformation("Prima modificada");
       } else {
         // crear
         dispatch(createBonusServiceThunk(bonusService));
         deselectBonusService();
-        alert("Prima registrada");
+        setInformation("Prima registrada");
       }
     }
   };
@@ -197,7 +200,9 @@ const BonusServiceForm = ({
               <button
                 type="submit"
                 className="btn btn-primary"
-                // data-bs-dismiss="modal"
+                data-bs-dismiss="modal"
+                data-bs-target="#modalInformation"
+                data-bs-toggle="modal"
               >
                 {textButton}
               </button>
@@ -205,6 +210,14 @@ const BonusServiceForm = ({
           </div>
         </div>
       </div>
+      <ModalInformation
+        idModal={"modalInformation"}
+        className={"modal fade"}
+        tabIndex={"-1"}
+        aria-labelledby={"exampleModalLabel"}
+        aria-hidden={"true"}
+        information={information}
+      />
     </form>
   );
 };

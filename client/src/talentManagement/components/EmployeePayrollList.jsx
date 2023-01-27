@@ -1,14 +1,24 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link, useParams } from "react-router-dom";
 import ModalDelete from "./ModalDelete";
 import { formatNumber } from "../../hooks";
 import { useCoinFormatter } from "../../hooks";
 import {
   getEmployeePayrollByOverallPayrollId,
   getEmployeePayrollByIdThunk,
-} from "../../app/slicesTalentManagement/employeePayroll.slice";
-import { useParams } from "react-router-dom";
+  getEmployeePayrollByEmployeeIdThunk,
+} from "../../app/slicesTalentManagement/employeePayroll.slice.jsx";
+
+import { getContractByEmployeeIdThunk } from "../../app/slicesTalentManagement/contract.slice";
+import { getSocialSecurityByEmployeeIdThunk } from "../../app/slicesTalentManagement/socialSecurity.slice";
+import { getEndowmentByEmployeeIdThunk } from "../../app/slicesTalentManagement/endowment.slice";
+import { getFamilyInformationByEmployeeIdThunk } from "../../app/slicesTalentManagement/familyInformation.slice";
+import { getHealthyLifeByEmployeeIdThunk } from "../../app/slicesTalentManagement/healthyLife.slice";
+import { getSalaryIncreaseByEmployeeIdThunk } from "../../app/slicesTalentManagement/salaryIncrease.slice";
+import { getAreaThunk } from "../../app/slicesTalentManagement/area.slice";
+import axios from "axios";
+import getConfig from "../../utils/getConfig";
 
 const EmployeePayrollList = ({
   setTotalAccrued,
@@ -19,6 +29,7 @@ const EmployeePayrollList = ({
   const navigate = useNavigate();
   const employeePayroll = useSelector((state) => state.employeePayroll);
   const [idEmployeePayroll, setIdEmployeePayroll] = useState(0);
+  const [overallPayroll, setOverallPayroll] = useState({});
   const { id } = useParams();
   let totalAccrued = 0;
   let totalDeductions = 0;
@@ -41,20 +52,28 @@ const EmployeePayrollList = ({
     });
   };
 
-  if (employeePayroll.length > 0) {
-    employeePayroll.map((employeePayroll) => {
-      totalAccrued += employeePayroll.totalAccrued;
-      totalDeductions += employeePayroll.totalDeductions;
-      totalNetPayable += employeePayroll.netPayable;
-    });
-  }
-  setTotalAccrued(totalAccrued);
-  setTotalDeductions(totalDeductions);
-  setTotalNetPayable(totalNetPayable);
-
   useEffect(() => {
+    axios
+      .get(
+        `http://localhost:4000/api/v1/talent-management/overall-payroll/${id}`,
+        getConfig()
+      )
+      .then((res) => {
+        setOverallPayroll(res.data.overallPayroll);
+      });
+
     dispatch(getEmployeePayrollByOverallPayrollId(id));
-  }, [dispatch]);
+    if (employeePayroll.length > 0) {
+      employeePayroll.map((employeePayroll) => {
+        totalAccrued += employeePayroll.totalAccrued;
+        totalDeductions += employeePayroll.totalDeductions;
+        totalNetPayable += employeePayroll.netPayable;
+      });
+    }
+    setTotalAccrued(totalAccrued / 2);
+    setTotalDeductions(totalDeductions / 2);
+    setTotalNetPayable(totalNetPayable / 2);
+  }, [dispatch, id]);
 
   return (
     <div className="table-responsive rounded-3" style={{ height: "410px" }}>
@@ -64,24 +83,66 @@ const EmployeePayrollList = ({
             <th scope="col">Nombres</th>
             <th scope="col">Identificacion</th>
             <th scope="col">Salario</th>
-            <th scope="col">Novedades</th>
             <th scope="col">Ingresos</th>
             <th scope="col">Deducciones</th>
             <th scope="col">Neto a pagar</th>
-            <th scope="col">Editar</th>
-            <th scope="col">Eliminar</th>
+            <th scope="col">Ver mas</th>
+            {overallPayroll?.status === "En proceso" ? (
+              <>
+                <th scope="col">Editar</th>
+                <th scope="col">Eliminar</th>
+              </>
+            ) : null}
           </tr>
         </thead>
         <tbody>
           {Array.isArray(employeePayroll)
             ? employeePayroll.map((employeePayroll) => (
                 <tr className="text-left" key={employeePayroll.id}>
-                  <td>{employeePayroll.employee?.names} </td>
+                  <td>
+                    <Link
+                      to={`/talent-management/employee/${employeePayroll.employeeId}`}
+                      className="nav-link active"
+                    >
+                      <button
+                        type="button"
+                        className="btn btn-link"
+                        onClick={() => {
+                          dispatch(
+                            getContractByEmployeeIdThunk(
+                              employeePayroll.employeeId
+                            ),
+                            getSocialSecurityByEmployeeIdThunk(
+                              employeePayroll.employeeId
+                            ),
+                            getEndowmentByEmployeeIdThunk(
+                              employeePayroll.employeeId
+                            ),
+                            getFamilyInformationByEmployeeIdThunk(
+                              employeePayroll.employeeId
+                            ),
+                            getHealthyLifeByEmployeeIdThunk(
+                              employeePayroll.employeeId
+                            ),
+                            getSalaryIncreaseByEmployeeIdThunk(
+                              employeePayroll.employeeId
+                            ),
+                            getEmployeePayrollByEmployeeIdThunk(
+                              employeePayroll.employeeId
+                            ),
+                            getAreaThunk()
+                          );
+                        }}
+                      >
+                        {employeePayroll.employee?.names}
+                      </button>
+                    </Link>
+                  </td>
+
                   <td>
                     {formatNumber(employeePayroll.employee?.identification)}{" "}
                   </td>
                   <td>{useCoinFormatter.format(employeePayroll.salary)} </td>
-                  <td>Ver detalle</td>
                   <td>
                     {useCoinFormatter.format(employeePayroll.totalAccrued)}{" "}
                   </td>
@@ -92,29 +153,51 @@ const EmployeePayrollList = ({
                     {useCoinFormatter.format(employeePayroll.netPayable)}{" "}
                   </td>
                   <td>
-                    <button
-                      type="button"
-                      className="btn btn-info me-1"
-                      onClick={() => {
-                        addNewsPayroll(employeePayroll.id);
-                      }}
+                    <Link
+                      to={`/talent-management/employee-payroll/${employeePayroll.id}`}
                     >
-                      <i className="bi bi-pencil"></i>
-                    </button>
+                      <button
+                        type="button"
+                        className="btn btn-info"
+                        onClick={() => {
+                          dispatch(
+                            getEmployeePayrollByIdThunk(employeePayroll.id)
+                          );
+                        }}
+                      >
+                        <i className="bi bi-plus-circle"></i>
+                      </button>
+                    </Link>
                   </td>
-                  <td>
-                    <button
-                      onClick={() => {
-                        setIdEmployeePayroll(employeePayroll.id);
-                      }}
-                      type="button"
-                      className="btn btn-danger"
-                      data-bs-toggle="modal"
-                      data-bs-target="#modalDelete"
-                    >
-                      <i className="bi bi-trash"></i>
-                    </button>
-                  </td>
+
+                  {employeePayroll.overallPayroll?.status === "En proceso" ? (
+                    <>
+                      <td>
+                        <button
+                          type="button"
+                          className="btn btn-warning me-1"
+                          onClick={() => {
+                            addNewsPayroll(employeePayroll.id);
+                          }}
+                        >
+                          <i className="bi bi-pencil"></i>
+                        </button>
+                      </td>
+                      <td>
+                        <button
+                          onClick={() => {
+                            setIdEmployeePayroll(employeePayroll.id);
+                          }}
+                          type="button"
+                          className="btn btn-danger"
+                          data-bs-toggle="modal"
+                          data-bs-target="#modalDelete"
+                        >
+                          <i className="bi bi-trash"></i>
+                        </button>
+                      </td>
+                    </>
+                  ) : null}
                 </tr>
               ))
             : []}

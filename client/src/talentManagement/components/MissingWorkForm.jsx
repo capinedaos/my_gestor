@@ -8,6 +8,7 @@ import {
 
 import { getEmployeeThunk } from "../../app/slicesTalentManagement/employee.slice";
 import { useFormValidation } from "../../hooks";
+import ModalInformation from "./ModalInformation";
 
 const MissingWorkForm = ({
   className,
@@ -28,6 +29,8 @@ const MissingWorkForm = ({
   const [paidOut, setPaidOut] = useState("");
   const [employeeId, setEmployeeId] = useState("");
   const employees = useSelector((state) => state.employee);
+
+  const [information, setInformation] = useState("");
 
   useFormValidation();
 
@@ -71,12 +74,12 @@ const MissingWorkForm = ({
       if (missingWorkSelected !== null) {
         dispatch(updateMissingWorkThunk(missingWork, missingWorkSelected.id));
         deselectMissingWork();
-        alert("Ausencia modificada");
+        setInformation("Ausencia modificada");
       } else {
         // crear
         dispatch(createMissingWorkThunk(missingWork));
         deselectMissingWork();
-        alert("Ausencia registrada");
+        setInformation("Ausencia registrada");
       }
     }
   };
@@ -192,11 +195,19 @@ const MissingWorkForm = ({
                   className="form-control"
                   required
                 >
-                  <option value="" disabled>
-                    Seleccione una opcion
-                  </option>
-                  <option value={true}>SI</option>
-                  <option value={false}>NO</option>
+                  {cause === "licencia" ? (
+                    <>
+                      <option value="" disabled>
+                        Seleccione una opcion
+                      </option>
+                      <option value={true}>SI</option>
+                      <option value={false}>NO</option>
+                    </>
+                  ) : (
+                    <option selected="selected" value={true}>
+                      SI
+                    </option>
+                  )}
                 </select>
                 <div className="valid-feedback">
                   Campo ingresado correctamente
@@ -244,7 +255,9 @@ const MissingWorkForm = ({
               <button
                 type="submit"
                 className="btn btn-primary"
-                // data-bs-dismiss="modal"
+                data-bs-dismiss="modal"
+                data-bs-target="#modalInformation"
+                data-bs-toggle="modal"
               >
                 {textButton}
               </button>
@@ -252,6 +265,14 @@ const MissingWorkForm = ({
           </div>
         </div>
       </div>
+      <ModalInformation
+        idModal={"modalInformation"}
+        className={"modal fade"}
+        tabIndex={"-1"}
+        aria-labelledby={"exampleModalLabel"}
+        aria-hidden={"true"}
+        information={information}
+      />
     </form>
   );
 };

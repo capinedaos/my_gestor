@@ -11,26 +11,6 @@ const { AppError } = require("../../utils/appError.util");
 const createOverallPayroll = catchAsync(async (req, res, next) => {
   const { typeOfSettlement, description, month, year } = req.body;
   let newMonth = "";
-  
-  // const overallPayroll = await OverallPayroll.findAll();
-
-  // const newInitialDate = new Date(overallPayroll.initialDate);
-  // const newFinalDate = new Date(overallPayroll.finalDate);
-
-  // if (overallPayroll) {
-  //   for (let i = 0; i < overallPayroll.length; i++) {
-  //     if (
-  //       new Date(overallPayroll[i].initialDate).getTime() ===
-  //         newInitialDate.getTime() &&
-  //       new Date(overallPayroll[i].finalDate).getTime() ===
-  //         newFinalDate.getTime()
-  //     ) {
-  //       return next(
-  //         new AppError("Ya existe una nómina con la misma fecha", 404)
-  //       );
-  //     }
-  //   }
-  // }
 
   if (month === "enero") {
     newMonth = "01";
@@ -124,17 +104,7 @@ const getOverallPayrollById = catchAsync(async (req, res, next) => {
 const updateOverallPayroll = catchAsync(async (req, res, next) => {
   const { overallPayroll } = req;
   const { typeOfSettlement, description, month, year } = req.body;
-  // const employeePayroll = await EmployeePayroll.findAll({
-  //   where: {
-  //     initialDate: overallPayroll.initialDate,
-  //     finalDate: overallPayroll.finalDate,
-  //   },
-  // });
 
-  // const total = employeePayroll.reduce(
-  //   (total, employee) => total + employee.netPayable,
-  //   0
-  // );
   let newMonth = "";
   const overallPayrollDate = await OverallPayroll.findAll();
 
@@ -196,6 +166,17 @@ const updateOverallPayroll = catchAsync(async (req, res, next) => {
     finalDate = new Date(`${year}/${newMonth}/30`);
   }
 
+  const employeePayroll = await EmployeePayroll.findAll({
+    where: { overallPayrollId: overallPayroll.id },
+  });
+
+  let total = 0;
+  if (employeePayroll.length > 0) {
+    employeePayroll.map((employeePayroll) => {
+      total += employeePayroll.netPayable;
+    });
+  }
+
   await overallPayroll.update({
     typeOfSettlement,
     description,
@@ -204,6 +185,7 @@ const updateOverallPayroll = catchAsync(async (req, res, next) => {
     paymentPeriod: date,
     initialDate,
     finalDate,
+    totalPayroll: total,
   });
 
   res.status(201).json({ status: "success", overallPayroll });
@@ -215,10 +197,32 @@ const deleteOverallPayroll = catchAsync(async (req, res, next) => {
   res.status(201).json({ status: "success" });
 });
 
+const finishPayroll = catchAsync(async (req, res, next) => {
+  const { overallPayroll } = req;
+
+  const employeePayroll = await EmployeePayroll.findAll({
+    where: { overallPayrollId: overallPayroll.id },
+  });
+
+  let total = 0;
+  if (employeePayroll.length > 0) {
+    employeePayroll.map((employeePayroll) => {
+      total += employeePayroll.netPayable;
+    });
+  }
+
+  await overallPayroll.update({
+    totalPayroll: total,
+    status: "Terminada",
+  });
+  res.status(200).json({ status: "success", overallPayroll });
+});
+
 module.exports = {
   createOverallPayroll,
   getAllOverallPayroll,
   getOverallPayrollById,
   updateOverallPayroll,
   deleteOverallPayroll,
+  finishPayroll,
 };
