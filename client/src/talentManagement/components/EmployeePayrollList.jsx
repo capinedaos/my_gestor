@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, Link, useParams } from "react-router-dom";
-import ModalDelete from "./ModalDelete";
+import { ModalDelete } from "./ModalDelete";
 import { formatNumber } from "../../hooks";
 import { useCoinFormatter } from "../../hooks";
 import {
@@ -20,7 +20,7 @@ import { getAreaThunk } from "../../app/slicesTalentManagement/area.slice";
 import axios from "axios";
 import getConfig from "../../utils/getConfig";
 
-const EmployeePayrollList = ({
+export const EmployeePayrollList = ({
   setTotalAccrued,
   setTotalDeductions,
   setTotalNetPayable,
@@ -215,5 +215,3 @@ const EmployeePayrollList = ({
     </div>
   );
 };
-
-export default EmployeePayrollList;

@@ -22,7 +22,6 @@ import {
   DetailEmployeePayroll,
   PayrollInformation,
   ProofPayment,
-  CalendarPage,
   // Contract,
 } from "../talentManagement/pages";
 
@@ -33,7 +32,6 @@ const RoutesTalentManagement = () => {
       <Routes>
         <Route path="/home" element={<HomeTalentManagement />} />
         <Route path="/employee" element={<Employee />} />
-        <Route path="/calendar" element={<CalendarPage />} />
         <Route path="/overall-payroll" element={<OverallPayroll />} />
         <Route
           path="/create-overall-payroll"

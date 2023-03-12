@@ -30,14 +30,14 @@ import { getSalaryIncreaseByEmployeeIdThunk } from "../../app/slicesTalentManage
 import { getAreaThunk } from "../../app/slicesTalentManagement/area.slice";
 
 import {
-  ButtonReturn,
   SalaryIncreaseForm,
   SalaryIncreaseList,
   ContractList,
   ModalInformation,
 } from "../components";
+import { ButtonReturn } from "../../components";
 
-const DetailEmployee = () => {
+export const DetailEmployee = () => {
   const dispatch = useDispatch();
   const areas = useSelector((state) => state.area);
   const [titleModal, setTitleModal] = useState("");
@@ -107,6 +107,7 @@ const DetailEmployee = () => {
         getConfig()
       )
       .then((res) => {
+        // console.log(res.data.employeeById);
         const currentDate = new Date();
         const birthday = new Date(res.data.employeeById.birthday);
         const difference = Math.abs(currentDate - birthday);
@@ -136,6 +137,9 @@ const DetailEmployee = () => {
       (contract) => contract.status === "activo"
     );
     setContracActive(contractFind);
+    console.log(contract);
+    console.log(contracActive);
+    console.log(contractFind);
 
     setTypeContract(contractFind?.typeContract);
     setSalary(contractFind?.salary);
@@ -1200,5 +1204,3 @@ const DetailEmployee = () => {
     </>
   );
 };
-
-export default DetailEmployee;

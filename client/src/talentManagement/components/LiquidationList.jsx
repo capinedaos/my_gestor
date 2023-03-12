@@ -6,10 +6,10 @@ import {
   getLiquidationByIdThunk,
 } from "../../app/slicesTalentManagement/liquidation.slice";
 import { getContractByEmployeeIdThunk } from "../../app/slicesTalentManagement/contract.slice";
-import ModalDelete from "./ModalDelete";
+import { ModalDelete } from "./ModalDelete";
 import { useCoinFormatter } from "../../hooks";
 
-const LiquidationList = ({
+export const LiquidationList = ({
   setTitleModal,
   selectLiquidation,
   setTextButton,
@@ -130,5 +130,3 @@ const LiquidationList = ({
     </div>
   );
 };
-
-export default LiquidationList;

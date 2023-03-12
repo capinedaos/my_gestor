@@ -1,11 +1,10 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { ModuleCard } from "../../components";
-import { ButtonReturn } from "../components";
+import { ModuleCard, ButtonReturn } from "../../components";
 import "../../assets/styles/HomeMyGestor.css";
 import { Link } from "react-router-dom";
 
-const HomeTalentManagement = () => {
+export const HomeTalentManagement = () => {
   const employees = useSelector((state) => state.employee);
   // const contract = useSelector((state) => state.contract);
   const overallPayroll = useSelector((state) => state.overallPayroll);
@@ -76,15 +75,7 @@ const HomeTalentManagement = () => {
             counter={liquidation.length}
           />
         </Link>
-        <Link to="/talent-management/calendar" className="link">
-          <ModuleCard
-            module_name="Calendario"
-            icon={<i className="bi bi-calendar-plus"></i>}
-          />
-        </Link>
       </div>
     </div>
   );
 };
-
-export default HomeTalentManagement;

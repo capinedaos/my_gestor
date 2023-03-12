@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const NavBar = () => {
+export const NavBar = () => {
   const logout = () => {
     localStorage.setItem("token", "");
     alert("Cerrando Sesion");
@@ -44,4 +44,4 @@ const NavBar = () => {
   );
 };
 
-export default NavBar;
+

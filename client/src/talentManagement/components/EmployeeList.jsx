@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getEmployeeThunk } from "../../app/slicesTalentManagement/employee.slice";
-import ModalDelete from "./ModalDelete";
+import { ModalDelete } from "./ModalDelete";
 import { formatNumber } from "../../hooks";
 import { getContractByEmployeeIdThunk } from "../../app/slicesTalentManagement/contract.slice";
 import { getSocialSecurityByEmployeeIdThunk } from "../../app/slicesTalentManagement/socialSecurity.slice";
@@ -12,7 +12,11 @@ import { getHealthyLifeByEmployeeIdThunk } from "../../app/slicesTalentManagemen
 import { getSalaryIncreaseByEmployeeIdThunk } from "../../app/slicesTalentManagement/salaryIncrease.slice";
 import { getAreaThunk } from "../../app/slicesTalentManagement/area.slice";
 
-const EmployeeList = ({ setTitleModal, selectEmployee, setTextButton }) => {
+export const EmployeeList = ({
+  setTitleModal,
+  selectEmployee,
+  setTextButton,
+}) => {
   const employees = useSelector((state) => state.employee);
   const dispatch = useDispatch();
   const [idEmployee, setIdEmployee] = useState(0);
@@ -112,9 +116,6 @@ const EmployeeList = ({ setTitleModal, selectEmployee, setTextButton }) => {
         aria-hidden={"true"}
         idEmployee={idEmployee}
       />
-     
     </div>
   );
 };
-
-export default EmployeeList;

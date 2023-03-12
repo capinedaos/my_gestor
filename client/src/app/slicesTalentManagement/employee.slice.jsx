@@ -44,8 +44,9 @@ export const getEmployeeByIdThunk = (id) => (dispatch) => {
       `http://localhost:4000/api/v1/talent-management/employee/${id}`,
       getConfig()
     )
-    .then((res) => {
-      dispatch(setEmployee(res.data.employeeById));
+    .then(async (res) => {
+      await dispatch(setEmployee(res.data.employeeById));
+      console.log(res.data.employeeById);
     })
     .finally(() => dispatch(setIsLoading(false)));
 };

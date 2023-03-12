@@ -7,9 +7,9 @@ import {
 } from "../../app/slicesTalentManagement/contract.slice";
 import { getEmployeeThunk } from "../../app/slicesTalentManagement/employee.slice";
 import { useFormValidation } from "../../hooks";
-import ModalInformation from "./ModalInformation";
+import { ModalInformation } from "./ModalInformation";
 
-const ContractForm = ({
+export const ContractForm = ({
   className,
   idModal,
   tabIndex,
@@ -264,5 +264,3 @@ const ContractForm = ({
     </form>
   );
 };
-
-export default ContractForm;

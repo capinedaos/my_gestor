@@ -34,19 +34,17 @@ const HomeMyGestor = () => {
             />
           </Link>
 
+          <Link to="/accounting-system/home" className="link">
+            <ModuleCard
+              module_name="CONTABILIDAD"
+              icon={<i className="bi bi-calculator"></i>}
+            />
+          </Link>
+
           <Link to="/job-security/home" className="link">
             <ModuleCard
               // module_name="SG-SST"
               // icon={<i className="bi bi-clipboard2-pulse"></i>}
-              module_name=""
-              icon={<i className="bi bi-question-square"></i>}
-            />
-          </Link>
-
-          <Link to="/accounting-system/home" className="link">
-            <ModuleCard
-              // module_name="CONTABLE"
-              // icon={<i className="bi bi-calculator"></i>}
               module_name=""
               icon={<i className="bi bi-question-square"></i>}
             />

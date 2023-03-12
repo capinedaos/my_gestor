@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import { LoanMoneyForm, LoanMoneyList, ButtonReturn } from "../components";
+import { LoanMoneyForm, LoanMoneyList } from "../components";
+import { ButtonReturn } from "../../components";
 
-const LoanMoney = () => {
+export const LoanMoney = () => {
   const [loanMoneySelected, setLoanMoneySelected] = useState(null);
   const [titleModal, setTitleModal] = useState("");
   const [textButton, setTextButton] = useState("");
@@ -36,6 +37,25 @@ const LoanMoney = () => {
         </button>
       </div>
 
+      <div className="input-group mb-3">
+        <input
+          type="text"
+          // value={search}
+          // onChange={handleChange}
+          className="form-control"
+          placeholder="Busqueda por Empleado o Estado"
+          aria-label="Busqueda por Empleado o Estado"
+          aria-describedby="button-addon2"
+        />
+        <button
+          className="btn btn-outline-info"
+          type="button"
+          id="button-addon2"
+        >
+          <i className="bi bi-search"></i>
+        </button>
+      </div>
+
       <LoanMoneyForm
         className={"modal fade"}
         idModal={"modalForm"}
@@ -56,5 +76,3 @@ const LoanMoney = () => {
     </div>
   );
 };
-
-export default LoanMoney;

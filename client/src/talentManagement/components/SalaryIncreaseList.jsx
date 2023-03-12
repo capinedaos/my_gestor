@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import ModalDelete from "./ModalDelete";
+import { ModalDelete } from "./ModalDelete";
 import { useCoinFormatter } from "../../hooks";
 import { getSalaryIncreaseByEmployeeIdThunk } from "../../app/slicesTalentManagement/salaryIncrease.slice";
 
-const SalaryIncreaseList = () => {
+export const SalaryIncreaseList = () => {
   const salaryIncrease = useSelector((state) => state.salaryIncrease);
   const dispatch = useDispatch();
   const [idSalaryIncrease, setIdSalaryIncrease] = useState(0);
@@ -66,5 +66,3 @@ const SalaryIncreaseList = () => {
     </div>
   );
 };
-
-export default SalaryIncreaseList;

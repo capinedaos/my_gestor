@@ -4,16 +4,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import getConfig from "../../utils/getConfig";
 import { useCoinFormatter } from "../../hooks";
-import {
-  ButtonReturn,
-  EmployeePayrollList,
-  ModalInformation,
-} from "../components";
+import { EmployeePayrollList, ModalInformation } from "../components";
+import { ButtonReturn } from "../../components";
 import { getEmployeePayrollByOverallPayrollId } from "../../app/slicesTalentManagement/employeePayroll.slice";
 import { finishPayrollThunk } from "../../app/slicesTalentManagement/overallPayroll.slice";
 import "../assets/styles/CompletePayroll.css";
 
-const CompletePayroll = () => {
+export const CompletePayroll = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const employeePayroll = useSelector((state) => state.employeePayroll);
@@ -93,5 +90,3 @@ const CompletePayroll = () => {
     </div>
   );
 };
-
-export default CompletePayroll;

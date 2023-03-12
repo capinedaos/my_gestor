@@ -2,7 +2,7 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { payLoanByIdThunk } from "../../app/slicesTalentManagement/loanMoney.slice";
 
-const ModalPayLoan = ({
+export const ModalPayLoan = ({
   idLoanMoney,
   className,
   idModal,
@@ -64,5 +64,3 @@ const ModalPayLoan = ({
     </div>
   );
 };
-
-export default ModalPayLoan;

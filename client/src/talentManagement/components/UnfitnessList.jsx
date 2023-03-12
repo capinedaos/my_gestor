@@ -2,9 +2,13 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getUnfitnessThunk } from "../../app/slicesTalentManagement/unfitness.slice";
-import ModalDelete from "./ModalDelete";
+import { ModalDelete } from "./ModalDelete";
 
-const UnfitnessList = ({ setTitleModal, selectUnfitness, setTextButton }) => {
+export const UnfitnessList = ({
+  setTitleModal,
+  selectUnfitness,
+  setTextButton,
+}) => {
   const unfitness = useSelector((state) => state.unfitness);
   const dispatch = useDispatch();
   const [idUnfitness, setIdUnfitness] = useState(0);
@@ -93,5 +97,3 @@ const UnfitnessList = ({ setTitleModal, selectUnfitness, setTextButton }) => {
     </div>
   );
 };
-
-export default UnfitnessList;

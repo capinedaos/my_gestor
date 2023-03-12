@@ -1,7 +1,7 @@
 import React from "react";
 import "../assets/styles/ModuleCard.css";
 
-const ModuleCard = (props) => {
+export const ModuleCard = (props) => {
   return (
     <>
       <div className="module_card position-relative">
@@ -21,4 +21,4 @@ const ModuleCard = (props) => {
   );
 };
 
-export default ModuleCard;
+

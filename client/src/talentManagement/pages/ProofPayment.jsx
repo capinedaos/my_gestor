@@ -4,11 +4,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import getConfig from "../../utils/getConfig";
 import { useCoinFormatter } from "../../hooks";
-import { ButtonReturn, EmployeePayrollList } from "../components";
+import { EmployeePayrollList } from "../components";
+import { ButtonReturn } from "../../components";
 import { getEmployeePayrollByOverallPayrollId } from "../../app/slicesTalentManagement/employeePayroll.slice";
 import "../assets/styles/CompletePayroll.css";
 
-const ProofPayment = () => {
+export const ProofPayment = () => {
   const dispatch = useDispatch();
   const employeePayroll = useSelector((state) => state.employeePayroll);
   const [overallPayroll, setOverallPayroll] = useState({});
@@ -54,5 +55,3 @@ const ProofPayment = () => {
     </div>
   );
 };
-
-export default ProofPayment;

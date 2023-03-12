@@ -5,12 +5,12 @@ import { getEmployeePayrollByIdThunk } from "../../app/slicesTalentManagement/em
 import { getSocialSecurityByEmployeeIdThunk } from "../../app/slicesTalentManagement/socialSecurity.slice";
 import { getContractByEmployeeIdThunk } from "../../app/slicesTalentManagement/contract.slice";
 import { getCompanyThunk } from "../../app/slices/company.slice";
-import { ButtonReturn } from "../components";
+import { ButtonReturn } from "../../components";
 import { useCoinFormatter, formatNumber } from "../../hooks";
 import axios from "axios";
 import getConfig from "../../utils/getConfig";
 
-const DetailEmployeePayroll = () => {
+export const DetailEmployeePayroll = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
   const company = useSelector((state) => state.company);
@@ -389,5 +389,3 @@ const DetailEmployeePayroll = () => {
     </div>
   );
 };
-
-export default DetailEmployeePayroll;

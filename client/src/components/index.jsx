@@ -1,4 +1,6 @@
-export { default as ModuleCard } from "./ModuleCard";
-export { default as NavBar } from "./NavBar";
-export { default as LoadingScreen } from "./LoadingScreen";
-export { default as ProtectedRoutes } from "./ProtectedRoutes";
+export * from "./ModuleCard";
+export * from "./NavBar";
+export * from "./LoadingScreen";
+export * from "./ProtectedRoutes";
+export * from "./ButtonReturn";
+export * from "./ItemButton";

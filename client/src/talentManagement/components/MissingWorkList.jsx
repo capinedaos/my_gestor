@@ -2,9 +2,9 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getMissingWorkThunk } from "../../app/slicesTalentManagement/missingWork.slice";
-import ModalDelete from "./ModalDelete";
+import {ModalDelete} from "./ModalDelete";
 
-const MissingWorkList = ({
+export const MissingWorkList = ({
   setTitleModal,
   selectMissingWork,
   setTextButton,
@@ -101,5 +101,3 @@ const MissingWorkList = ({
     </div>
   );
 };
-
-export default MissingWorkList;

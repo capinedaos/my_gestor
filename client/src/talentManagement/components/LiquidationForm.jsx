@@ -8,9 +8,9 @@ import {
 
 import { getEmployeeThunk } from "../../app/slicesTalentManagement/employee.slice";
 import { useFormValidation } from "../../hooks";
-import ModalInformation from "./ModalInformation";
+import { ModalInformation } from "./ModalInformation";
 
-const LiquidationForm = ({
+export const LiquidationForm = ({
   className,
   idModal,
   tabIndex,
@@ -242,5 +242,3 @@ const LiquidationForm = ({
     </form>
   );
 };
-
-export default LiquidationForm;

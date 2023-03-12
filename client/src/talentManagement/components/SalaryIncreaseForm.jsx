@@ -4,9 +4,9 @@ import { useForm } from "react-hook-form";
 import { useFormValidation } from "../../hooks";
 import { createSalaryIncreaseThunk } from "../../app/slicesTalentManagement/salaryIncrease.slice";
 import { useParams } from "react-router-dom";
-import ModalInformation from "./ModalInformation";
+import { ModalInformation } from "./ModalInformation";
 
-const SalaryIncreaseForm = ({
+export const SalaryIncreaseForm = ({
   className,
   idModal,
   tabIndex,
@@ -153,5 +153,3 @@ const SalaryIncreaseForm = ({
     </form>
   );
 };
-
-export default SalaryIncreaseForm;

@@ -8,9 +8,9 @@ import {
 import { getAreaThunk } from "../../app/slicesTalentManagement/area.slice";
 import { getContractByEmployeeIdThunk } from "../../app/slicesTalentManagement/contract.slice";
 import { useFormValidation } from "../../hooks";
-import ModalInformation from "./ModalInformation";
+import { ModalInformation } from "./ModalInformation";
 
-const EmployeeForm = ({
+export const EmployeeForm = ({
   className,
   idModal,
   tabIndex,
@@ -320,5 +320,3 @@ const EmployeeForm = ({
     </form>
   );
 };
-
-export default EmployeeForm;

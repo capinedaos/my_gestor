@@ -5,11 +5,15 @@ import {
   getLoanMoneyThunk,
   getLoanMoneyByIdThunk,
 } from "../../app/slicesTalentManagement/loanMoney.slice";
-import ModalDelete from "./ModalDelete";
-import ModalPayLoan from "./ModalPayLoan";
+import { ModalDelete } from "./ModalDelete";
+import { ModalPayLoan } from "./ModalPayLoan";
 import { useCoinFormatter } from "../../hooks";
 
-const LoanMoneyList = ({ setTitleModal, selectLoanMoney, setTextButton }) => {
+export const LoanMoneyList = ({
+  setTitleModal,
+  selectLoanMoney,
+  setTextButton,
+}) => {
   const loanMoney = useSelector((state) => state.loanMoney);
   const dispatch = useDispatch();
   const [idLoanMoney, setIdLoanMoney] = useState(0);
@@ -138,5 +142,3 @@ const LoanMoneyList = ({ setTitleModal, selectLoanMoney, setTextButton }) => {
     </div>
   );
 };
-
-export default LoanMoneyList;

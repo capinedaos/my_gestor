@@ -5,9 +5,10 @@ import { Link, useParams } from "react-router-dom";
 import getConfig from "../../utils/getConfig";
 import { useCoinFormatter, formatNumber } from "../../hooks";
 import { getContractByEmployeeIdThunk } from "../../app/slicesTalentManagement/contract.slice";
-import { ModalDelete, LiquidationForm, ButtonReturn } from "../components";
+import { ModalDelete, LiquidationForm } from "../components";
+import { ButtonReturn } from "../../components";
 
-const DetailLiquidation = () => {
+export const DetailLiquidation = () => {
   const dispatch = useDispatch();
   const [idLiquidation, setIdLiquidation] = useState(0);
   const [liquidation, setLiquidation] = useState({});
@@ -226,5 +227,3 @@ const DetailLiquidation = () => {
     </>
   );
 };
-
-export default DetailLiquidation;

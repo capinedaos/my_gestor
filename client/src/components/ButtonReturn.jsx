@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const ButtonReturn = ({ route }) => {
+export const ButtonReturn = ({ route }) => {
   return (
     <div className="mx-2 mb-3">
       <Link to={route} className="nav-link active">
@@ -13,4 +13,4 @@ const ButtonReturn = ({ route }) => {
   );
 };
 
-export default ButtonReturn;
+

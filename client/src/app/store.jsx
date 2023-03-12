@@ -20,6 +20,8 @@ import payInMoneySlice from "./slicesTalentManagement/payInMoney.slice";
 import bonusServiceSlice from "./slicesTalentManagement/bonusService.slice";
 import liquidationSlice from "./slicesTalentManagement/liquidation.slice";
 import salaryIncreaseSlice from "./slicesTalentManagement/salaryIncrease.slice";
+import uiSlice from "./slicesTalentManagement/ui.slice";
+import calendarSlice from "./slicesTalentManagement/calendar.slice";
 
 export const store = configureStore({
   reducer: {
@@ -42,5 +44,11 @@ export const store = configureStore({
     bonusService: bonusServiceSlice,
     liquidation: liquidationSlice,
     salaryIncrease: salaryIncreaseSlice,
+    calendar: calendarSlice,
+    ui: uiSlice,
   },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: false,
+    }),
 });

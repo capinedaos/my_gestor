@@ -7,9 +7,9 @@ import {
 } from "../../app/slicesTalentManagement/bonusService.slice";
 import { getEmployeeThunk } from "../../app/slicesTalentManagement/employee.slice";
 import { useFormValidation } from "../../hooks";
-import ModalInformation from "./ModalInformation";
+import { ModalInformation } from "./ModalInformation";
 
-const BonusServiceForm = ({
+export const BonusServiceForm = ({
   className,
   idModal,
   tabIndex,
@@ -221,5 +221,3 @@ const BonusServiceForm = ({
     </form>
   );
 };
-
-export default BonusServiceForm;

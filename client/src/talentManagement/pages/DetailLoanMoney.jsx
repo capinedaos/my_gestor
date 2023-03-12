@@ -5,15 +5,11 @@ import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import getConfig from "../../utils/getConfig";
 import { getPayInMoneyByLoanMoneyIdThunk } from "../../app/slicesTalentManagement/payInMoney.slice";
-import {
-  ModalDelete,
-  ModalPayLoan,
-  LoanMoneyForm,
-  ButtonReturn,
-} from "../components";
+import { ModalDelete, ModalPayLoan, LoanMoneyForm } from "../components";
+import { ButtonReturn } from "../../components";
 import { useCoinFormatter } from "../../hooks";
 
-const DetailLoanMoney = () => {
+export const DetailLoanMoney = () => {
   const dispatch = useDispatch();
   const payInMoney = useSelector((state) => state.payInMoney);
   const [idLoanMoney, setIdLoanMoney] = useState(0);
@@ -222,5 +218,3 @@ const DetailLoanMoney = () => {
     </>
   );
 };
-
-export default DetailLoanMoney;

@@ -6,10 +6,10 @@ import {
   getOverallPayrollByIdThunk,
 } from "../../app/slicesTalentManagement/overallPayroll.slice";
 import { getEmployeePayrollByOverallPayrollId } from "../../app/slicesTalentManagement/employeePayroll.slice";
-import ModalDelete from "./ModalDelete";
+import { ModalDelete } from "./ModalDelete";
 import { useCoinFormatter } from "../../hooks";
 
-const OverallPayrollList = ({
+export const OverallPayrollList = ({
   setTitleModal,
   selectOverallPayroll,
   setTextButton,
@@ -144,5 +144,3 @@ const OverallPayrollList = ({
     </div>
   );
 };
-
-export default OverallPayrollList;

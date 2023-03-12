@@ -13,7 +13,7 @@ import { deleteSalaryIncreaseByIdThunk } from "../../app/slicesTalentManagement/
 import { deleteOverallPayrollByIdThunk } from "../../app/slicesTalentManagement/overallPayroll.slice";
 import { deleteEmployeePayrollByIdThunk } from "../../app/slicesTalentManagement/employeePayroll.slice";
 
-const ModalDelete = ({
+export const ModalDelete = ({
   idEmployeePayroll,
   idOverallPayroll,
   idSalaryIncrease,
@@ -125,5 +125,3 @@ const ModalDelete = ({
     </div>
   );
 };
-
-export default ModalDelete;

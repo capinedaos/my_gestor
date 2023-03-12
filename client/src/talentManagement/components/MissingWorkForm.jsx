@@ -8,9 +8,9 @@ import {
 
 import { getEmployeeThunk } from "../../app/slicesTalentManagement/employee.slice";
 import { useFormValidation } from "../../hooks";
-import ModalInformation from "./ModalInformation";
+import { ModalInformation } from "./ModalInformation";
 
-const MissingWorkForm = ({
+export const MissingWorkForm = ({
   className,
   idModal,
   tabIndex,
@@ -276,5 +276,3 @@ const MissingWorkForm = ({
     </form>
   );
 };
-
-export default MissingWorkForm;

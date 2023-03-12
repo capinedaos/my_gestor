@@ -7,9 +7,9 @@ import {
 } from "../../app/slicesTalentManagement/unfitness.slice";
 import { getEmployeeThunk } from "../../app/slicesTalentManagement/employee.slice";
 import { useFormValidation } from "../../hooks";
-import ModalInformation from "./ModalInformation";
+import { ModalInformation } from "./ModalInformation";
 
-const UnfitnessForm = ({
+export const UnfitnessForm = ({
   className,
   idModal,
   tabIndex,
@@ -238,5 +238,3 @@ const UnfitnessForm = ({
     </form>
   );
 };
-
-export default UnfitnessForm;

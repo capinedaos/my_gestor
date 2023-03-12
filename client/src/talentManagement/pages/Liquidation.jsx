@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import { LiquidationForm, LiquidationList, ButtonReturn } from "../components";
+import { LiquidationForm, LiquidationList } from "../components";
+import { ButtonReturn } from "../../components";
 
-const Liquidation = () => {
+export const Liquidation = () => {
   const [liquidationSelected, setLiquidationSelected] = useState(null);
   const [titleModal, setTitleModal] = useState("");
   const [textButton, setTextButton] = useState("");
@@ -34,6 +35,25 @@ const Liquidation = () => {
         </button>
       </div>
 
+      <div className="input-group mb-3">
+        <input
+          type="text"
+          // value={search}
+          // onChange={handleChange}
+          className="form-control"
+          placeholder="Busqueda por Empleado"
+          aria-label="Busqueda por Empleado"
+          aria-describedby="button-addon2"
+        />
+        <button
+          className="btn btn-outline-info"
+          type="button"
+          id="button-addon2"
+        >
+          <i className="bi bi-search"></i>
+        </button>
+      </div>
+
       <LiquidationForm
         className={"modal fade"}
         idModal={"modalForm"}
@@ -54,5 +74,3 @@ const Liquidation = () => {
     </div>
   );
 };
-
-export default Liquidation;

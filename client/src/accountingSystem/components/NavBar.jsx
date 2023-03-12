@@ -27,7 +27,7 @@ export const NavBar = () => {
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
               <li className="nav-item">
-                <Link to="/talent-management/home" className="nav-link active">
+                <Link to="/accounting-system/home" className="nav-link active">
                   <i className="bi bi-house" style={{ fontSize: "25px" }}></i>
                 </Link>
               </li>

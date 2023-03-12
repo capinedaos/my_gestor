@@ -1,6 +1,6 @@
 import React from "react";
 
-const ModalInformation = ({
+export const ModalInformation = ({
   idModal,
   tabIndex,
   ariaLabelledby,
@@ -44,5 +44,3 @@ const ModalInformation = ({
     </div>
   );
 };
-
-export default ModalInformation;

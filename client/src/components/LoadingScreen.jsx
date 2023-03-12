@@ -1,7 +1,7 @@
 import React from "react";
 import "../assets/styles/LoadingScreen.css"
 
-const LoadingScreen = () => {
+export const LoadingScreen = () => {
   return (
     <div className="overlay">
       <div className="lds-hourglass"></div>
@@ -9,4 +9,3 @@ const LoadingScreen = () => {
   );
 };
 
-export default LoadingScreen;

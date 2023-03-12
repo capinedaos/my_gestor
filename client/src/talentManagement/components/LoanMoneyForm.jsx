@@ -8,9 +8,9 @@ import {
 
 import { getEmployeeThunk } from "../../app/slicesTalentManagement/employee.slice";
 import { useFormValidation } from "../../hooks";
-import ModalInformation from "./ModalInformation";
+import { ModalInformation } from "./ModalInformation";
 
-const LoanMoneyForm = ({
+export const LoanMoneyForm = ({
   className,
   idModal,
   tabIndex,
@@ -307,5 +307,3 @@ const LoanMoneyForm = ({
     </form>
   );
 };
-
-export default LoanMoneyForm;

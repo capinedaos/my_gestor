@@ -5,10 +5,10 @@ import {
   getBonusServiceThunk,
   getBonusServiceByIdThunk,
 } from "../../app/slicesTalentManagement/bonusService.slice";
-import ModalDelete from "./ModalDelete";
+import { ModalDelete } from "./ModalDelete";
 import { useCoinFormatter } from "../../hooks";
 
-const BonusServiceList = ({
+export const BonusServiceList = ({
   setTitleModal,
   selectBonusService,
   setTextButton,
@@ -124,5 +124,3 @@ const BonusServiceList = ({
     </div>
   );
 };
-
-export default BonusServiceList;

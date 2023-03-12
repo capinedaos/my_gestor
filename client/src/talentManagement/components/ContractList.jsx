@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getContractByEmployeeIdThunk } from "../../app/slicesTalentManagement/contract.slice";
 
-const ContractList = () => {
+export const ContractList = () => {
   const contract = useSelector((state) => state.contract);
   const dispatch = useDispatch();
   const { id } = useParams();
@@ -46,4 +46,4 @@ const ContractList = () => {
   );
 };
 
-export default ContractList;
+

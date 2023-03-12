@@ -2,13 +2,10 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { getOverallPayrollThunk } from "../../app/slicesTalentManagement/overallPayroll.slice";
-import {
-  ButtonReturn,
-  OverallPayrollForm,
-  OverallPayrollList,
-} from "../components";
+import { OverallPayrollForm, OverallPayrollList } from "../components";
+import { ButtonReturn } from "../../components";
 
-const OverallPayroll = () => {
+export const OverallPayroll = () => {
   const dispatch = useDispatch();
   const [overallPayrollSelected, setOverallPayrollSelected] = useState(null);
   const [titleModal, setTitleModal] = useState("");
@@ -40,10 +37,22 @@ const OverallPayroll = () => {
             </button>
           </Link>
         </div>
-
-        <div className="mb-3 mt-3 mx-auto">
-          <input type="text" id="id" className="form-control" />
-          <button className="btn btn-primary">
+        
+        <div className="input-group mb-3">
+          <input
+            type="text"
+            // value={search}
+            // onChange={handleChange}
+            className="form-control"
+            placeholder="Busqueda por Tipo o Descripcion"
+            aria-label="Busqueda por Tipo o Descripcion"
+            aria-describedby="button-addon2"
+          />
+          <button
+            className="btn btn-outline-info"
+            type="button"
+            id="button-addon2"
+          >
             <i className="bi bi-search"></i>
           </button>
         </div>
@@ -69,5 +78,3 @@ const OverallPayroll = () => {
     </>
   );
 };
-
-export default OverallPayroll;

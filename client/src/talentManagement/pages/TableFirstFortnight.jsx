@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { ButtonReturn, ModalInformation } from "../components";
+import { ModalInformation } from "../components";
+import { ButtonReturn } from "../../components";
 import {
   getEmployeePayrollByIdThunk,
   updateEmployeePayrollByIdThunk,
@@ -10,7 +11,7 @@ import {
 import { useCoinFormatter } from "../../hooks";
 import "../assets/styles/AddNewsPayroll.css";
 
-const TableFirstFortnight = () => {
+export const TableFirstFortnight = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { id } = useParams();
@@ -2474,5 +2475,3 @@ const TableFirstFortnight = () => {
     </div>
   );
 };
-
-export default TableFirstFortnight;

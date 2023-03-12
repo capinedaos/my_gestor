@@ -9,11 +9,12 @@ import {
 import { createEmployeePayrollThunk } from "../../app/slicesTalentManagement/employeePayroll.slice";
 import { getEmployeeThunk } from "../../app/slicesTalentManagement/employee.slice";
 import { useNavigate } from "react-router-dom";
-import { ButtonReturn, ModalInformation } from "../components";
+import { ModalInformation } from "../components";
+import { ButtonReturn } from "../../components";
 import { useFormValidation } from "../../hooks";
 import getConfig from "../../utils/getConfig";
 
-const CreateOverallPayroll = () => {
+export const CreateOverallPayroll = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const employees = useSelector((state) => state.employee);
@@ -267,5 +268,3 @@ const CreateOverallPayroll = () => {
     </div>
   );
 };
-
-export default CreateOverallPayroll;

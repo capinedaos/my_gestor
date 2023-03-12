@@ -4,11 +4,11 @@ import axios from "axios";
 import getConfig from "../../utils/getConfig";
 import { useParams } from "react-router-dom";
 import { getEmployeePayrollByOverallPayrollId } from "../../app/slicesTalentManagement/employeePayroll.slice";
-import { ButtonReturn } from "../components";
+import { ButtonReturn } from "../../components";
 import { useCoinFormatter } from "../../hooks";
 import moment from "moment";
 
-const PayrollInformation = () => {
+export const PayrollInformation = () => {
   const [overallPayroll, setOverallPayroll] = useState({});
   const employeePayroll = useSelector((state) => state.employeePayroll);
   const dispatch = useDispatch();
@@ -24,7 +24,7 @@ const PayrollInformation = () => {
       .then((res) => {
         setOverallPayroll(res.data.overallPayroll);
       });
-      
+
     dispatch(getEmployeePayrollByOverallPayrollId(id));
     let total = 0;
     if (employeePayroll.length > 0) {
@@ -78,5 +78,3 @@ const PayrollInformation = () => {
     </div>
   );
 };
-
-export default PayrollInformation;

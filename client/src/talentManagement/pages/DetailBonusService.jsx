@@ -6,9 +6,10 @@ import { useParams } from "react-router-dom";
 import getConfig from "../../utils/getConfig";
 import { useCoinFormatter, formatNumber } from "../../hooks";
 import { getContractByEmployeeIdThunk } from "../../app/slicesTalentManagement/contract.slice";
-import { ModalDelete, BonusServiceForm, ButtonReturn } from "../components";
+import { ModalDelete, BonusServiceForm } from "../components";
+import { ButtonReturn } from "../../components";
 
-const DetailBonusService = () => {
+export const DetailBonusService = () => {
   const dispatch = useDispatch();
   const [idBonusService, setIdBonusService] = useState(0);
   const [bonusService, setBonusService] = useState({});
@@ -212,5 +213,3 @@ const DetailBonusService = () => {
     </>
   );
 };
-
-export default DetailBonusService;

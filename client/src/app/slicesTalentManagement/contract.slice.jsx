@@ -34,6 +34,7 @@ export const getContractByEmployeeIdThunk = (employeeId) => (dispatch) => {
     )
     .then((res) => {
       dispatch(setContract(res.data.contractByEmployeeId));
+      console.log(res.data.contractByEmployeeId);
     })
     .finally(() => dispatch(setIsLoading(false)));
 };

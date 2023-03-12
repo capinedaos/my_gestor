@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import { ContractForm, ContractList, ButtonReturn } from "../components";
+import { ContractForm, ContractList } from "../components";
+import { ButtonReturn } from "../../components";
 
-const Contract = () => {
+export const Contract = () => {
   const [contractSelected, setContractSelected] = useState(null);
   const [titleModal, setTitleModal] = useState("");
   const [textButton, setTextButton] = useState("");
@@ -58,5 +59,3 @@ const Contract = () => {
     </>
   );
 };
-
-export default Contract;

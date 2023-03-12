@@ -1,6 +1,6 @@
 import { Navigate, Outlet } from "react-router-dom";
 
-const ProtectedRoutes = () => {
+export const ProtectedRoutes = () => {
   
   const token = localStorage.getItem("token");
 
@@ -11,4 +11,4 @@ const ProtectedRoutes = () => {
   }
 };
 
-export default ProtectedRoutes;
+

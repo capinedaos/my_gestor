@@ -2,9 +2,9 @@ import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { updateOverallPayrollThunk } from "../../app/slicesTalentManagement/overallPayroll.slice";
 import { useFormValidation } from "../../hooks";
-import ModalInformation from "./ModalInformation";
+import { ModalInformation } from "./ModalInformation";
 
-const OverallPayrollForm = ({
+export const OverallPayrollForm = ({
   className,
   idModal,
   tabIndex,
@@ -206,5 +206,3 @@ const OverallPayrollForm = ({
     </form>
   );
 };
-
-export default OverallPayrollForm;
