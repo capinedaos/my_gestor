@@ -21,3 +21,4 @@ export * from "./OverallPayrollForm";
 export * from "./OverallPayrollList";
 export * from "./EmployeePayrollList";
 export * from "./ModalInformation";
+export * from "./CompanyForm";

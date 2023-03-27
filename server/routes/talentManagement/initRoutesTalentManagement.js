@@ -18,10 +18,8 @@ const initRoutesTalentManagement = (app) => {
   const { salaryIncreaseRouter } = require("./salaryIncrease.routes");
   const { bonusServiceRouter } = require("./bonusService.routes");
   const { overallPayrollRouter } = require("./overallPayroll.routes");
-  const { areaRouter } = require("./area.routes");
 
   // Define endpoints
-  app.use("/api/v1/talent-management/area", areaRouter);
   app.use("/api/v1/talent-management/contract", contractRouter);
   app.use("/api/v1/talent-management/employee", employeeRouter);
   app.use("/api/v1/talent-management/endowment", endowmentRouter);

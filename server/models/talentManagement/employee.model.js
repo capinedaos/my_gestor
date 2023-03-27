@@ -64,9 +64,10 @@ const Employee = db.define("employee", {
     allowNull: false,
     defaultValue: "",
   },
-  areaId: {
-    type: DataTypes.INTEGER,
+  area: {
+    type: DataTypes.STRING,
     allowNull: false,
+    defaultValue: "",
   },
   status: {
     type: DataTypes.STRING,

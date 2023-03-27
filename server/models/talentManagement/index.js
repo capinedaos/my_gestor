@@ -15,7 +15,6 @@ const { PayInMoney } = require("./payInMoney.model");
 const { SalaryIncrease } = require("./salaryIncrease.model");
 const { SocialSecurity } = require("./socialSecurity.model");
 const { Unfitness } = require("./unfitness.model");
-const { Area } = require("./area.model");
 
 module.exports = {
   BonusService,
@@ -35,5 +34,4 @@ module.exports = {
   SalaryIncrease,
   SocialSecurity,
   Unfitness,
-  Area,
 };

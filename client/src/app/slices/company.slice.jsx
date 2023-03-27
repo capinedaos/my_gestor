@@ -26,10 +26,24 @@ export const getCompanyThunk = () => (dispatch) => {
 };
 
 export const createCompanyThunk = (data) => (dispatch) => {
-  console.log(data);
   dispatch(setIsLoading(true));
   return axios
     .post(URL, data, getConfig())
+    .then((res) => {
+      dispatch(getCompanyThunk());
+      dispatch(setCompany(res.data.company));
+    })
+    .finally(() => dispatch(setIsLoading(false)));
+};
+
+export const updateCompanyThunk = (data, id) => (dispatch) => {
+  dispatch(setIsLoading(true));
+  return axios
+    .patch(
+      `http://localhost:4000/api/v1/company/${id}`,
+      data,
+      getConfig()
+    )
     .then((res) => {
       dispatch(getCompanyThunk());
       dispatch(setCompany(res.data.company));

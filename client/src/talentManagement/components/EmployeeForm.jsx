@@ -5,7 +5,6 @@ import {
   createEmployeeThunk,
   updateEmployeeThunk,
 } from "../../app/slicesTalentManagement/employee.slice";
-import { getAreaThunk } from "../../app/slicesTalentManagement/area.slice";
 import { getContractByEmployeeIdThunk } from "../../app/slicesTalentManagement/contract.slice";
 import { useFormValidation } from "../../hooks";
 import { ModalInformation } from "./ModalInformation";
@@ -26,8 +25,7 @@ export const EmployeeForm = ({
   const [identification, setIdentification] = useState("");
   const [birthday, setBirthday] = useState("");
   const [phone, setPhone] = useState("");
-  const [areaId, setAreaId] = useState("");
-  const areas = useSelector((state) => state.area);
+  const [area, setArea] = useState("");
 
   const contract = useSelector((state) => state.contract);
   const [contracActive, setContracActive] = useState({});
@@ -40,7 +38,6 @@ export const EmployeeForm = ({
   useFormValidation();
 
   useEffect(() => {
-    dispatch(getAreaThunk());
     if (employeeSelected !== null) {
       dispatch(getContractByEmployeeIdThunk(employeeSelected.id));
       const contractFind = contract.find(
@@ -51,7 +48,7 @@ export const EmployeeForm = ({
       setIdentification(employeeSelected.identification);
       setBirthday(moment(employeeSelected.birthday).format("YYYY-MM-DD"));
       setPhone(employeeSelected.phone);
-      setAreaId(employeeSelected.areaId);
+      setArea(employeeSelected.area);
       setSalary(contracActive?.salary);
       setInitialDate(moment(contracActive?.initialDate).format("YYYY-MM-DD"));
       setFinalDate(moment(contracActive?.finalDate).format("YYYY-MM-DD"));
@@ -60,7 +57,7 @@ export const EmployeeForm = ({
       setIdentification("");
       setBirthday("");
       setPhone("");
-      setAreaId("");
+      setArea("");
       setSalary("");
       setInitialDate("");
       setFinalDate("");
@@ -83,7 +80,7 @@ export const EmployeeForm = ({
       address: "",
       email: "",
       studies: "",
-      areaId,
+      area,
       salary,
       initialDate,
       finalDate,
@@ -259,27 +256,23 @@ export const EmployeeForm = ({
               </div>
 
               <div className="mb-3">
-                <label htmlFor="areaId" className="form-label">
+                <label htmlFor="typeContract" className="form-label">
                   Area
                 </label>
                 <select
                   type="text"
-                  id="areaId"
-                  onChange={(e) => setAreaId(e.target.value)}
-                  value={areaId}
+                  id="area"
+                  onChange={(e) => setArea(e.target.value)}
+                  value={area}
                   className="form-control"
                   required
                 >
                   <option value="" disabled>
                     Seleccione una opcion
                   </option>
-                  {Array.isArray(areas)
-                    ? areas.map((area) => (
-                        <option value={area.id} key={area.id}>
-                          {area.nameArea}
-                        </option>
-                      ))
-                    : []}
+                  <option value="Administrativa">Administrativa</option>
+                  <option value="Ventas">Ventas</option>
+                  <option value="Planta">Planta</option>
                 </select>
                 <div className="valid-feedback">
                   Campo ingresado correctamente

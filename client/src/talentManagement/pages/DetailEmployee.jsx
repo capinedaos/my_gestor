@@ -27,7 +27,6 @@ import {
   updateHealthyLifeByIdThunk,
 } from "../../app/slicesTalentManagement/healthyLife.slice";
 import { getSalaryIncreaseByEmployeeIdThunk } from "../../app/slicesTalentManagement/salaryIncrease.slice";
-import { getAreaThunk } from "../../app/slicesTalentManagement/area.slice";
 
 import {
   SalaryIncreaseForm,
@@ -39,7 +38,6 @@ import { ButtonReturn } from "../../components";
 
 export const DetailEmployee = () => {
   const dispatch = useDispatch();
-  const areas = useSelector((state) => state.area);
   const [titleModal, setTitleModal] = useState("");
   const [textButton, setTextButton] = useState("");
   const [information, setInformation] = useState("");
@@ -53,7 +51,7 @@ export const DetailEmployee = () => {
   const [initialDate, setInitialDate] = useState("");
   const [finalDate, setFinalDate] = useState("");
 
-  const employee = useSelector((state) => state.employee);
+  // const employee = useSelector((state) => state.employee);
   const [names, setNames] = useState("");
   const [identification, setIdentification] = useState("");
   const [bankAccount, setBankAccount] = useState("");
@@ -67,7 +65,7 @@ export const DetailEmployee = () => {
   const [address, setAddress] = useState("");
   const [email, setEmail] = useState("");
   const [studies, setStudies] = useState("");
-  const [areaId, setAreaId] = useState("");
+  const [area, setArea] = useState("");
 
   const socialSecurity = useSelector((state) => state.socialSecurity);
   const [arl, setArl] = useState("");
@@ -129,7 +127,7 @@ export const DetailEmployee = () => {
         setAddress(res.data.employeeById?.address);
         setEmail(res.data.employeeById?.email);
         setStudies(res.data.employeeById?.studies);
-        setAreaId(res.data.employeeById?.areaId);
+        setArea(res.data.employeeById?.area);
       });
 
     dispatch(getContractByEmployeeIdThunk(id));
@@ -137,9 +135,6 @@ export const DetailEmployee = () => {
       (contract) => contract.status === "activo"
     );
     setContracActive(contractFind);
-    console.log(contract);
-    console.log(contracActive);
-    console.log(contractFind);
 
     setTypeContract(contractFind?.typeContract);
     setSalary(contractFind?.salary);
@@ -179,7 +174,7 @@ export const DetailEmployee = () => {
     setMedicines(healthyLife?.medicines);
 
     dispatch(getSalaryIncreaseByEmployeeIdThunk(id));
-    dispatch(getAreaThunk());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id, dispatch]);
 
   const onSubmitSocialSecurity = (e) => {
@@ -252,7 +247,7 @@ export const DetailEmployee = () => {
       address,
       email,
       studies,
-      areaId,
+      area,
     };
     dispatch(updateEmployeeThunk(data, id));
     setInformation("Informacion empleado modificado");
@@ -506,21 +501,17 @@ export const DetailEmployee = () => {
                       <div className="form-floating mb-1">
                         <select
                           type="text"
-                          id="areaId"
-                          onChange={(e) => setAreaId(e.target.value)}
-                          value={areaId || ""}
+                          id="area"
+                          onChange={(e) => setArea(e.target.value)}
+                          value={area || ""}
                           className="form-control"
                         >
-                          <option value="" defaultValue>
+                          <option value="" disabled>
                             Seleccione una opcion
                           </option>
-                          {Array.isArray(areas)
-                            ? areas.map((area) => (
-                                <option value={area.id} key={area.id}>
-                                  {area.nameArea}
-                                </option>
-                              ))
-                            : []}
+                          <option value="Administrativa">Administrativa</option>
+                          <option value="Ventas">Ventas</option>
+                          <option value="Planta">Planta</option>
                         </select>
                         <label htmlFor="areaId">Area</label>
                       </div>

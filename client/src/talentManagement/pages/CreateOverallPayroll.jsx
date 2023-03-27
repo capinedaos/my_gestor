@@ -216,7 +216,7 @@ export const CreateOverallPayroll = () => {
                 <tbody>
                   {employeeData.map((employee, index) => (
                     <tr className="text-left" key={index}>
-                      <th>
+                      <td>
                         <input
                           type="checkbox"
                           className="form-check-input"
@@ -224,7 +224,7 @@ export const CreateOverallPayroll = () => {
                           checked={employee?.isChecked || false}
                           onChange={handleChange}
                         />
-                      </th>
+                      </td>
                       <td>{index + 1} </td>
                       <td>{employee.names}</td>
                       <td>{employee.identification}</td>

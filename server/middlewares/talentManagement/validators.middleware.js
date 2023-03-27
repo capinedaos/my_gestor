@@ -38,15 +38,6 @@ const createUserValidators = [
   checkResult,
 ];
 
-const createAreaValidators = [
-  body("nameArea")
-    .notEmpty()
-    .withMessage("Nombre de area no puede estar vacio")
-    .isString()
-    .withMessage("Nombre de area debe ser texo"),
-  checkResult,
-];
-
 const createCompanyValidators = [
   body("companyName")
     .notEmpty()
@@ -138,13 +129,7 @@ const createEmployeeValidators = [
   //   .withMessage("Estudios no puede estar vacio")
   //   .isString()
   //   .withMessage("Estudios debe ser texto"),
-  body("areaId")
-    .notEmpty()
-    .withMessage("areaId no puede estar vacio")
-    .isNumeric()
-    .withMessage("areaId debe ser un numero")
-    .custom((val) => val > 0)
-    .withMessage("areaId no puede ser un valor negativo"),
+
   checkResult,
 ];
 
@@ -680,7 +665,6 @@ const createFamilyInformationValidators = [
 
 module.exports = {
   createUserValidators,
-  createAreaValidators,
   createCompanyValidators,
   createEmployeeValidators,
   createContractValidators,

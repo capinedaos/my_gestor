@@ -11,9 +11,6 @@ const {
 
 // Middlewares
 const {
-  areaExists,
-} = require("../../middlewares/talentManagement/area.middleware");
-const {
   createEmployeeValidators,
   employeeExists,
 } = require("../../middlewares/talentManagement");
@@ -30,7 +27,7 @@ employeeRouter.get("/", getAllEmployee);
 
 employeeRouter.use(userAdmin);
 
-employeeRouter.post("/", createEmployeeValidators, areaExists, createEmployee);
+employeeRouter.post("/", createEmployeeValidators, createEmployee);
 
 employeeRouter
   .use("/:id", employeeExists)

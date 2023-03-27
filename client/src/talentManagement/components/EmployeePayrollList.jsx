@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, Link, useParams } from "react-router-dom";
@@ -16,7 +17,6 @@ import { getEndowmentByEmployeeIdThunk } from "../../app/slicesTalentManagement/
 import { getFamilyInformationByEmployeeIdThunk } from "../../app/slicesTalentManagement/familyInformation.slice";
 import { getHealthyLifeByEmployeeIdThunk } from "../../app/slicesTalentManagement/healthyLife.slice";
 import { getSalaryIncreaseByEmployeeIdThunk } from "../../app/slicesTalentManagement/salaryIncrease.slice";
-import { getAreaThunk } from "../../app/slicesTalentManagement/area.slice";
 import axios from "axios";
 import getConfig from "../../utils/getConfig";
 
@@ -130,7 +130,6 @@ export const EmployeePayrollList = ({
                             getEmployeePayrollByEmployeeIdThunk(
                               employeePayroll.employeeId
                             ),
-                            getAreaThunk()
                           );
                         }}
                       >

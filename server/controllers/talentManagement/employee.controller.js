@@ -18,7 +18,7 @@ const createEmployee = catchAsync(async (req, res, next) => {
     identification,
     birthday,
     phone,
-    areaId,
+    area,
     salary,
     initialDate,
     finalDate,
@@ -37,7 +37,7 @@ const createEmployee = catchAsync(async (req, res, next) => {
     // address: address.toLowerCase(),
     // email: email.toLowerCase(),
     // studies: studies.toLowerCase(),
-    areaId,
+    area,
   });
 
   const difference = Math.abs(new Date(finalDate) - new Date(initialDate));
@@ -115,7 +115,7 @@ const updateEmployee = catchAsync(async (req, res, next) => {
     address,
     email,
     studies,
-    areaId,
+    area,
   } = req.body;
   console.log(bankAccount);
   await employee.update({
@@ -131,7 +131,7 @@ const updateEmployee = catchAsync(async (req, res, next) => {
     address,
     email,
     studies,
-    areaId,
+    area,
   });
   res.status(201).json({ status: "success", employee });
 });

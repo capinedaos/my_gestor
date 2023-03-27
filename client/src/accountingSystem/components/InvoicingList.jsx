@@ -6,6 +6,7 @@ export const InvoicingList = () => {
       <table className="table table-sm table-striped border-primary text-gray-900">
         <thead className="bg-light table-info text-black">
           <tr>
+            <th scope="col">Item</th>
             <th scope="col">Numero</th>
             <th scope="col">Fecha</th>
             <th scope="col">Cliente</th>
@@ -16,6 +17,15 @@ export const InvoicingList = () => {
         </thead>
         <tbody>
           <tr>
+            <td>
+              <input
+                type="checkbox"
+                className="form-check-input"
+                // name={employee.names}
+                // checked={employee?.isChecked || false}
+                // onChange={handleChange}
+              />
+            </td>
             <td>001</td>
             <td>23/02/2023</td>
             <td>Multinacional sas</td>
@@ -24,6 +34,15 @@ export const InvoicingList = () => {
             <td>$ 14.250</td>
           </tr>
           <tr>
+            <td>
+              <input
+                type="checkbox"
+                className="form-check-input"
+                // name={employee.names}
+                // checked={employee?.isChecked || false}
+                // onChange={handleChange}
+              />
+            </td>
             <td>001</td>
             <td>23/02/2023</td>
             <td>Multinacional sas</td>
@@ -32,78 +51,15 @@ export const InvoicingList = () => {
             <td>$ 14.250</td>
           </tr>
           <tr>
-            <td>001</td>
-            <td>23/02/2023</td>
-            <td>Multinacional sas</td>
-            <td>contado</td>
-            <td>sin vendedor</td>
-            <td>$ 14.250</td>
-          </tr>
-          <tr>
-            <td>001</td>
-            <td>23/02/2023</td>
-            <td>Multinacional sas</td>
-            <td>contado</td>
-            <td>sin vendedor</td>
-            <td>$ 14.250</td>
-          </tr>
-          <tr>
-            <td>001</td>
-            <td>23/02/2023</td>
-            <td>Multinacional sas</td>
-            <td>contado</td>
-            <td>sin vendedor</td>
-            <td>$ 14.250</td>
-          </tr>
-          <tr>
-            <td>001</td>
-            <td>23/02/2023</td>
-            <td>Multinacional sas</td>
-            <td>contado</td>
-            <td>sin vendedor</td>
-            <td>$ 14.250</td>
-          </tr>
-          <tr>
-            <td>001</td>
-            <td>23/02/2023</td>
-            <td>Multinacional sas</td>
-            <td>contado</td>
-            <td>sin vendedor</td>
-            <td>$ 14.250</td>
-          </tr>
-          <tr>
-            <td>001</td>
-            <td>23/02/2023</td>
-            <td>Multinacional sas</td>
-            <td>contado</td>
-            <td>sin vendedor</td>
-            <td>$ 14.250</td>
-          </tr>
-          <tr>
-            <td>001</td>
-            <td>23/02/2023</td>
-            <td>Multinacional sas</td>
-            <td>contado</td>
-            <td>sin vendedor</td>
-            <td>$ 14.250</td>
-          </tr>
-          <tr>
-            <td>001</td>
-            <td>23/02/2023</td>
-            <td>Multinacional sas</td>
-            <td>contado</td>
-            <td>sin vendedor</td>
-            <td>$ 14.250</td>
-          </tr>
-          <tr>
-            <td>001</td>
-            <td>23/02/2023</td>
-            <td>Multinacional sas</td>
-            <td>contado</td>
-            <td>sin vendedor</td>
-            <td>$ 14.250</td>
-          </tr>
-          <tr>
+            <td>
+              <input
+                type="checkbox"
+                className="form-check-input"
+                // name={employee.names}
+                // checked={employee?.isChecked || false}
+                // onChange={handleChange}
+              />
+            </td>
             <td>001</td>
             <td>23/02/2023</td>
             <td>Multinacional sas</td>

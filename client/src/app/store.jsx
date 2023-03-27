@@ -13,7 +13,6 @@ import endowmentSlice from "./slicesTalentManagement/endowment.slice";
 import familyInformationSlice from "./slicesTalentManagement/familyInformation.slice";
 import healthyLifeSlice from "./slicesTalentManagement/healthyLife.slice";
 import unfitnessSlice from "./slicesTalentManagement/unfitness.slice";
-import areaSlice from "./slicesTalentManagement/area.slice";
 import missingWorkSlice from "./slicesTalentManagement/missingWork.slice";
 import loanMoneySlice from "./slicesTalentManagement/loanMoney.slice";
 import payInMoneySlice from "./slicesTalentManagement/payInMoney.slice";
@@ -37,7 +36,6 @@ export const store = configureStore({
     familyInformation: familyInformationSlice,
     healthyLife: healthyLifeSlice,
     unfitness: unfitnessSlice,
-    area: areaSlice,
     missingWork: missingWorkSlice,
     loanMoney: loanMoneySlice,
     payInMoney: payInMoneySlice,

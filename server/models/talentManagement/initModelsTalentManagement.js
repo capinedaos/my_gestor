@@ -18,13 +18,8 @@ const { BonusService } = require("./bonusService.model");
 const { OverallPayroll } = require("./overallPayroll.model");
 const { FamilyInformation } = require("./familyInformation.model");
 const { SalaryIncrease } = require("./salaryIncrease.model");
-const { Area } = require("./area.model");
 
 const initModelsTalentManagement = () => {
-  // 1 Area --> M Employee
-  Area.hasMany(Employee, { foreignKey: "areaId" });
-  Employee.belongsTo(Area);
-
   // 1 Employee --> M Contract
   Employee.hasMany(Contract, { foreignKey: "employeeId" });
   Contract.belongsTo(Employee);

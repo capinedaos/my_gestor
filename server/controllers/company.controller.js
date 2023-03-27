@@ -16,6 +16,8 @@ const createCompany = catchAsync(async (req, res, next) => {
     email,
   });
 
+  console.log(newCompany)
+
   res.status(201).json({
     status: "success",
     newCompany,
@@ -38,8 +40,15 @@ const updateCompany = catchAsync(async (req, res, next) => {
   res.status(201).json({ status: "success", company });
 });
 
+const deleteCompany = catchAsync(async (req, res, next) => {
+  const { company } = req;
+  await company.destroy();
+  res.status(201).json({ status: "success", company });
+});
+
 module.exports = {
   createCompany,
   getCompany,
   updateCompany,
+  deleteCompany
 };

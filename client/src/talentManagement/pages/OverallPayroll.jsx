@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { getOverallPayrollThunk } from "../../app/slicesTalentManagement/overallPayroll.slice";
 import { OverallPayrollForm, OverallPayrollList } from "../components";

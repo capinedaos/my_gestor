@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getContractByEmployeeIdThunk } from "../../app/slicesTalentManagement/contract.slice";
+import { useCoinFormatter } from "../../hooks";
 
 export const ContractList = () => {
   const contract = useSelector((state) => state.contract);
@@ -31,7 +32,7 @@ export const ContractList = () => {
             ? contract.map((contract) => (
                 <tr className="text-left" key={contract.id}>
                   <td>{contract.typeContract}</td>
-                  <td>{contract.salary}</td>
+                  <td>{useCoinFormatter.format(contract.salary)}</td>
                   <td>{contract.position}</td>
                   <td>{new Date(contract.initialDate).toLocaleDateString()}</td>
                   <td>{new Date(contract.finalDate).toLocaleDateString()}</td>
@@ -45,5 +46,3 @@ export const ContractList = () => {
     </div>
   );
 };
-
-
