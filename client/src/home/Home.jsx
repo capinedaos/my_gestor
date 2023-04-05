@@ -1,9 +1,7 @@
 import React from "react";
-import Content from "./Content";
-import Footer from "./Footer";
-import Header from "./Header";
+import { Content, Footer, Header } from "./";
 
-const Home = () => {
+export const Home = () => {
   return (
     <>
       <Header />
@@ -12,5 +10,3 @@ const Home = () => {
     </>
   );
 };
-
-export default Home;
