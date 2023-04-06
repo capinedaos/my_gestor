@@ -16,17 +16,17 @@ export const EmployeeList = ({
   selectEmployee,
   setTextButton,
 }) => {
-  const employees = useSelector((state) => state.employee);
+  const employee = useSelector((state) => state.employee);
   const dispatch = useDispatch();
   const [idEmployee, setIdEmployee] = useState(0);
   const [search, setSearch] = useState("");
-  const [employee, setEmployee] = useState([]);
-  const [employeeFilter, setEmployeeFilter] = useState([]);
+  const [employeeList, setEmployeeList] = useState([]);
+  const [employeesFilter, setEmployeesFilter] = useState([]);
 
   useEffect(() => {
     dispatch(getEmployeeThunk());
-    setEmployee(employees);
-    setEmployeeFilter(employees);
+    setEmployeeList(employee);
+    setEmployeesFilter(employee);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch]);
 
@@ -36,9 +36,10 @@ export const EmployeeList = ({
   };
 
   const filter = (search) => {
-    let searchResult = employeeFilter.filter((element) => {
+    // eslint-disable-next-line array-callback-return
+    let searchResult = employeesFilter.filter((element) => {
       if (
-        element.name.toString().toLowerCase().includes(search.toLowerCase()) ||
+        element.names.toString().toLowerCase().includes(search.toLowerCase()) ||
         element.identification
           .toString()
           .toLowerCase()
@@ -47,7 +48,7 @@ export const EmployeeList = ({
         return element;
       }
     });
-    setEmployee(searchResult);
+    setEmployeeList(searchResult);
   };
 
   return (
@@ -86,8 +87,8 @@ export const EmployeeList = ({
             </tr>
           </thead>
           <tbody>
-            {Array.isArray(employee)
-              ? employee.map((employee) => (
+            {Array.isArray(employeeList)
+              ? employeeList.map((employee) => (
                   <tr className="text-left" key={employee.id}>
                     <td>
                       <Link

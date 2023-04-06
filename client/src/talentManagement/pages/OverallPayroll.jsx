@@ -37,25 +37,6 @@ export const OverallPayroll = () => {
             </button>
           </Link>
         </div>
-        
-        <div className="input-group mb-3">
-          <input
-            type="text"
-            // value={search}
-            // onChange={handleChange}
-            className="form-control"
-            placeholder="Busqueda por Tipo o Descripcion"
-            aria-label="Busqueda por Tipo o Descripcion"
-            aria-describedby="button-addon2"
-          />
-          <button
-            className="btn btn-outline-info"
-            type="button"
-            id="button-addon2"
-          >
-            <i className="bi bi-search"></i>
-          </button>
-        </div>
 
         <OverallPayrollForm
           className={"modal fade"}

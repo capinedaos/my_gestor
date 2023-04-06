@@ -5,30 +5,30 @@ import { useNavigate } from "react-router-dom";
 import { Footer, Header } from "../home";
 import "../assets/styles/Login.css";
 
-import { ModalInformation } from "../components/ModalInformation";
+import { ModalInfo } from "../components";
 
 const Login = () => {
   const { register, handleSubmit } = useForm();
   const navigate = useNavigate();
   const [show, setShow] = useState(false);
-
-  // const [information, setInformation] = useState("");
-
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+  const [information, setInformation] = useState("");
 
   const submit = (data) => {
     axios
       .post("http://localhost:4000/api/v1/users/login", data)
       .then((res) => {
         // alert("Sesión iniciada correctamente");
+        setInformation("Sesión iniciada correctamente");
         localStorage.setItem("token", res.data.token);
-        handleClose();
-        navigate("/home");
+        setTimeout(() => {
+          navigate("/home");
+        }, 500);
       })
       .catch((error) => {
         if (error.response.status === 400) {
-          handleClose();
+          setInformation("Credenciales incorrectas");
           // alert("credenciales incorrectas");
         }
       });
@@ -77,11 +77,21 @@ const Login = () => {
               Check me out
             </label>
           </div>
-          <button type="submit" className="btn btn-primary">
+          <button
+            type="submit"
+            className="btn btn-primary"
+            onClick={handleShow}
+          >
             INGRESAR
           </button>
         </form>
       </div>
+
+      <ModalInfo
+        show={show}
+        handleClose={handleClose}
+        information={information}
+      />
 
       <Footer />
     </>

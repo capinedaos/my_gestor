@@ -7,6 +7,12 @@ const createMissingWork = catchAsync(async (req, res, next) => {
   const { cause, observation, initialDate, finalDate, paidOut, employeeId } =
     req.body;
 
+  let state = false;
+
+  if (cause !== "licencia" || paidOut === "true") {
+    state = true;
+  }
+
   const difference = Math.abs(new Date(finalDate) - new Date(initialDate));
   const days = difference / (1000 * 3600 * 24) + 1;
 
@@ -16,7 +22,7 @@ const createMissingWork = catchAsync(async (req, res, next) => {
     initialDate,
     finalDate,
     term: days,
-    paidOut,
+    paidOut: state,
     employeeId,
   });
 

@@ -10,12 +10,8 @@ const {
 } = require("../../controllers/talentManagement/missingWork.controller");
 
 // Middlewares
-const {
-  createMissingWorkValidators,
-  missingWorkExists,
-  employeeExists,
-} = require("../../middlewares/talentManagement");
-const { validateDate } = require("../../middlewares/validateDate.middleware");
+const { missingWorkExists } = require("../../middlewares/talentManagement");
+
 const {
   protectSession,
   userAdmin,
@@ -29,13 +25,7 @@ missingWorkRouter.get("/", getAllMissingWork);
 
 missingWorkRouter.use(userAdmin);
 
-missingWorkRouter.post(
-  "/",
-  createMissingWorkValidators,
-  validateDate,
-  employeeExists,
-  createMissingWork
-);
+missingWorkRouter.post("/", createMissingWork);
 
 missingWorkRouter
   .use("/:id", missingWorkExists)
