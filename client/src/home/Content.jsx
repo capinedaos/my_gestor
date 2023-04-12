@@ -1,5 +1,6 @@
 import React from "react";
 import imgHome from "../assets/images/imgHome.jpg";
+import { Link } from "react-router-dom";
 
 export const Content = () => {
   return (
@@ -16,6 +17,9 @@ export const Content = () => {
           Gestiona novedades, genera nominas, liquida prestaciones sociales,
           crea facturas, gestiona inventarios, cartera y muchos mas !!!
         </h1>
+        <Link to="/login" className="btn btn-primary btn-lg">
+          Acceder
+        </Link>
       </div>
     </div>
   );

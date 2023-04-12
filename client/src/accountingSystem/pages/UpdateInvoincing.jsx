@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { getCompanyThunk } from "../../app/slices/company.slice";
 
-export const CreateInvoincing = () => {
+export const UpdateInvoincing = () => {
   const dispatch = useDispatch();
   const company = useSelector((state) => state.company);
 
@@ -15,7 +15,7 @@ export const CreateInvoincing = () => {
   return (
     <div className="d-flex justify-content-between">
       <div className="container">
-        <h2>Crear factura</h2>
+        <h2>Modificar factura</h2>
         <ButtonReturn route={"/accounting-system/invoicing"} />
         <div className="d-flex justify-content-between">
           <div>
@@ -115,23 +115,23 @@ export const CreateInvoincing = () => {
 
       <div class="d-flex flex-column mt-3 mx-3">
         <ItemButton
-          icon={<i className="bi bi-plus-square-fill"></i>}
+          icon={<i className="bi bi-file-earmark-plus-fill"></i>}
           title={"Crear producto"}
         />
         <ItemButton
-          icon={<i className="bi bi-zoom-in"></i>}
+          icon={<i className="bi bi-file-earmark-plus-fill"></i>}
           title={"Ver producto"}
         />
         <ItemButton
-          icon={<i className="bi bi-arrow-bar-up"></i>}
+          icon={<i className="bi bi-file-earmark-plus-fill"></i>}
           title={"Insertar linea"}
         />
         <ItemButton
-          icon={<i className="bi bi-arrow-bar-down"></i>}
+          icon={<i className="bi bi-file-earmark-plus-fill"></i>}
           title={"Eliminar linea"}
         />
         <ItemButton
-          icon={<i className="bi bi-list-check"></i>}
+          icon={<i className="bi bi-file-earmark-plus-fill"></i>}
           title={"Lista productos"}
         />
       </div>

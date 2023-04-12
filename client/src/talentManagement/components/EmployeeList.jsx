@@ -36,7 +36,6 @@ export const EmployeeList = ({
   };
 
   const filter = (search) => {
-    // eslint-disable-next-line array-callback-return
     let searchResult = employeesFilter.filter((element) => {
       if (
         element.names.toString().toLowerCase().includes(search.toLowerCase()) ||
@@ -46,6 +45,8 @@ export const EmployeeList = ({
           .includes(search.toLowerCase())
       ) {
         return element;
+      } else {
+        return null;
       }
     });
     setEmployeeList(searchResult);

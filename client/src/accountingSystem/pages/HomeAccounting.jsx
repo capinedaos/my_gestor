@@ -52,7 +52,7 @@ export const HomeAccounting = () => {
             // counter={employees.length}
           />
         </Link>
-        <Link to="/accounting-system/#" className="link">
+        <Link to="/accounting-system/customers" className="link">
           <ModuleCard
             module_name="Clientes Proveedores"
             icon={<i className="bi bi-person-video2"></i>}

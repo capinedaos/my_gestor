@@ -1,13 +1,13 @@
 import React from "react";
 import { ButtonReturn, ItemButton } from "../../components";
-import { InvoicingList } from "../components";
+import { CustomersList } from "../components";
 import { Link } from "react-router-dom";
 
-export const Invoicing = () => {
+export const Customers = () => {
   return (
     <>
       <div className="container">
-        <h2>Facturacion</h2>
+        <h2>Clientes-Proveedores</h2>
         <ButtonReturn route={"/accounting-system/home"} />
         <div className="input-group mb-3">
           <input
@@ -15,8 +15,8 @@ export const Invoicing = () => {
             // value={search}
             // onChange={handleChange}
             className="form-control"
-            placeholder="Busqueda por Cliente o Vendedor"
-            aria-label="Busqueda por Cliente o Vendedor"
+            placeholder="Busqueda por Nombre o Tipo"
+            aria-label="Busqueda por Nombre o Tipo"
             aria-describedby="button-addon2"
           />
           <button
@@ -27,41 +27,37 @@ export const Invoicing = () => {
             <i className="bi bi-search"></i>
           </button>
         </div>
-        <InvoicingList />
+        <CustomersList />
         <div className="d-flex justify-content-between mt-3">
-          <Link to="/accounting-system/create-invoicing" className="link">
+          <Link to="/accounting-system/create-customers" className="link">
             <ItemButton
               icon={<i className="bi bi-file-earmark-plus-fill"></i>}
               title={"Crear"}
             />
           </Link>
 
-          <Link to="/accounting-system/update-invoicing" className="link">
+          <Link to="/accounting-system/#" className="link">
             <ItemButton
               icon={<i className="bi bi-pencil"></i>}
               title={"Modificar"}
             />
           </Link>
 
-          <ItemButton
-            icon={<i className="bi bi-printer"></i>}
-            title={"Imprimir"}
-          />
-          <ItemButton
-            icon={<i className="bi bi-trash"></i>}
-            title={"Eliminar"}
-          />
-
-          <Link to="/accounting-system/detail-invoicing" className="link">
+          <Link to="/accounting-system/#" className="link">
             <ItemButton
               icon={<i className="bi bi-zoom-in"></i>}
-              title={"Ver Dcmto"}
+              title={"Consultar"}
             />
           </Link>
 
           <ItemButton
-            icon={<i className="bi bi-repeat"></i>}
-            title={"Duplicar"}
+            icon={<i className="bi bi-trash"></i>}
+            title={"Eliminar"}
+          />
+          <ItemButton icon={<i className="bi bi-coin"></i>} title={"Balance"} />
+          <ItemButton
+            icon={<i className="bi bi-journals"></i>}
+            title={"Reportes"}
           />
         </div>
       </div>
