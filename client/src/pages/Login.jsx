@@ -92,6 +92,18 @@ const Login = () => {
           <Link to={"/"}>
             <button className="btn btn-info">CANCELAR</button>
           </Link>
+
+          <div className="mt-3 p-3 bg-info bg-opacity-10 border border-info border-start-0 rounded-end">
+            <div>
+              <h5>Usuario de prueba</h5>
+              <p className="border-bottom border-warning">
+                Email: <span>usuario1@mail.com</span>
+              </p>
+              <p className="border-bottom border-warning">
+                Contraseña: <span>pass1234</span>
+              </p>
+            </div>
+          </div>
         </form>
       </div>
 
