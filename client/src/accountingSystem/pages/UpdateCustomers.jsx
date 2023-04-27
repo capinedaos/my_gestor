@@ -1,11 +1,11 @@
 import { ButtonReturn } from "../../components";
 import { FormCustomers } from "../components";
 
-export const CreateCustomers = () => {
+export const UpdateCustomers = () => {
   return (
     <>
       <div className="container">
-        <h2>Crear Cliente - Proveedor</h2>
+        <h2>Modificar Cliente - Proveedor</h2>
         <ButtonReturn route={"/accounting-system/customers"} />
         <FormCustomers />
       </div>

@@ -12,44 +12,44 @@ export const UnfitnessList = ({
   const unfitness = useSelector((state) => state.unfitness);
   const dispatch = useDispatch();
   const [idUnfitness, setIdUnfitness] = useState(0);
-  const [search, setSearch] = useState("");
-  const [unfitnessList, setUnfitnessList] = useState([]);
-  const [unfitnessFilter, setUnfitnessFilter] = useState([]);
+  // const [search, setSearch] = useState("");
+  // const [unfitnessList, setUnfitnessList] = useState([]);
+  // const [unfitnessFilter, setUnfitnessFilter] = useState([]);
 
   useEffect(() => {
     dispatch(getUnfitnessThunk());
-    setUnfitnessList(unfitness);
-    setUnfitnessFilter(unfitness);
+    // setUnfitnessList(unfitness);
+    // setUnfitnessFilter(unfitness);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch]);
 
-  const handleChange = (e) => {
-    setSearch(e.target.value);
-    filter(e.target.value);
-  };
+  // const handleChange = (e) => {
+  //   setSearch(e.target.value);
+  //   filter(e.target.value);
+  // };
 
-  const filter = (search) => {
-    // eslint-disable-next-line array-callback-return
-    let searchResult = unfitnessFilter.filter((element) => {
-      if (
-        element.employee?.names
-          .toString()
-          .toLowerCase()
-          .includes(search.toLowerCase()) ||
-        element.diagnostic
-          .toString()
-          .toLowerCase()
-          .includes(search.toLowerCase())
-      ) {
-        return element;
-      }
-    });
-    setUnfitnessList(searchResult);
-  };
+  // const filter = (search) => {
+  //   // eslint-disable-next-line array-callback-return
+  //   let searchResult = unfitnessFilter.filter((element) => {
+  //     if (
+  //       element.employee?.names
+  //         .toString()
+  //         .toLowerCase()
+  //         .includes(search.toLowerCase()) ||
+  //       element.diagnostic
+  //         .toString()
+  //         .toLowerCase()
+  //         .includes(search.toLowerCase())
+  //     ) {
+  //       return element;
+  //     }
+  //   });
+  //   setUnfitnessList(searchResult);
+  // };
 
   return (
     <>
-      <div className="input-group mb-3">
+      {/* <div className="input-group mb-3">
         <input
           type="text"
           value={search}
@@ -66,7 +66,7 @@ export const UnfitnessList = ({
         >
           <i className="bi bi-search"></i>
         </button>
-      </div>
+      </div> */}
 
       <div className="table-responsive rounded-3" style={{ height: "410px" }}>
         <table className="table table-sm table-striped border-primary text-gray-900">
@@ -83,8 +83,8 @@ export const UnfitnessList = ({
             </tr>
           </thead>
           <tbody>
-            {Array.isArray(unfitnessList)
-              ? unfitnessList.map((unfitness) => (
+            {Array.isArray(unfitness)
+              ? unfitness.map((unfitness) => (
                   <tr className="text-left" key={unfitness.id}>
                     <td>
                       <Link

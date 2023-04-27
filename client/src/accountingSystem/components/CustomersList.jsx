@@ -6,6 +6,14 @@ export const CustomersList = () => {
       <table className="table table-sm table-striped border-primary text-gray-900">
         <thead className="bg-light table-info text-black">
           <tr>
+            <th scope="col">
+              {" "}
+              <input
+                type="checkbox"
+                className="form-check-input"
+                name="allSelect"
+              />
+            </th>
             <th scope="col">Codigo</th>
             <th scope="col">Nombre</th>
             <th scope="col">Representante</th>
@@ -16,6 +24,15 @@ export const CustomersList = () => {
         </thead>
         <tbody>
           <tr>
+            <td>
+              <input
+                type="checkbox"
+                className="form-check-input"
+                // name={employee.names}
+                // checked={employee?.isChecked || false}
+                // onChange={handleChange}
+              />
+            </td>
             <td>001</td>
             <td>floristeria azusena</td>
             <td>Pedro Hernandez</td>
@@ -24,6 +41,15 @@ export const CustomersList = () => {
             <td>cliente</td>
           </tr>
           <tr>
+            <td>
+              <input
+                type="checkbox"
+                className="form-check-input"
+                // name={employee.names}
+                // checked={employee?.isChecked || false}
+                // onChange={handleChange}
+              />
+            </td>
             <td>002</td>
             <td>Mil cacharros</td>
             <td>Maria Lopez</td>
@@ -32,6 +58,15 @@ export const CustomersList = () => {
             <td>cliente</td>
           </tr>
           <tr>
+            <td>
+              <input
+                type="checkbox"
+                className="form-check-input"
+                // name={employee.names}
+                // checked={employee?.isChecked || false}
+                // onChange={handleChange}
+              />
+            </td>
             <td>002</td>
             <td>Vitelsa</td>
             <td>John Doe</td>

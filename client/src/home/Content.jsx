@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 export const Content = () => {
   return (
-    <div className="container display" style={{ height: "80vh" }}>
+    <div className="container display" style={{ minHeight: "80vh" }}>
       <img
         src={imgHome}
         className="card-img-top"

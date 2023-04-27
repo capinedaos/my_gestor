@@ -17,45 +17,44 @@ export const OverallPayrollList = ({
   const overallPayroll = useSelector((state) => state.overallPayroll);
   const dispatch = useDispatch();
   const [idOverallPayroll, setIdOverallPayroll] = useState(0);
-
-  const [search, setSearch] = useState("");
-  const [overallPayrollList, setOverallPayrollList] = useState([]);
-  const [overallPayrollFilter, setOverallPayrollFilter] = useState([]);
+  // const [search, setSearch] = useState("");
+  // const [overallPayrollList, setOverallPayrollList] = useState([]);
+  // const [overallPayrollFilter, setOverallPayrollFilter] = useState([]);
 
   useEffect(() => {
     dispatch(getOverallPayrollThunk());
-    setOverallPayrollList(overallPayroll);
-    setOverallPayrollFilter(overallPayroll);
+    // setOverallPayrollList(overallPayroll);
+    // setOverallPayrollFilter(overallPayroll);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch]);
 
-  const handleChange = (e) => {
-    setSearch(e.target.value);
-    filter(e.target.value);
-  };
+  // const handleChange = (e) => {
+  //   setSearch(e.target.value);
+  //   filter(e.target.value);
+  // };
 
-  const filter = (search) => {
-    // eslint-disable-next-line array-callback-return
-    let searchResult = overallPayrollFilter.filter((element) => {
-      if (
-        element.typeOfSettlement
-          .toString()
-          .toLowerCase()
-          .includes(search.toLowerCase()) ||
-        element.description
-          .toString()
-          .toLowerCase()
-          .includes(search.toLowerCase())
-      ) {
-        return element;
-      }
-    });
-    setOverallPayrollList(searchResult);
-  };
+  // const filter = (search) => {
+  //   // eslint-disable-next-line array-callback-return
+  //   let searchResult = overallPayrollFilter.filter((element) => {
+  //     if (
+  //       element.typeOfSettlement
+  //         .toString()
+  //         .toLowerCase()
+  //         .includes(search.toLowerCase()) ||
+  //       element.description
+  //         .toString()
+  //         .toLowerCase()
+  //         .includes(search.toLowerCase())
+  //     ) {
+  //       return element;
+  //     }
+  //   });
+  //   setOverallPayrollList(searchResult);
+  // };
 
   return (
     <>
-      <div className="input-group mb-3">
+      {/* <div className="input-group mb-3">
         <input
           type="text"
           value={search}
@@ -72,7 +71,8 @@ export const OverallPayrollList = ({
         >
           <i className="bi bi-search"></i>
         </button>
-      </div>
+      </div> */}
+
       <div className="table-responsive rounded-3" style={{ height: "410px" }}>
         <table className="table table-sm table-striped border-primary text-gray-900">
           <thead className="bg-light table-info text-black">
@@ -89,8 +89,8 @@ export const OverallPayrollList = ({
             </tr>
           </thead>
           <tbody>
-            {Array.isArray(overallPayrollList)
-              ? overallPayrollList.map((overallPayroll) => (
+            {Array.isArray(overallPayroll)
+              ? overallPayroll.map((overallPayroll) => (
                   <tr className="text-left" key={overallPayroll.id}>
                     <td>{overallPayroll.status}</td>
                     <td>{overallPayroll.typeOfSettlement}</td>

@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { Footer, Header } from "../home";
 import "../assets/styles/Login.css";
+import { Link } from "react-router-dom";
 
 import { ModalInfo } from "../components";
 
@@ -38,7 +39,10 @@ const Login = () => {
     <>
       <Header />
 
-      <div className="login-container text-bg-secondary p-3 mb-4">
+      <div
+        className="login-container text-bg-secondary p-3 mb-4"
+        style={{ minHeight: "55vh" }}
+      >
         <form onSubmit={handleSubmit(submit)}>
           <div className="display center">
             <h2>Inicio de sesion</h2>
@@ -67,7 +71,7 @@ const Login = () => {
               {...register("password")}
             />
           </div>
-          <div className="mb-3 form-check">
+          {/* <div className="mb-3 form-check">
             <input
               type="checkbox"
               className="form-check-input"
@@ -76,14 +80,18 @@ const Login = () => {
             <label className="form-check-label" htmlFor="exampleCheck1">
               Check me out
             </label>
-          </div>
+          </div> */}
           <button
             type="submit"
-            className="btn btn-primary"
+            className="btn btn-primary mx-2"
             onClick={handleShow}
           >
             INGRESAR
           </button>
+
+          <Link to={"/"}>
+            <button className="btn btn-info">CANCELAR</button>
+          </Link>
         </form>
       </div>
 

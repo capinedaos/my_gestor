@@ -16,40 +16,40 @@ export const BonusServiceList = ({
   const bonusService = useSelector((state) => state.bonusService);
   const dispatch = useDispatch();
   const [idBonusService, setIdBonusService] = useState(0);
-  const [search, setSearch] = useState("");
-  const [bonusServiceList, setBonusServiceList] = useState([]);
-  const [bonusServiceFilter, setBonusServiceFilter] = useState([]);
+  // const [search, setSearch] = useState("");
+  // const [bonusServiceList, setBonusServiceList] = useState([]);
+  // const [bonusServiceFilter, setBonusServiceFilter] = useState([]);
 
   useEffect(() => {
     dispatch(getBonusServiceThunk());
-    setBonusServiceList(bonusService);
-    setBonusServiceFilter(bonusService);
+    // setBonusServiceList(bonusService);
+    // setBonusServiceFilter(bonusService);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch]);
 
-  const handleChange = (e) => {
-    setSearch(e.target.value);
-    filter(e.target.value);
-  };
+  // const handleChange = (e) => {
+  //   setSearch(e.target.value);
+  //   filter(e.target.value);
+  // };
 
-  const filter = (search) => {
-    // eslint-disable-next-line array-callback-return
-    let searchResult = bonusServiceFilter.filter((element) => {
-      if (
-        element.employee?.names
-          .toString()
-          .toLowerCase()
-          .includes(search.toLowerCase())
-      ) {
-        return element;
-      }
-    });
-    setBonusServiceList(searchResult);
-  };
+  // const filter = (search) => {
+  //   // eslint-disable-next-line array-callback-return
+  //   let searchResult = bonusServiceFilter.filter((element) => {
+  //     if (
+  //       element.employee?.names
+  //         .toString()
+  //         .toLowerCase()
+  //         .includes(search.toLowerCase())
+  //     ) {
+  //       return element;
+  //     }
+  //   });
+  //   setBonusServiceList(searchResult);
+  // };
 
   return (
     <>
-      <div className="input-group mb-3">
+      {/* <div className="input-group mb-3">
         <input
           type="text"
           value={search}
@@ -66,7 +66,7 @@ export const BonusServiceList = ({
         >
           <i className="bi bi-search"></i>
         </button>
-      </div>
+      </div> */}
 
       <div className="table-responsive rounded-3" style={{ height: "410px" }}>
         <table className="table table-sm table-striped border-primary text-gray-900">
@@ -84,8 +84,8 @@ export const BonusServiceList = ({
             </tr>
           </thead>
           <tbody>
-            {Array.isArray(bonusServiceList)
-              ? bonusServiceList.map((bonusService) => (
+            {Array.isArray(bonusService)
+              ? bonusService.map((bonusService) => (
                   <tr className="text-left" key={bonusService.id}>
                     <td>
                       <Link

@@ -30,6 +30,7 @@ export const CreateOverallPayroll = () => {
     dispatch(getOverallPayrollThunk());
     dispatch(getEmployeeThunk());
     setEmployeeData(employees);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch]);
 
   const handleChange = (e) => {
@@ -55,6 +56,8 @@ export const CreateOverallPayroll = () => {
       (employee) => employee.isChecked === true
     );
 
+    // console.log(employeePayroll);
+
     dispatch(createOverallPayrollThunk(data));
 
     axios
@@ -63,7 +66,8 @@ export const CreateOverallPayroll = () => {
         getConfig()
       )
       .then((res) => {
-        // hacer map de arrays ids
+        // map de arrays ids
+        // eslint-disable-next-line array-callback-return
         employeePayroll.map((employee) => {
           dataPayroll = {
             employeeId: employee.id,

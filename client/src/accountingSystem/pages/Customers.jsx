@@ -36,7 +36,7 @@ export const Customers = () => {
             />
           </Link>
 
-          <Link to="/accounting-system/#" className="link">
+          <Link to="/accounting-system/update-customers" className="link">
             <ItemButton
               icon={<i className="bi bi-pencil"></i>}
               title={"Modificar"}

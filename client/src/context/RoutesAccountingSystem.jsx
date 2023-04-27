@@ -7,6 +7,7 @@ import {
   DetailInvoincing,
   CreateInvoincing,
   UpdateInvoincing,
+  UpdateCustomers,
   Customers,
   CreateCustomers,
 } from "../accountingSystem/pages";
@@ -23,6 +24,7 @@ const RoutesAccountingSystem = () => {
         <Route path="/create-invoicing" element={<CreateInvoincing />} />
         <Route path="/create-customers" element={<CreateCustomers />} />
         <Route path="/update-invoicing" element={<UpdateInvoincing />} />
+        <Route path="/update-customers" element={<UpdateCustomers />} />
       </Routes>
     </div>
   );

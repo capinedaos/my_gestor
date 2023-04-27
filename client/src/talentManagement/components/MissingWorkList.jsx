@@ -12,41 +12,41 @@ export const MissingWorkList = ({
   const missingWork = useSelector((state) => state.missingWork);
   const dispatch = useDispatch();
   const [idMissingWork, setIdMissingWork] = useState(0);
-  const [search, setSearch] = useState("");
-  const [missingWorkList, setMissingWorkList] = useState([]);
-  const [missingWorkFilter, setMissingWorkFilter] = useState([]);
+  // const [search, setSearch] = useState("");
+  // const [missingWorkList, setMissingWorkList] = useState([]);
+  // const [missingWorkFilter, setMissingWorkFilter] = useState([]);
 
   useEffect(() => {
     dispatch(getMissingWorkThunk());
-    setMissingWorkList(missingWork);
-    setMissingWorkFilter(missingWork);
+    // setMissingWorkList(missingWork);
+    // setMissingWorkFilter(missingWork);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch]);
 
-  const handleChange = (e) => {
-    setSearch(e.target.value);
-    filter(e.target.value);
-  };
+  // const handleChange = (e) => {
+  //   setSearch(e.target.value);
+  //   filter(e.target.value);
+  // };
 
-  const filter = (search) => {
-    // eslint-disable-next-line array-callback-return
-    let searchResult = missingWorkFilter.filter((element) => {
-      if (
-        element.employee?.names
-          .toString()
-          .toLowerCase()
-          .includes(search.toLowerCase()) ||
-        element.cause.toString().toLowerCase().includes(search.toLowerCase())
-      ) {
-        return element;
-      }
-    });
-    setMissingWorkList(searchResult);
-  };
+  // const filter = (search) => {
+  //   // eslint-disable-next-line array-callback-return
+  //   let searchResult = missingWorkFilter.filter((element) => {
+  //     if (
+  //       element.employee?.names
+  //         .toString()
+  //         .toLowerCase()
+  //         .includes(search.toLowerCase()) ||
+  //       element.cause.toString().toLowerCase().includes(search.toLowerCase())
+  //     ) {
+  //       return element;
+  //     }
+  //   });
+  //   setMissingWorkList(searchResult);
+  // };
 
   return (
     <>
-      <div className="input-group mb-3">
+      {/* <div className="input-group mb-3">
         <input
           type="text"
           value={search}
@@ -63,7 +63,8 @@ export const MissingWorkList = ({
         >
           <i className="bi bi-search"></i>
         </button>
-      </div>
+      </div> */}
+
       <div className="table-responsive rounded-3" style={{ height: "410px" }}>
         <table className="table table-sm table-striped border-primary text-gray-900">
           <thead className="bg-light table-info text-black">
@@ -80,8 +81,8 @@ export const MissingWorkList = ({
             </tr>
           </thead>
           <tbody>
-            {Array.isArray(missingWorkList)
-              ? missingWorkList.map((missingWork) => (
+            {Array.isArray(missingWork)
+              ? missingWork.map((missingWork) => (
                   <tr className="text-left" key={missingWork.id}>
                     <td>
                       <Link

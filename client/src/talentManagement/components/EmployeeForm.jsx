@@ -62,6 +62,7 @@ export const EmployeeForm = ({
       setInitialDate("");
       setFinalDate("");
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [employeeSelected, contracActive, dispatch]);
 
   const onSubmit = (e) => {

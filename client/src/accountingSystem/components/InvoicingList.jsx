@@ -6,7 +6,14 @@ export const InvoicingList = () => {
       <table className="table table-sm table-striped border-primary text-gray-900">
         <thead className="bg-light table-info text-black">
           <tr>
-            <th scope="col">Item</th>
+            <th scope="col">
+              {" "}
+              <input
+                type="checkbox"
+                className="form-check-input"
+                name="allSelect"
+              />
+            </th>
             <th scope="col">Numero</th>
             <th scope="col">Fecha</th>
             <th scope="col">Cliente</th>

@@ -19,42 +19,42 @@ export const EmployeeList = ({
   const employee = useSelector((state) => state.employee);
   const dispatch = useDispatch();
   const [idEmployee, setIdEmployee] = useState(0);
-  const [search, setSearch] = useState("");
-  const [employeeList, setEmployeeList] = useState([]);
-  const [employeesFilter, setEmployeesFilter] = useState([]);
+  // const [search, setSearch] = useState("");
+  // const [employeeList, setEmployeeList] = useState([]);
+  // const [employeesFilter, setEmployeesFilter] = useState([]);
 
   useEffect(() => {
     dispatch(getEmployeeThunk());
-    setEmployeeList(employee);
-    setEmployeesFilter(employee);
+    // setEmployeeList(employee);
+    // setEmployeesFilter(employee);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch]);
 
-  const handleChange = (e) => {
-    setSearch(e.target.value);
-    filter(e.target.value);
-  };
+  // const handleChange = (e) => {
+  //   setSearch(e.target.value);
+  //   filter(e.target.value);
+  // };
 
-  const filter = (search) => {
-    let searchResult = employeesFilter.filter((element) => {
-      if (
-        element.names.toString().toLowerCase().includes(search.toLowerCase()) ||
-        element.identification
-          .toString()
-          .toLowerCase()
-          .includes(search.toLowerCase())
-      ) {
-        return element;
-      } else {
-        return null;
-      }
-    });
-    setEmployeeList(searchResult);
-  };
+  // const filter = (search) => {
+  //   let searchResult = employeesFilter.filter((element) => {
+  //     if (
+  //       element.names.toString().toLowerCase().includes(search.toLowerCase()) ||
+  //       element.identification
+  //         .toString()
+  //         .toLowerCase()
+  //         .includes(search.toLowerCase())
+  //     ) {
+  //       return element;
+  //     } else {
+  //       return null;
+  //     }
+  //   });
+  //   setEmployeeList(searchResult);
+  // };
 
   return (
     <>
-      <div className="input-group mb-3">
+      {/* <div className="input-group mb-3">
         <input
           type="text"
           value={search}
@@ -71,7 +71,7 @@ export const EmployeeList = ({
         >
           <i className="bi bi-search"></i>
         </button>
-      </div>
+      </div> */}
 
       <div className="table-responsive rounded-3" style={{ height: "410px" }}>
         <table className="table table-sm table-striped border-primary text-gray-900">
@@ -88,8 +88,8 @@ export const EmployeeList = ({
             </tr>
           </thead>
           <tbody>
-            {Array.isArray(employeeList)
-              ? employeeList.map((employee) => (
+            {Array.isArray(employee)
+              ? employee.map((employee) => (
                   <tr className="text-left" key={employee.id}>
                     <td>
                       <Link
