@@ -62,7 +62,7 @@ export const CreateOverallPayroll = () => {
 
     axios
       .get(
-        "http://localhost:4000/api/v1/talent-management/overall-payroll",
+        "https://server-my-gestor-production.up.railway.app/api/v1/talent-management/overall-payroll",
         getConfig()
       )
       .then((res) => {

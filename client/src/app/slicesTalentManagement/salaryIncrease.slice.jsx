@@ -3,7 +3,7 @@ import axios from "axios";
 import { setIsLoading } from "../slices/isLoading.slice";
 import getConfig from "../../utils/getConfig";
 
-const URL = "http://localhost:4000/api/v1/talent-management/salary-increase";
+const URL = "https://server-my-gestor-production.up.railway.app/api/v1/talent-management/salary-increase";
 
 export const salaryIncreaseSlice = createSlice({
   name: "salaryIncrease",
@@ -20,7 +20,7 @@ export const getSalaryIncreaseByEmployeeIdThunk =
     dispatch(setIsLoading(true));
     return axios
       .get(
-        `http://localhost:4000/api/v1/talent-management/salary-increase/employee/${employeeId}`,
+        `https://server-my-gestor-production.up.railway.app/api/v1/talent-management/salary-increase/employee/${employeeId}`,
         getConfig()
       )
       .then((res) => {
@@ -33,7 +33,7 @@ export const deleteSalaryIncreaseByIdThunk = (id, employeeId) => (dispatch) => {
   dispatch(setIsLoading(true));
   return axios
     .delete(
-      `http://localhost:4000/api/v1/talent-management/salary-increase/${id}`,
+      `https://server-my-gestor-production.up.railway.app/api/v1/talent-management/salary-increase/${id}`,
       getConfig()
     )
     .then((res) => {

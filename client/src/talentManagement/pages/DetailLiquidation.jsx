@@ -30,7 +30,7 @@ export const DetailLiquidation = () => {
   useEffect(() => {
     axios
       .get(
-        "http://localhost:4000/api/v1/talent-management/liquidation",
+        "https://server-my-gestor-production.up.railway.app/api/v1/talent-management/liquidation",
         getConfig()
       )
       .then((res) => {
@@ -46,6 +46,7 @@ export const DetailLiquidation = () => {
       (contract) => contract.status === "activo"
     );
     setContracActive(contractFind);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id, dispatch]);
 
   return (

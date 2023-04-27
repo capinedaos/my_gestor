@@ -21,7 +21,7 @@ export const ProofPayment = () => {
   useEffect(() => {
     axios
       .get(
-        `http://localhost:4000/api/v1/talent-management/overall-payroll/${id}`,
+        `https://server-my-gestor-production.up.railway.app/api/v1/talent-management/overall-payroll/${id}`,
         getConfig()
       )
       .then((res) => {
@@ -29,6 +29,7 @@ export const ProofPayment = () => {
       });
     dispatch(getEmployeePayrollByOverallPayrollId(id));
     console.log(overallPayroll.status);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id, dispatch]);
   return (
     <div className="container">

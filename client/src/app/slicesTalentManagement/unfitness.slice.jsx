@@ -3,7 +3,7 @@ import axios from "axios";
 import { setIsLoading } from "../slices/isLoading.slice";
 import getConfig from "../../utils/getConfig";
 
-const URL = "http://localhost:4000/api/v1/talent-management/unfitness";
+const URL = "https://server-my-gestor-production.up.railway.app/api/v1/talent-management/unfitness";
 
 export const unfitnessSlice = createSlice({
   name: "unfitness",
@@ -29,7 +29,7 @@ export const getUnfitnessByIdThunk = (id) => (dispatch) => {
   dispatch(setIsLoading(true));
   return axios
     .get(
-      `http://localhost:4000/api/v1/talent-management/unfitness/${id}`,
+      `https://server-my-gestor-production.up.railway.app/api/v1/talent-management/unfitness/${id}`,
       getConfig()
     )
     .then((res) => {
@@ -53,7 +53,7 @@ export const updateUnfitnessThunk = (data, id) => (dispatch) => {
   dispatch(setIsLoading(true));
   return axios
     .patch(
-      `http://localhost:4000/api/v1/talent-management/unfitness/${id}`,
+      `https://server-my-gestor-production.up.railway.app/api/v1/talent-management/unfitness/${id}`,
       data,
       getConfig()
     )
@@ -68,7 +68,7 @@ export const deleteUnfitnessByIdThunk = (id) => (dispatch) => {
   dispatch(setIsLoading(true));
   return axios
     .delete(
-      `http://localhost:4000/api/v1/talent-management/unfitness/${id}`,
+      `https://server-my-gestor-production.up.railway.app/api/v1/talent-management/unfitness/${id}`,
       getConfig()
     )
     .then((res) => {

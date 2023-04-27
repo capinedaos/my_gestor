@@ -17,7 +17,7 @@ export const getEndowmentByEmployeeIdThunk = (employeeId) => (dispatch) => {
   dispatch(setIsLoading(true));
   return axios
     .get(
-      `http://localhost:4000/api/v1/talent-management/endowment/employee/${employeeId}`,
+      `https://server-my-gestor-production.up.railway.app/api/v1/talent-management/endowment/employee/${employeeId}`,
       getConfig()
     )
     .then((res) => {
@@ -30,7 +30,7 @@ export const updateEndowmentByIdThunk = (data, id) => (dispatch) => {
   dispatch(setIsLoading(true));
   return axios
     .patch(
-      `http://localhost:4000/api/v1/talent-management/endowment/${id}`,
+      `https://server-my-gestor-production.up.railway.app/api/v1/talent-management/endowment/${id}`,
       data,
       getConfig()
     )
@@ -45,7 +45,7 @@ export const getEndowmentByIdThunk = (id) => (dispatch) => {
   dispatch(setIsLoading(true));
   return axios
     .get(
-      `http://localhost:4000/api/v1/talent-management/endowment/${id}`,
+      `https://server-my-gestor-production.up.railway.app/api/v1/talent-management/endowment/${id}`,
       getConfig()
     )
     .then((res) => {

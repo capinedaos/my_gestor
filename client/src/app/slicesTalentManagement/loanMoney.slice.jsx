@@ -19,7 +19,7 @@ export const payLoanByIdThunk = (id) => (dispatch) => {
   dispatch(setIsLoading(true));
   return axios
     .patch(
-      `http://localhost:4000/api/v1/talent-management/loan-money/pay-loan/${id}`,
+      `https://server-my-gestor-production.up.railway.app/api/v1/talent-management/loan-money/pay-loan/${id}`,
       getConfig(),
       console.log(getConfig())
     )
@@ -55,7 +55,7 @@ export const updateLoanMoneyThunk = (data, id) => (dispatch) => {
   dispatch(setIsLoading(true));
   return axios
     .patch(
-      `http://localhost:4000/api/v1/talent-management/loan-money/${id}`,
+      `https://server-my-gestor-production.up.railway.app/api/v1/talent-management/loan-money/${id}`,
       data,
       getConfig(),
       console.log(getConfig())
@@ -71,7 +71,7 @@ export const deleteLoanMoneyByIdThunk = (id) => (dispatch) => {
   dispatch(setIsLoading(true));
   return axios
     .delete(
-      `http://localhost:4000/api/v1/talent-management/loan-money/${id}`,
+      `https://server-my-gestor-production.up.railway.app/api/v1/talent-management/loan-money/${id}`,
       getConfig()
     )
     .then((res) => {
@@ -86,7 +86,7 @@ export const getLoanMoneyByIdThunk = (id) => (dispatch) => {
   dispatch(setIsLoading(true));
   return axios
     .get(
-      `http://localhost:4000/api/v1/talent-management/loan-money/${id}`,
+      `https://server-my-gestor-production.up.railway.app/api/v1/talent-management/loan-money/${id}`,
       getConfig()
     )
     .then((res) => {

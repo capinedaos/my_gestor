@@ -18,7 +18,7 @@ export const getSocialSecurityByEmployeeIdThunk =
     dispatch(setIsLoading(true));
     return axios
       .get(
-        `http://localhost:4000/api/v1/talent-management/social-security/employee/${employeeId}`,
+        `https://server-my-gestor-production.up.railway.app/api/v1/talent-management/social-security/employee/${employeeId}`,
         getConfig()
       )
       .then((res) => {
@@ -31,7 +31,7 @@ export const updateSocialSecurityByIdThunk = (data, id) => (dispatch) => {
   dispatch(setIsLoading(true));
   return axios
     .patch(
-      `http://localhost:4000/api/v1/talent-management/social-security/${id}`,
+      `https://server-my-gestor-production.up.railway.app/api/v1/talent-management/social-security/${id}`,
       data,
       getConfig()
     )
@@ -46,7 +46,7 @@ export const getSocialSecurityByIdThunk = (id) => (dispatch) => {
   dispatch(setIsLoading(true));
   return axios
     .get(
-      `http://localhost:4000/api/v1/talent-management/social-security/${id}`,
+      `https://server-my-gestor-production.up.railway.app/api/v1/talent-management/social-security/${id}`,
       getConfig()
     )
     .then((res) => {

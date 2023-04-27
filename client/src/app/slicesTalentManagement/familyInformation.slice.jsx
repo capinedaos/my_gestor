@@ -18,7 +18,7 @@ export const getFamilyInformationByEmployeeIdThunk =
     dispatch(setIsLoading(true));
     return axios
       .get(
-        `http://localhost:4000/api/v1/talent-management/family-information/employee/${employeeId}`,
+        `https://server-my-gestor-production.up.railway.app/api/v1/talent-management/family-information/employee/${employeeId}`,
         getConfig()
       )
       .then((res) => {
@@ -31,7 +31,7 @@ export const updateFamilyInformationByIdThunk = (data, id) => (dispatch) => {
   dispatch(setIsLoading(true));
   return axios
     .patch(
-      `http://localhost:4000/api/v1/talent-management/family-information/${id}`,
+      `https://server-my-gestor-production.up.railway.app/api/v1/talent-management/family-information/${id}`,
       data,
       getConfig()
     )
@@ -46,7 +46,7 @@ export const getFamilyInformationByIdThunk = (id) => (dispatch) => {
   dispatch(setIsLoading(true));
   return axios
     .get(
-      `http://localhost:4000/api/v1/talent-management/family-information/${id}`,
+      `https://server-my-gestor-production.up.railway.app/api/v1/talent-management/family-information/${id}`,
       getConfig()
     )
     .then((res) => {

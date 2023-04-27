@@ -101,7 +101,7 @@ export const DetailEmployee = () => {
   useEffect(() => {
     axios
       .get(
-        `http://localhost:4000/api/v1/talent-management/employee/${id}`,
+        `https://server-my-gestor-production.up.railway.app/api/v1/talent-management/employee/${id}`,
         getConfig()
       )
       .then((res) => {

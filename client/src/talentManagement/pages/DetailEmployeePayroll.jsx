@@ -24,7 +24,7 @@ export const DetailEmployeePayroll = () => {
     dispatch(getCompanyThunk());
     axios
       .get(
-        `http://localhost:4000/api/v1/talent-management/employee-payroll/${id}`,
+        `https://server-my-gestor-production.up.railway.app/api/v1/talent-management/employee-payroll/${id}`,
         getConfig()
       )
       .then((res) => {
@@ -42,6 +42,7 @@ export const DetailEmployeePayroll = () => {
       (contract) => contract.status === "activo"
     );
     setContracActive(contractFind);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch, id]);
 
   return (

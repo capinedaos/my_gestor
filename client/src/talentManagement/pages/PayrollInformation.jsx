@@ -18,7 +18,7 @@ export const PayrollInformation = () => {
   useEffect(() => {
     axios
       .get(
-        `http://localhost:4000/api/v1/talent-management/overall-payroll/${id}`,
+        `https://server-my-gestor-production.up.railway.app/api/v1/talent-management/overall-payroll/${id}`,
         getConfig()
       )
       .then((res) => {
@@ -33,6 +33,7 @@ export const PayrollInformation = () => {
       });
     }
     setTotalNetPayable(total);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id, dispatch]);
 
   return (
@@ -43,9 +44,9 @@ export const PayrollInformation = () => {
       <div className="card">
         <div className="card-body">
           <h5 className="card-title">Estado de nomina</h5>
-          <a href="#" className="btn btn-primary">
+          <button  className="btn btn-primary">
             <i className="bi bi-check-circle">Nomina terminada</i>
-          </a>
+          </button>
           <p className="card-text">
             Fecha:
             {moment(overallPayroll.updatedAt).format("YYYY-MM-DD")}

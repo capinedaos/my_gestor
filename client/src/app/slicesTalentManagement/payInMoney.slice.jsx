@@ -17,7 +17,7 @@ export const getPayInMoneyByLoanMoneyIdThunk = (loanMoneyId) => (dispatch) => {
   dispatch(setIsLoading(true));
   return axios
     .get(
-      `http://localhost:4000/api/v1/talent-management/pay-in-money/${loanMoneyId}`,
+      `https://server-my-gestor-production.up.railway.app/api/v1/talent-management/pay-in-money/${loanMoneyId}`,
       getConfig()
     )
     .then((res) => {

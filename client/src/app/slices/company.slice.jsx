@@ -3,7 +3,7 @@ import axios from "axios";
 import { setIsLoading } from "../slices/isLoading.slice";
 import getConfig from "../../utils/getConfig";
 
-const URL = "http://localhost:4000/api/v1/company";
+const URL = "https://server-my-gestor-production.up.railway.app/api/v1/company";
 
 export const companySlice = createSlice({
   name: "company",

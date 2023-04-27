@@ -3,7 +3,7 @@ import axios from "axios";
 import { setIsLoading } from "../slices/isLoading.slice";
 import getConfig from "../../utils/getConfig";
 
-const URL = "http://localhost:4000/api/v1/talent-management/employee";
+const URL = "https://server-my-gestor-production.up.railway.app/api/v1/talent-management/employee";
 
 export const employeeSlice = createSlice({
   name: "employee",
@@ -41,7 +41,7 @@ export const getEmployeeByIdThunk = (id) => (dispatch) => {
   dispatch(setIsLoading(true));
   return axios
     .get(
-      `http://localhost:4000/api/v1/talent-management/employee/${id}`,
+      `https://server-my-gestor-production.up.railway.app/api/v1/talent-management/employee/${id}`,
       getConfig()
     )
     .then(async (res) => {
@@ -55,7 +55,7 @@ export const updateEmployeeThunk = (data, id) => (dispatch) => {
   dispatch(setIsLoading(true));
   return axios
     .patch(
-      `http://localhost:4000/api/v1/talent-management/employee/${id}`,
+      `https://server-my-gestor-production.up.railway.app/api/v1/talent-management/employee/${id}`,
       data,
       getConfig()
     )
@@ -70,7 +70,7 @@ export const deleteEmployeeByIdThunk = (id) => (dispatch) => {
   dispatch(setIsLoading(true));
   return axios
     .delete(
-      `http://localhost:4000/api/v1/talent-management/employee/${id}`,
+      `https://server-my-gestor-production.up.railway.app/api/v1/talent-management/employee/${id}`,
       getConfig()
     )
     .then((res) => {

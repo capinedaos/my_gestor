@@ -3,7 +3,7 @@ import axios from "axios";
 import { setIsLoading } from "../slices/isLoading.slice";
 import getConfig from "../../utils/getConfig";
 
-const URL = "http://localhost:4000/api/v1/talent-management/missing-work";
+const URL = "https://server-my-gestor-production.up.railway.app/api/v1/talent-management/missing-work";
 
 export const missingWorkSlice = createSlice({
   name: "missingwork",
@@ -40,7 +40,7 @@ export const updateMissingWorkThunk = (data, id) => (dispatch) => {
   dispatch(setIsLoading(true));
   return axios
     .patch(
-      `http://localhost:4000/api/v1/talent-management/missing-work/${id}`,
+      `https://server-my-gestor-production.up.railway.app/api/v1/talent-management/missing-work/${id}`,
       data,
       getConfig()
     )
@@ -55,7 +55,7 @@ export const deleteMissingWorkByIdThunk = (id) => (dispatch) => {
   dispatch(setIsLoading(true));
   return axios
     .delete(
-      `http://localhost:4000/api/v1/talent-management/missing-work/${id}`,
+      `https://server-my-gestor-production.up.railway.app/api/v1/talent-management/missing-work/${id}`,
       getConfig()
     )
     .then((res) => {

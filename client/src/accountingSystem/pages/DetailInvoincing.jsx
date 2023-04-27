@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { ButtonReturn, ItemButton } from "../../components";
+import { ButtonReturn } from "../../components";
 import { useDispatch, useSelector } from "react-redux";
 
 import { getCompanyThunk } from "../../app/slices/company.slice";

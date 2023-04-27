@@ -3,7 +3,7 @@ import axios from "axios";
 import { setIsLoading } from "../slices/isLoading.slice";
 import getConfig from "../../utils/getConfig";
 
-const URL = "http://localhost:4000/api/v1/talent-management/liquidation";
+const URL = "https://server-my-gestor-production.up.railway.app/api/v1/talent-management/liquidation";
 
 export const liquidationSlice = createSlice({
   name: "liquidation",
@@ -40,7 +40,7 @@ export const updateLiquidationThunk = (data, id) => (dispatch) => {
   dispatch(setIsLoading(true));
   return axios
     .patch(
-      `http://localhost:4000/api/v1/talent-management/liquidation/${id}`,
+      `https://server-my-gestor-production.up.railway.app/api/v1/talent-management/liquidation/${id}`,
       data,
       getConfig()
     )
@@ -55,7 +55,7 @@ export const deleteLiquidationByIdThunk = (id) => (dispatch) => {
   dispatch(setIsLoading(true));
   return axios
     .delete(
-      `http://localhost:4000/api/v1/talent-management/liquidation/${id}`,
+      `https://server-my-gestor-production.up.railway.app/api/v1/talent-management/liquidation/${id}`,
       getConfig()
     )
     .then((res) => {
@@ -69,7 +69,7 @@ export const getLiquidationByIdThunk = (id) => (dispatch) => {
   dispatch(setIsLoading(true));
   return axios
     .get(
-      `http://localhost:4000/api/v1/talent-management/liquidation/${id}`,
+      `https://server-my-gestor-production.up.railway.app/api/v1/talent-management/liquidation/${id}`,
       getConfig()
     )
     .then((res) => {

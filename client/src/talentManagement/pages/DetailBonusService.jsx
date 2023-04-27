@@ -31,7 +31,7 @@ export const DetailBonusService = () => {
   useEffect(() => {
     axios
       .get(
-        "http://localhost:4000/api/v1/talent-management/bonus-service",
+        "https://server-my-gestor-production.up.railway.app/api/v1/talent-management/bonus-service",
         getConfig()
       )
       .then((res) => {
@@ -47,6 +47,7 @@ export const DetailBonusService = () => {
       (contract) => contract.status === "activo"
     );
     setContracActive(contractFind);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id, dispatch]);
 
   return (

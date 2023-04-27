@@ -3,7 +3,7 @@ import axios from "axios";
 import { setIsLoading } from "../slices/isLoading.slice";
 import getConfig from "../../utils/getConfig";
 
-const URL = "http://localhost:4000/api/v1/talent-management/overall-payroll";
+const URL = "https://server-my-gestor-production.up.railway.app/api/v1/talent-management/overall-payroll";
 
 export const overallPayrollSlice = createSlice({
   name: "overallPayroll",
@@ -40,7 +40,7 @@ export const updateOverallPayrollThunk = (data, id) => (dispatch) => {
   dispatch(setIsLoading(true));
   return axios
     .patch(
-      `http://localhost:4000/api/v1/talent-management/overall-payroll/${id}`,
+      `https://server-my-gestor-production.up.railway.app/api/v1/talent-management/overall-payroll/${id}`,
       data,
       getConfig()
     )
@@ -55,7 +55,7 @@ export const finishPayrollThunk = (id) => (dispatch) => {
   dispatch(setIsLoading(true));
   return axios
     .patch(
-      `http://localhost:4000/api/v1/talent-management/overall-payroll/finish-payroll/${id}`,
+      `https://server-my-gestor-production.up.railway.app/api/v1/talent-management/overall-payroll/finish-payroll/${id}`,
       getConfig()
     )
     .then((res) => {
@@ -69,7 +69,7 @@ export const getOverallPayrollByIdThunk = (id) => (dispatch) => {
   dispatch(setIsLoading(true));
   return axios
     .get(
-      `http://localhost:4000/api/v1/talent-management/overall-payroll/${id}`,
+      `https://server-my-gestor-production.up.railway.app/api/v1/talent-management/overall-payroll/${id}`,
       getConfig()
     )
     .then((res) => {
@@ -83,7 +83,7 @@ export const deleteOverallPayrollByIdThunk = (id) => (dispatch) => {
   dispatch(setIsLoading(true));
   return axios
     .delete(
-      `http://localhost:4000/api/v1/talent-management/overall-payroll/${id}`,
+      `https://server-my-gestor-production.up.railway.app/api/v1/talent-management/overall-payroll/${id}`,
       getConfig()
     )
     .then((res) => {
