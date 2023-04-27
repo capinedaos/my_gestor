@@ -28,6 +28,7 @@ export const PayrollInformation = () => {
     dispatch(getEmployeePayrollByOverallPayrollId(id));
     let total = 0;
     if (employeePayroll.length > 0) {
+      // eslint-disable-next-line array-callback-return
       employeePayroll.map((employeePayroll) => {
         total += employeePayroll.netPayable;
       });

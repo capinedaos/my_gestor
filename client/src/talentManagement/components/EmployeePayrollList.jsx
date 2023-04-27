@@ -38,6 +38,7 @@ export const EmployeePayrollList = ({
   const addNewsPayroll = (id) => {
     dispatch(getEmployeePayrollByIdThunk(id));
 
+    // eslint-disable-next-line array-callback-return
     employeePayroll.map((employeePayroll) => {
       if (employeePayroll.overallPayroll.typeOfSettlement === "mensual") {
         navigate(`/talent-management/monthly-payroll/${id}`);
@@ -64,6 +65,7 @@ export const EmployeePayrollList = ({
 
     dispatch(getEmployeePayrollByOverallPayrollId(id));
     if (employeePayroll.length > 0) {
+      // eslint-disable-next-line array-callback-return
       employeePayroll.map((employeePayroll) => {
         totalAccrued += employeePayroll.totalAccrued;
         totalDeductions += employeePayroll.totalDeductions;
